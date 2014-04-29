@@ -402,8 +402,7 @@ public class ServiceFieldSQLParser extends SQLParser implements SQLParserAble
 				command = iformAction.parseOrderFieldForQuery(
 						alias, 
 						config.getField(),
-						"" );				
-				
+						"" );					
 			}
 			
 			CommandConfiguration command_param = new CommandConfiguration();
@@ -419,18 +418,7 @@ public class ServiceFieldSQLParser extends SQLParser implements SQLParserAble
 			
 			result.setCommand(  command_param );
 			
-//			result = new CommandForm();
-//			
-//			StringBuffer sBuf = new StringBuffer();
-//			if( !UtilTools.isNull(alias) ){
-//				sBuf.append(UtilTools.getTrim(alias));
-//				sBuf.append(".");
-//			}
-//			sBuf.append(UtilTools.getTrim( config.getField()));
-//			
-//			
-//			
-//			result.setCommand( sBuf.toString());
+
 			result.setAlias(UtilTools.getTrim(alias));
 			
 			logger.debug("ServiceFieldSQLParser执行parserOrderCommand完毕。");	
@@ -510,19 +498,7 @@ public class ServiceFieldSQLParser extends SQLParser implements SQLParserAble
 			sqlCommandAble.addRequestTask( taskRequest );
 			
 			result.setCommand( command_param );
-//			
-//			result = new CommandForm();
-//			
-//			StringBuffer sBuf = new StringBuffer();
-//			if( !UtilTools.isNull(alias) ){
-//				sBuf.append(UtilTools.getTrim(alias));
-//				sBuf.append(".");
-//			}
-//			sBuf.append(UtilTools.getTrim( config.getField()));
-//			
-//			
-//			
-//			result.setCommand( sBuf.toString());
+
 			result.setAlias(UtilTools.getTrim(alias));
 			
 			logger.debug("ServiceFieldSQLParser执行parserGroupbyCommand完毕。");	

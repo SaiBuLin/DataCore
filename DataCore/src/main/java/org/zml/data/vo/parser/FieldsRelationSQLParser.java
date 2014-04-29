@@ -1,6 +1,9 @@
 package org.zml.data.vo.parser;
 import org.zml.data.vo.bind.FieldsRelation;
 import org.zml.data.vo.bind.TableRelation;
+import org.zml.data.vo.command.bind.CommandConfiguration;
+import org.zml.data.vo.command.parser.SQLCommandAble;
+import org.zml.data.vo.command.parser.SQLCommandFactory;
 import org.zml.data.vo.exception.DataServiceException;
 import org.zml.data.vo.form.CommandForm;
 import org.zml.data.vo.form.VOForm;
@@ -72,9 +75,19 @@ public class FieldsRelationSQLParser extends SQLParser implements SQLParserAble
 				throw new Exception("Right Form 没有配置别名alias.");
 			}
 			
-			String leftTable = "";// leftForm.getCommand();
+			SQLCommandAble leftComAble = SQLCommandFactory.getQueryDefineInterpreter(  leftForm.getCommand() );
 			
-			String rightTable = "";// rightForm.getCommand();
+			SQLCommandAble rightComAble = SQLCommandFactory.getQueryDefineInterpreter(  rightForm.getCommand() );
+			
+			String leftTable = "";// leftForm.getCommand();
+			if( leftComAble != null ){
+				leftTable = leftComAble.getRequestTaskContent();
+			}
+			
+			String rightTable = "";//rightForm.getCommand();
+			if( rightComAble != null ){
+				rightTable = rightComAble.getRequestTaskContent();
+			}
 			
 			if( UtilTools.isNull( leftTable ) ){
 				throw new Exception( "LeftForm 的Command的属性为空。" );
@@ -184,6 +197,18 @@ public class FieldsRelationSQLParser extends SQLParser implements SQLParserAble
 				sBuf.append(relationString);
 				sBuf.append(" )  ");
 			}
+			
+			result = new CommandForm();
+			
+			CommandConfiguration resultCommand = new CommandConfiguration();
+			
+			SQLCommandAble resultCommandAble = SQLCommandFactory.getQueryDefineInterpreter(resultCommand);
+			if( resultCommandAble != null ){
+				resultCommandAble.insertRequestTask("RL001", sBuf.toString());				
+			}else{
+				logger.error("SQLCommandFactory 执行getQueryDefineInterpreter错误，resultCommand 没有对应的SQLCommandAble。");
+			}
+			result.setCommand( resultCommand );
 			
 			logger.debug("FieldsRelationSQLParser执行parserCommand完毕。");
 			return result;

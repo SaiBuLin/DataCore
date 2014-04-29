@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+    xmlns="http://www.zlmwork.com/zmdataset"
+    xmlns:vo="http://www.zlmwork.com/zmvoengine"
+    targetNamespace="http://www.zlmwork.com/zmdataset"
+	 elementFormDefault="qualified" attributeFormDefault="unqualified" >
+	<xs:import namespace="http://www.zlmwork.com/zmvoengine" schemaLocation="VO_SCHEMA_2013.xsd" />
+	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="datasetNode" type="DatasetNode"/>
+	<xs:element name="netDataSet" type="NetDataSet" substitutionGroup="datasetNode" />
+	
+	<xs:element name="table" type="Table" substitutionGroup="datasetNode" />
+	<xs:element name="tableGroup" type="TableGroup" substitutionGroup="table" />
+	<xs:element name="dataTable" type="DataTable" substitutionGroup="table" />
+	
+	<xs:element name="dataField" type="DataField" substitutionGroup="datasetNode" />
+	<xs:element name="dataFieldGroup" type="DataFieldGroup" substitutionGroup="dataField" />
+	<xs:element name="columnField" type="ColumnField" substitutionGroup="dataField" />	
+	
+	<xs:element name="myValue" type="MyValue" substitutionGroup="datasetNode" />
+	<xs:element name="dataValueGroup" type="DataValueGroup" substitutionGroup="myValue" />
+	<xs:element name="dataValue" type="DataValue" substitutionGroup="myValue" />	
+	
+	
+	<xs:element name="dataException" type="DataException" substitutionGroup="datasetNode" />
+	<xs:element name="dataExceptionGroup" type="DataExceptionGroup" substitutionGroup="dataException" />
+	<xs:element name="extendException" type="ExtendException" substitutionGroup="dataException" />
+	
+	<xs:complexType name="DatasetNode">
+		<xs:attribute name="code" type="xs:string"/>
+		<xs:attribute name="index" type="xs:integer"/>
+	</xs:complexType>
+	
+	<xs:complexType name="NetDataSet">
+		<xs:complexContent>
+			<xs:extension base="DatasetNode">
+				<xs:sequence>
+					<xs:element ref="dataTable" />		
+					<xs:element ref="dataException" />			
+				</xs:sequence>
+				<xs:attribute name="updatenumber" type="xs:integer" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="Table">
+		<xs:complexContent>
+			<xs:extension base="DatasetNode" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="TableGroup">
+		<xs:complexContent>
+			<xs:extension base="Table" >
+				<xs:sequence>
+					<xs:element ref="dataTable" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataTable">
+		<xs:complexContent>
+			<xs:extension base="Table" >
+				<xs:sequence>
+					<xs:element ref="dataField" />
+					<xs:element ref="myValue" />
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:string" />
+				<xs:attribute name="page" type="xs:long" />
+				<xs:attribute name="pages" type="xs:long" />
+				<xs:attribute name="pagesize" type="xs:long" />
+				<xs:attribute name="records" type="xs:long" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataField">
+		<xs:complexContent>
+			<xs:extension base="DatasetNode" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataFieldGroup">
+		<xs:complexContent>
+			<xs:extension base="DataField" >
+				<xs:sequence>
+					<xs:element ref="dataField" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ColumnField">
+		<xs:complexContent>
+			<xs:extension base="DataField" >
+				<xs:attribute name="field" type="xs:string" />
+				<xs:attribute name="label" type="xs:string" />
+				<xs:attribute name="datatype" type="vo:DataType" />
+				<xs:attribute name="fieldsize" type="xs:integer" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="MyValue">
+		<xs:complexContent>
+			<xs:extension base="DatasetNode" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataValueGroup">
+		<xs:complexContent>
+			<xs:extension base="MyValue" >
+				<xs:sequence>
+					<xs:element ref="myValue" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataValue">
+		<xs:complexContent>
+			<xs:extension base="MyValue" >
+				<xs:attribute name="myValue" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataException">
+		<xs:complexContent>
+			<xs:extension base="DatasetNode" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataExceptionGroup">
+		<xs:complexContent>
+			<xs:extension base="DataException" >
+				<xs:sequence>
+					<xs:element ref="dataException" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ExtendException">
+		<xs:complexContent>
+			<xs:extension base="DataException" >
+				<xs:sequence>
+					<xs:element name="errormessage" type="xs:string" />
+					<xs:element name="errorreason" type="xs:string" />
+				</xs:sequence>
+				<xs:attribute name="errorcode" type="xs:integer" />
+				<xs:attribute name="errortime" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+</xs:schema>

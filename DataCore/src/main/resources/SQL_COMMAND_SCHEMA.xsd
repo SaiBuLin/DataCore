@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ 	xmlns="http://www.zlmwork.com/vocommand"
+ 	targetNamespace="http://www.zlmwork.com/vocommand" 
+  	elementFormDefault="qualified" attributeFormDefault="unqualified" >
+ 
+	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
+		<xs:annotation>
+			<xs:documentation>
+				用来记录需要执行Command 字符串
+			</xs:documentation>
+		</xs:annotation>		
+	</xs:element>
+	
+	<xs:element name="commandDefine" type="CommandDefine" />
+	<xs:element name="commandConfiguration" type="CommandConfiguration" substitutionGroup="commandDefine" />
+	
+	<xs:element name="requestTask" type="RequestTask" substitutionGroup="commandDefine" />	
+	<xs:element name="requestTaskGroup" type="RequestTaskGroup" substitutionGroup="requestTask" />
+	<xs:element name="serviceTask" type="ServiceTask" substitutionGroup="requestTask" />
+	
+	<xs:element name="requestParameter" type="RequestParameter" substitutionGroup="commandDefine" />
+	<xs:element name="requestParameterGroup" type="RequestParameterGroup" substitutionGroup="requestParameter" />
+	<xs:element name="serviceParameter" type="ServiceParameter" substitutionGroup="requestParameter" />
+	
+	
+	<xs:complexType name="CommandDefine">
+		<xs:attribute name="code" type="xs:string"/>
+		<xs:attribute name="index" type="xs:integer"/>				
+	</xs:complexType>
+	
+	<xs:complexType name="CommandConfiguration">
+		<xs:complexContent>
+			<xs:extension base="CommandDefine">
+				<xs:sequence>
+					<xs:element ref="requestTask" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="RequestTask">
+		<xs:complexContent>
+			<xs:extension base="CommandDefine" />
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="RequestTaskGroup">
+		<xs:complexContent>
+			<xs:extension base="RequestTask">
+				<xs:sequence>
+					<xs:element ref="requestTask" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="ServiceTask">
+		<xs:complexContent>
+			<xs:extension base="RequestTask" >
+				<xs:sequence>
+					<xs:element name="commandContent" type="xs:string"  />
+					<xs:element ref="requestParameter" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<!--  -->
+	<xs:complexType name="RequestParameter">
+		<xs:complexContent>
+			<xs:extension base="CommandDefine" />
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="RequestParameterGroup">
+		<xs:complexContent>
+			<xs:extension base="RequestParameter" >
+				<xs:sequence>
+					<xs:element ref="requestParameter" minOccurs="0" maxOccurs="unbounded"/>				
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="ServiceParameter">
+		<xs:complexContent>
+			<xs:extension base="RequestParameter" >
+				<xs:sequence>
+					<xs:element name="valuecontent" type="xs:string"  />				
+				</xs:sequence>
+				<xs:attribute name="param" type="xs:string" />
+				<xs:attribute name="paramtype" type="ParamValueType" />
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<!--支持存储Blob 文件-->
+	<xs:simpleType name="ParamValueType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="zyhString"/>
+			<xs:enumeration value="zyhInteger"/>
+			<xs:enumeration value="zyhShort"/>
+			<xs:enumeration value="zyhLong"/>
+			<xs:enumeration value="zyhFloat"/>
+			<xs:enumeration value="zyhDouble"/>
+			<xs:enumeration value="zyhDatetime"/>
+			<xs:enumeration value="zyhDate"/>
+			<xs:enumeration value="zyhBoolean"/>
+			<xs:enumeration value="zyhBlob"/>
+			<xs:enumeration value="zyhXML"/>
+			<xs:enumeration value="zyhNumberic"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	
+</xs:schema>

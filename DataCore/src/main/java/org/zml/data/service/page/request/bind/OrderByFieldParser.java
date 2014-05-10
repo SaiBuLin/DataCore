@@ -51,7 +51,7 @@ public class OrderByFieldParser extends SimpleFieldParser implements IXmlVisitor
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof OrderByField ))  return;
 			OrderByField objElement = (OrderByField)element;
-			if(  objElement.getOperation() != null )
+			if( objElement.getOperation() != null)
 			{
 				OrderDirection dataOneElement = objElement.getOperation();
 				String tmpValue = String.valueOf(dataOneElement);

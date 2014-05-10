@@ -1,5 +1,7 @@
 package org.zml.data.service.page.request.bind;
+
 import java.util.ArrayList;
+
 import org.zml.data.vo.bind.OperationLogical;
 
 public class ComplexConditionSyntax extends ConditionSyntax

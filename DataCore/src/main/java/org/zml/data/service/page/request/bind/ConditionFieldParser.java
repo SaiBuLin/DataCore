@@ -1,10 +1,11 @@
 package org.zml.data.service.page.request.bind;
+import org.zml.data.vo.bind.FieldLogical;
 import org.zml.tools.xml.parser.IXmlVisitorParserable;
 import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
 import org.zml.util.UtilTools;
-import org.zml.data.vo.bind.FieldLogical;
+
 
 public class ConditionFieldParser extends SimpleFieldParser implements IXmlVisitorParserable
 {
@@ -26,7 +27,7 @@ public class ConditionFieldParser extends SimpleFieldParser implements IXmlVisit
 		objElement.setXmlElementName(node.getName());
 		if(node.attribute("operation")!= null )
 		{
-			objElement.setOperation((FieldLogical)this.getObjectFromAttribute(node,"operation", FieldLogical.class.getName()));
+			objElement.setOperation((FieldLogical)this.getObjectFromAttribute(node,"operation",FieldLogical.class.getName()));
 		}
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
@@ -51,7 +52,7 @@ public class ConditionFieldParser extends SimpleFieldParser implements IXmlVisit
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof ConditionField ))  return;
 			ConditionField objElement = (ConditionField)element;
-			if(  objElement.getOperation() != null )
+			if(   objElement.getOperation() != null)
 			{
 				FieldLogical dataOneElement = objElement.getOperation();
 				String tmpValue = String.valueOf(dataOneElement);

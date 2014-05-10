@@ -2,10 +2,8 @@ package org.zml.data.service.page.request.parser;
 
 import java.util.List;
 
-import org.zml.data.service.page.request.bind.RequestField;
 import org.zml.data.vo.command.bind.CommandConfiguration;
 import org.zml.data.vo.command.bind.RequestTask;
-import org.zml.data.vo.form.VOForm;
 
 /**
  * 

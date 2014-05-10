@@ -1,11 +1,14 @@
 package org.zml.data.service.page.request.bind;
+import org.zml.data.vo.bind.OperationLogical;
 import org.zml.tools.xml.parser.IXmlVisitorParserable;
 import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
+
 import java.util.ArrayList;
+
 import org.zml.util.UtilTools;
-import org.zml.data.vo.bind.OperationLogical;
+
 
 public class ComplexConditionSyntaxParser extends ConditionSyntaxParser implements IXmlVisitorParserable
 {

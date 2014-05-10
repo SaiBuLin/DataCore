@@ -23,32 +23,32 @@ public abstract class VOServiceRequest extends AIVOEngine implements VOServiceRe
 	
 	@Override
 	public List<String> listSelectFieldNames() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public List<String> listWhereFieldNames() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public List<String> listOrderByFieldNames() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public List<String> listGroupByFieldNames() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public CommandConfiguration parseWhereForSyntax(RequestTask whereField,
 			String alias) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

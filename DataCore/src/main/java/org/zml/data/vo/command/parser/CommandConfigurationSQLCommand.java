@@ -479,4 +479,7 @@ public class CommandConfigurationSQLCommand extends SQLCommand implements SQLCom
 			}
 		}
 	}
+
+
+	
 }

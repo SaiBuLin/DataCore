@@ -63,7 +63,7 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 					result.addAll( lstResult );
 				}
 			}
-			
+			logger.debug("QueryRequestVOServiceRequest 执行listSelectFieldNames完毕。");
 			return result;			
 		}catch(Exception e){
 			if( e != null ){
@@ -88,7 +88,7 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 		try{
 						
 			/* 强制转换 */
-			logger.debug("listSelectFieldNames 执行：将queryDefineElement强制转换成QueryRequest.");
+			logger.debug("listWhereFieldNames 执行：将queryDefineElement强制转换成QueryRequest.");
 			QueryRequest config = (QueryRequest)this.getQueryDefineElement();
 			
 			if( config == null ){
@@ -107,7 +107,7 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 				VOServiceRequestAble requestAble = VOServiceRequestFactory.getQueryDefineInterpreter( part );
 				
 				if( requestAble == null ){
-					logger.error("QueryRequestVOServiceRequest 执行listSelectFieldNames 出现错误，其中RequestPart 有成员没有对应的VOServiceRequestAble。");
+					logger.error("QueryRequestVOServiceRequest 执行listWhereFieldNames 出现错误，其中RequestPart 有成员没有对应的VOServiceRequestAble。");
 					continue;
 				}
 				
@@ -116,18 +116,18 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 					result.addAll( lstResult );
 				}
 			}
-			
+			logger.debug("QueryRequestVOServiceRequest 执行listWhereFieldNames完毕。");
 			return result;			
 		}catch(Exception e){
 			if( e != null ){
 				String execeptionClassName = e.getClass().toString();
 				if( !UtilTools.isNull(execeptionClassName)){
-					logger.error("QueryRequestVOServiceRequest::listSelectFieldNames 抛出异常， 异常类：" + execeptionClassName);
+					logger.error("QueryRequestVOServiceRequest::listWhereFieldNames 抛出异常， 异常类：" + execeptionClassName);
 				}
-				logger.error("QueryRequestVOServiceRequest::listSelectFieldNames 抛出异常， 异常信息：" + e.getMessage());
+				logger.error("QueryRequestVOServiceRequest::listWhereFieldNames 抛出异常， 异常信息：" + e.getMessage());
 				String localMessage = e.getLocalizedMessage();
 				if( !UtilTools.isNull(localMessage)){
-					logger.error("QueryRequestVOServiceRequest::listSelectFieldNames 抛出异常， 异常信息：" + localMessage);
+					logger.error("QueryRequestVOServiceRequest::listWhereFieldNames 抛出异常， 异常信息：" + localMessage);
 				}
 			}
 		}
@@ -136,12 +136,12 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 
 	@Override
 	public List<String> listOrderByFieldNames() throws Exception {
-		logger.debug("QueryRequestVOServiceRequest 执行loadSchemas。");
+		logger.debug("QueryRequestVOServiceRequest 执行listOrderByFieldNames。");
 		List<String> result = new ArrayList<String>();
 		try{
 						
 			/* 强制转换 */
-			logger.debug("listSelectFieldNames 执行：将queryDefineElement强制转换成QueryRequest.");
+			logger.debug("listOrderByFieldNames 执行：将queryDefineElement强制转换成QueryRequest.");
 			QueryRequest config = (QueryRequest)this.getQueryDefineElement();
 			
 			if( config == null ){
@@ -160,7 +160,7 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 				VOServiceRequestAble requestAble = VOServiceRequestFactory.getQueryDefineInterpreter( part );
 				
 				if( requestAble == null ){
-					logger.error("QueryRequestVOServiceRequest 执行listSelectFieldNames 出现错误，其中RequestPart 有成员没有对应的VOServiceRequestAble。");
+					logger.error("QueryRequestVOServiceRequest 执行listOrderByFieldNames 出现错误，其中RequestPart 有成员没有对应的VOServiceRequestAble。");
 					continue;
 				}
 				
@@ -169,18 +169,18 @@ public class QueryRequestVOServiceRequest extends VOServiceRequest implements VO
 					result.addAll( lstResult );
 				}
 			}
-			
+			logger.debug("QueryRequestVOServiceRequest 执行listOrderByFieldNames完毕。");
 			return result;			
 		}catch(Exception e){
 			if( e != null ){
 				String execeptionClassName = e.getClass().toString();
 				if( !UtilTools.isNull(execeptionClassName)){
-					logger.error("QueryRequestVOServiceRequest::listSelectFieldNames 抛出异常， 异常类：" + execeptionClassName);
+					logger.error("QueryRequestVOServiceRequest::listOrderByFieldNames 抛出异常， 异常类：" + execeptionClassName);
 				}
-				logger.error("QueryRequestVOServiceRequest::listSelectFieldNames 抛出异常， 异常信息：" + e.getMessage());
+				logger.error("QueryRequestVOServiceRequest::listOrderByFieldNames 抛出异常， 异常信息：" + e.getMessage());
 				String localMessage = e.getLocalizedMessage();
 				if( !UtilTools.isNull(localMessage)){
-					logger.error("QueryRequestVOServiceRequest::listSelectFieldNames 抛出异常， 异常信息：" + localMessage);
+					logger.error("QueryRequestVOServiceRequest::listOrderByFieldNames 抛出异常， 异常信息：" + localMessage);
 				}
 			}
 		}

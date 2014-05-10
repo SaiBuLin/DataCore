@@ -46,7 +46,7 @@
 		<xs:complexContent>
 			<xs:extension base="QueryFormNode">
 				<xs:sequence>
-					<xs:element ref="requestPart" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element ref="requestPart" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

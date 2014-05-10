@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns="http://www.zlmwork.com/zmvoengine"
+ targetNamespace="http://www.zlmwork.com/zmvoengine"
+ elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
+		<xs:annotation>
+			<xs:documentation>
+				VO Schema 2013 是旧版本的升级，
+				采用Schema 模型， 支持对SQL 的查询，修改，插入和删除
+				              支持对ArcGIS Server Rest （10.1) 版本
+				     查询，修改和删除。
+				     	支持对数据挖掘（基于mondrian）的查询。
+				
+				基于数据服务的概念进行开发。 
+				OLAP online analytical processing 
+				
+				1.将支持Blob 数据存储和读取
+				2. 支持对XML文件的读取和索引
+				3. 支持多数据集
+				4. 数据集合将采用综合并能转成JSON
+				5. 将建立VO数据发布服务器
+				
+				6. 基于mondrian 开源的数据挖掘体系，用来
+				   进行数据分析和处理
+				   
+				7. 支持复杂的SQL 或者数据请求服务的结构   
+				   
+				新的支持常量的定义
+				
+				VO Engine 是用来建立数据服务基础，支持访问mondrian
+				尤其是：MDX语言
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="define" type="Define"/>
+	
+	<xs:element name="schemaDefine" type="SchemaDefine" substitutionGroup="define"/>
+	<xs:element name="schemaConfigure" type="SchemaConfigure" substitutionGroup="schemaDefine"/>
+	
+	<!--VO 定义-->
+	<xs:element name="schema" type="Schema" substitutionGroup="schemaDefine"/>
+	
+	<xs:element name="schemaGroup" type="SchemaGroup" substitutionGroup="schema"/>
+	<xs:element name="voSchema" type="VOSchema" substitutionGroup="schema"/>
+	<xs:element name="viSchema" type="VISchema" substitutionGroup="schema"/>
+	
+	<xs:element name="formRelation" type="FormRelation" substitutionGroup="define"/>	
+	<xs:element name="formRelationGroup" type="FormRelationGroup" substitutionGroup="formRelation"/>
+	<xs:element name="leriFormsConnection" type="LeRiFormsConnection" substitutionGroup="formRelation"/>
+	
+	<!--Form 定义 -->
+	<xs:element name="form" type="Form" substitutionGroup="schemaDefine"/>
+	<xs:element name="serviceForm" type="ServiceForm" substitutionGroup="form"/>
+	<xs:element name="formGroup" type="FormGroup" substitutionGroup="form"/>	
+	<xs:element name="dataForm" type="DataForm" substitutionGroup="serviceForm"/>
+	<xs:element name="selectForm" type="SelectForm" substitutionGroup="dataForm"/>
+	<xs:element name="updateForm" type="UpdateForm" substitutionGroup="dataForm"/>
+	<xs:element name="insertForm" type="InsertForm" substitutionGroup="dataForm"/>	
+	<xs:element name="storedproductForm" type="StoredproductForm" substitutionGroup="serviceForm"/>
+
+	<!-- 特别数据 -->
+	<xs:element name="transactionForm" type="TransactionForm" substitutionGroup="serviceForm"/>
+	<xs:element name="viewForm" type="ViewForm" substitutionGroup="serviceForm"/>
+	
+	<!-- 左右 -->
+	<xs:element name="left" type="Left" substitutionGroup="define"/>
+	<xs:element name="right" type="Right" substitutionGroup="define"/>
+	<xs:element name="relation" type="Relation" substitutionGroup="define"/>
+	<xs:element name="relationGroup" type="RelationGroup" substitutionGroup="define"/>
+	<xs:element name="fieldsRelation" type="FieldsRelation" substitutionGroup="define"/>
+	<xs:element name="fieldValueRelation" type="FieldValueRelation" substitutionGroup="define"/>
+	
+	<!-- Field 定义 -->
+	<xs:element name="field" type="Field" substitutionGroup="define" />
+	<xs:element name="fieldGroup" type="FieldGroup" substitutionGroup="field" />
+	<xs:element name="serviceField" type="ServiceField" substitutionGroup="field" />
+	
+	<!-- 状态或者事件 -->
+	<xs:element name="status" type="Status" substitutionGroup="define" />
+	<xs:element name="statusGroup" type="StatusGroup" substitutionGroup="status" />
+	<xs:element name="getStatus" type="GetStatus" substitutionGroup="status" />
+	<xs:element name="setStatus" type="SetStatus" substitutionGroup="status" />
+	
+	<!-- Field 的值描述 -->
+	<xs:element name="fieldValue" type="FieldValue" substitutionGroup="define" />
+	<xs:element name="simpleValue" type="SimpleValue" substitutionGroup="fieldValue" />
+	<xs:element name="schemaValue" type="SchemaValue" substitutionGroup="fieldValue" />
+	<xs:element name="jsonFieldValue" type="JSONFieldValue" substitutionGroup="schemaValue" />
+	
+	<!-- FormPart -->
+	<xs:element name="formPart" type="FormPart" substitutionGroup="define"/>
+	<xs:element name="formPartGroup" type="FormPartGroup" substitutionGroup="formPart"/>
+	
+	<!-- Field 定义 -->
+	<xs:element name="fieldsPart" type="FieldsPart" substitutionGroup="formPart"/>
+	<xs:element name="selectedPart" type="SelectedPart" substitutionGroup="fieldsPart"/>
+	<xs:element name="wherePart" type="WherePart" substitutionGroup="fieldsPart"/>
+	<xs:element name="groupByPart" type="GroupByPart" substitutionGroup="fieldsPart"/>
+	<xs:element name="orderPart" type="OrderPart" substitutionGroup="fieldsPart"/>
+
+	<!-- 数据连接  -->
+	<xs:element name="connection" type="Connection" substitutionGroup="define"/>
+	<xs:element name="databaseConnection" type="DatabaseConnection" substitutionGroup="connection"/>
+	<xs:element name="jndiConnection" type="JNDIConnection" substitutionGroup="connection"/>
+	<xs:element name="serviceConnection" type="ServiceConnection" substitutionGroup="connection"/>	
+
+	<!-- 连接工具 -->
+	<xs:element name="connectTools" type="ConnectTools" substitutionGroup="define"/>
+	<xs:element name="serviceConnectTools" type="ServiceConnectTools" substitutionGroup="connectTools"/>		
+	
+	<xs:element name="attribute" type="Attribute" substitutionGroup="define"/>
+	<xs:element name="attributeGroup" type="AttributeGroup" substitutionGroup="attribute"/>
+	<xs:element name="valueAttribute" type="ValueAttribute" substitutionGroup="attribute"/>
+
+	<!-- 字典 -->
+	<xs:element name="library" type="Library" substitutionGroup="define"/>
+	<xs:element name="libraryGroup" type="LibraryGroup" substitutionGroup="library"/>
+	<xs:element name="formLibrary" type="FormLibrary" substitutionGroup="library"/>
+	<xs:element name="attributeLibrary" type="AttributeLibrary" substitutionGroup="library"/>
+	<xs:element name="referenceLibrary" type="ReferenceLibrary" substitutionGroup="library"/>
+	<xs:element name="sqlLibrary" type="SqlLibrary" substitutionGroup="library"/>
+	<xs:element name="actionLibrary" type="ActionLibrary" substitutionGroup="library"/>	
+	
+	<!-- form 执行Action -->
+	<xs:element name="actionTools" type="ActionTools" substitutionGroup="define"/>
+	<xs:element name="functionTools" type="FunctionTools" substitutionGroup="actionTools"/>	
+	<xs:element name="serviceActionTools" type="ServiceActionTools" substitutionGroup="functionTools"/>
+
+	<!-- 数据DataSet -->
+	<xs:element name="dataSet" type="DataSet" substitutionGroup="define"/>
+	<xs:element name="tableSet" type="TableSet" substitutionGroup="dataSet"/>
+	<xs:element name="sqlSet" type="SQLSet" substitutionGroup="dataSet"/>
+	<xs:element name="formSet" type="FormSet" substitutionGroup="dataSet"/>
+	<xs:element name="templateSet" type="TemplateSet" substitutionGroup="dataSet"/>
+	<xs:element name="doActionSet" type="DoActionSet" substitutionGroup="dataSet"/>	
+	
+	<!-- 数据合法性检查 -->
+	<xs:element name="validator" type="Validator" substitutionGroup="define"/>	
+	<xs:element name="validatorGroup" type="ValidatorGroup" substitutionGroup="validator"/>	
+	<xs:element name="dataTypeChecker" type="DataTypeChecker" substitutionGroup="validator"/>	
+	<xs:element name="canBeNull" type="CanBeNull" substitutionGroup="validator"/>	
+	<xs:element name="cannotBeNull" type="CannotBeNull" substitutionGroup="validator"/>	
+	<xs:element name="belongCollection" type="BelongCollection" substitutionGroup="validator"/>	
+	<xs:element name="noneBelongCollection" type="NoneBelongCollection" substitutionGroup="validator"/>	
+	<xs:element name="boundaryChecker" type="BoundaryChecker" substitutionGroup="validator"/>	
+	<xs:element name="extendMethodChecker" type="ExtendMethodChecker" substitutionGroup="validator"/>	
+	
+	<!-- Schema 定义 -->
+	<xs:complexType name="Define">
+		<xs:attribute name="code" type="xs:string"/>
+		<xs:attribute name="index" type="xs:integer"/>				
+	</xs:complexType>
+	
+	<xs:complexType name="SchemaDefine">
+		<xs:complexContent>
+			<xs:extension base="Define">
+				<xs:sequence>
+					<xs:element ref="attribute" />
+					<xs:element name="description" type="xs:string" />
+				</xs:sequence>
+				<xs:attribute name="label" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+
+	<!-- VO 配置 -->
+	<xs:complexType name="SchemaConfigure">
+		<xs:complexContent>
+			<xs:extension base="SchemaDefine">
+				<xs:sequence>
+					<xs:element ref="schema"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- VO 定义 -->
+	<xs:complexType name="Schema">
+		<xs:complexContent>
+			<xs:extension base="SchemaDefine">
+				<xs:sequence>
+					<xs:element ref="actionTools" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- VO 定义组 -->
+	<xs:complexType name="SchemaGroup">
+		<xs:complexContent>
+			<xs:extension base="Schema">
+				<xs:sequence>
+					<xs:element ref="schema" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!--DB VO Define 用来访问数据库　-->
+	<xs:complexType name="VOSchema">
+		<xs:complexContent>
+			<xs:extension base="Schema">
+				<xs:sequence>
+					<xs:element ref="form" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 支持复杂数据查询 -->
+	<xs:complexType name="VISchema">
+		<xs:complexContent>
+			<xs:extension base="Schema">
+				<xs:sequence>
+					<xs:element ref="form" />
+					<xs:element ref="formRelation" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FormRelation">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FormRelationGroup">
+		<xs:complexContent>
+			<xs:extension base="FormRelation" >
+				<xs:sequence>
+					<xs:element ref="formRelation" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="LeRiFormsConnection">
+		<xs:complexContent>
+			<xs:extension base="FormRelation" >
+				<xs:sequence>
+					<xs:element ref="relation" />
+				</xs:sequence>
+				<xs:attribute name="leftform" type="xs:string" />
+				<xs:attribute name="rightform" type="xs:string" />
+				<xs:attribute name="tableRelation" type="TableRelation" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Form 定义, actionTools 用来支持多中数据执行 -->
+	<xs:complexType name="Form">
+		<xs:complexContent>
+			<xs:extension base="SchemaDefine">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 表单组 -->
+	<xs:complexType name="FormGroup">
+		<xs:complexContent>
+			<xs:extension base="Form">
+				<xs:sequence>
+					<xs:element ref="form" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Connection 是用来连接数据存储服务， actionTools 是用来生成对应的命令字 -->
+	<xs:complexType name="ServiceForm">
+		<xs:complexContent>
+			<xs:extension base="Form">
+				<xs:sequence>
+					<xs:element ref="actionTools" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>				
+
+	<!-- 用来进行 描述 -->
+	<xs:complexType name="DataForm">
+		<xs:complexContent>
+			<xs:extension base="ServiceForm">
+				<xs:sequence>
+					<xs:element ref="formPart"/>
+					<xs:element ref="dataSet"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 
+		SELECT 的Form 
+		支持OLAP 语言，用来支持数据体系
+	-->
+	<xs:complexType name="SelectForm">
+		<xs:complexContent>
+			<xs:extension base="DataForm"/>
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<!-- 修改Form -->
+	<xs:complexType name="UpdateForm">
+		<xs:complexContent>
+			<xs:extension base="DataForm"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 插入Form -->
+	<xs:complexType name="InsertForm">
+		<xs:complexContent>
+			<xs:extension base="DataForm"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 删除Form -->
+	<xs:complexType name="DeleteForm">
+		<xs:complexContent>
+			<xs:extension base="DataForm"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 
+		存储过程， 调用存储过程，不一定有返回		
+     -->
+	<xs:complexType name="StoredproductForm">
+		<xs:complexContent>
+			<xs:extension base="ServiceForm">
+				<xs:attribute name="storedproduct" type="xs:string" /> 
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	
+	<!-- 
+		视图，动态视图 
+		根据各种条件进行处理，生成所需要 结果集合。        
+	              在view Form 处理的时候，要特别进行处理
+                            支持根据条件，需要显示Field 进行整理
+        Table 关系
+	-->
+	<xs:complexType name="ViewForm">
+		<xs:complexContent>
+			<xs:extension base="ServiceForm">
+				<xs:sequence>
+					<xs:element ref="left" />
+					<xs:element ref="right" />
+					<xs:element ref="relation" />
+				</xs:sequence>
+				<xs:attribute name="tableRelation" type="TableRelation" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<!-- 左边 -->
+	<xs:complexType name="Left">
+		<xs:complexContent>
+			<xs:extension base="Define">
+				<xs:sequence>
+					<xs:element ref="form" />
+				</xs:sequence>
+				<xs:attribute name="alias" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 右边 -->
+	<xs:complexType name="Right">
+		<xs:complexContent>
+			<xs:extension base="Define">
+				<xs:sequence>
+					<xs:element ref="form" />
+				</xs:sequence>
+				<xs:attribute name="alias" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 关系 -->
+	<xs:complexType name="Relation">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!--关系组 -->
+	<xs:complexType name="RelationGroup">
+		<xs:complexContent>
+			<xs:extension base="Relation" >
+				<xs:sequence>
+					<xs:element ref="relation" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+				<xs:attribute name="reloperation" type="OperationLogical" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 字段关系 -->
+	<xs:complexType name="FieldsRelation">
+		<xs:complexContent>
+			<xs:extension base="Relation">
+				<xs:attribute name="leftfield" type="xs:string" />
+				<xs:attribute name="rightfield" type="xs:string" />
+				<xs:attribute name="operation" type="FieldLogical" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!---->
+	<xs:complexType name="FieldValueRelation">
+		<xs:complexContent>
+			<xs:extension base="Relation">
+				<xs:attribute name="field" type="xs:string" />
+				<xs:attribute name="value" type="xs:string" />
+				<xs:attribute name="operation" type="FieldLogical" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 
+ 	支持多个Update From 处理 
+           利用formDefineGroup 来进行批量数据更新
+	-->
+	<xs:complexType name="TransactionForm">
+		<xs:complexContent>
+			<xs:extension base="ServiceForm">
+				<xs:sequence>
+					<xs:element ref="form"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--支持存储Blob 文件-->
+	<xs:simpleType name="DataType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="zyhString"/>
+			<xs:enumeration value="zyhInteger"/>
+			<xs:enumeration value="zyhShort"/>
+			<xs:enumeration value="zyhLong"/>
+			<xs:enumeration value="zyhFloat"/>
+			<xs:enumeration value="zyhDouble"/>
+			<xs:enumeration value="zyhDatetime"/>
+			<xs:enumeration value="zyhDate"/>
+			<xs:enumeration value="zyhBoolean"/>
+			<xs:enumeration value="zyhBlob"/>
+			<xs:enumeration value="zyhXML"/>
+			<xs:enumeration value="zyhNumberic"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="TableRelation">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INNER_JOIN"/>
+			<xs:enumeration value="LEFT_OUTER_JOIN"/>
+			<xs:enumeration value="RIGHT_OUTER_JOIN"/>
+			<xs:enumeration value="EXISTS"/>
+			<xs:enumeration value="NOT_EXISTS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="FieldLogical">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EQUALS"/>
+			<xs:enumeration value="NOTEQUALS"/>
+			<xs:enumeration value="LOWER"/>
+			<xs:enumeration value="LARGER"/>
+			<xs:enumeration value="NOT_LOWER"/>
+			<xs:enumeration value="NOT_LARGER"/>
+			<xs:enumeration value="IN"/>
+			<xs:enumeration value="NOTIN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="OperationLogical">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT"/>
+			<xs:enumeration value="AND"/>
+			<xs:enumeration value="OR"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="OrderDirection">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DESC"/>
+			<xs:enumeration value="ASC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="SQLFunction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AVG"/>
+			<xs:enumeration value="COUNT"/>
+			<xs:enumeration value="FIRST"/>
+			<xs:enumeration value="LAST"/>
+			<xs:enumeration value="MAX"/>
+			<xs:enumeration value="MIN"/>
+			<xs:enumeration value="STDEV"/>
+			<xs:enumeration value="STDEVP"/>
+			<xs:enumeration value="SUM"/>
+			<xs:enumeration value="VAR"/>
+			<xs:enumeration value="VARP"/>
+		</xs:restriction>
+	</xs:simpleType>
+		
+	<!-- 字段定义 -->
+	<xs:complexType name="Field">
+		<xs:complexContent>
+			<xs:extension base="Define"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FieldGroup">
+		<xs:complexContent>
+			<xs:extension base="Field">
+				<xs:sequence>
+					<xs:element ref="field" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FieldValue">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="SimpleValue">
+		<xs:complexContent>
+			<xs:extension base="FieldValue" >
+				<xs:attribute name="fieldvalue" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="SchemaValue">
+		<xs:complexContent>
+			<xs:extension base="FieldValue" >
+				<xs:sequence>
+					<xs:element name="ValueContent" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="JSONFieldValue">
+		<xs:complexContent>
+			<xs:extension base="SchemaValue" />
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="Status">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="StatusGroup">
+		<xs:complexContent>
+			<xs:extension base="Status" >
+				<xs:sequence>
+					<xs:element ref="status" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<!-- 从数据源读取数据后 -->
+	<xs:complexType name="GetStatus">
+		<xs:complexContent>
+			<xs:extension base="Status" >
+				<xs:sequence>
+					<xs:element ref="library" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<!-- 更新到数据存储前 -->
+	<xs:complexType name="SetStatus">
+		<xs:complexContent>
+			<xs:extension base="Status" >
+				<xs:sequence>
+					<xs:element ref="library" minOccurs="0"/>
+					<xs:element ref="validator" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<!-- 字段 -->
+	<xs:complexType name="ServiceField">
+		<xs:complexContent>
+			<xs:extension base="Field">
+				<xs:sequence>
+					<xs:element ref="status" minOccurs="0" />	
+					<xs:element ref="fieldValue"  minOccurs="0" />			
+				</xs:sequence>
+				<xs:attribute name="function" type="SQLFunction" />
+				<xs:attribute name="label" type="xs:string"/>
+				<xs:attribute name="dataType" type="DataType"/>
+				<xs:attribute name="field" type="xs:string"/>
+				<xs:attribute name="size" type="xs:integer"/>
+				<xs:attribute name="format" type="xs:string"/>	
+				<xs:attribute name="noneSelected" type="xs:boolean"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+
+	<!-- 表单部分, 用来区分数据结构、条件结构、Group 结构和排序  -->
+	<xs:complexType name="FormPart">
+		<xs:complexContent>
+			<xs:extension base="Define"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FormPartGroup">
+		<xs:complexContent>
+			<xs:extension base="FormPart">
+				<xs:sequence>
+					<xs:element ref="formPart" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FieldsPart">
+		<xs:complexContent>
+			<xs:extension base="FormPart">
+				<xs:sequence>
+					<xs:element ref="field"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="SelectedPart">
+		<xs:complexContent>
+			<xs:extension base="FieldsPart"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="WherePart">
+		<xs:complexContent>
+			<xs:extension base="FieldsPart"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="GroupByPart">
+		<xs:complexContent>
+			<xs:extension base="FieldsPart"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="OrderPart">
+		<xs:complexContent>
+			<xs:extension base="FieldsPart"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 链接 -->
+	<xs:complexType name="Connection">
+		<xs:complexContent>
+			<xs:extension base="Define">
+				<xs:sequence>
+					<xs:element ref="connectTools"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--链接字符串, 用来连接数据库-->
+	<xs:complexType name="DatabaseConnection">
+		<xs:complexContent>
+			<xs:extension base="Connection">
+				<xs:attribute name="connectionString" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 支持用Application Server的数据连接池 -->
+	<xs:complexType name="JNDIConnection">
+		<xs:complexContent>
+			<xs:extension base="Connection">
+				<xs:attribute name="context" type="xs:string"/>
+				<xs:attribute name="jndi" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- rest 服务接口 -->
+	<xs:complexType name="ServiceConnection">
+		<xs:complexContent>
+			<xs:extension base="Connection">
+				<xs:attribute name="serviceurl" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 用来连接数据源工具 -->
+	<xs:complexType name="ConnectTools">
+		<xs:complexContent>
+			<xs:extension base="Define"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- SQL 数据 工具  和Service 配置都用Service ConnectionTools -->
+	<xs:complexType name="ServiceConnectTools">
+		<xs:complexContent>
+			<xs:extension base="ConnectTools">
+				<xs:sequence>
+					<xs:element ref="attribute"/>
+				</xs:sequence>
+				<xs:attribute name="classname" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--属性-->
+	<xs:complexType name="Attribute">
+		<xs:complexContent>
+			<xs:extension base="Define"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AttributeGroup">
+		<xs:complexContent>
+			<xs:extension base="Attribute">
+				<xs:sequence>
+					<xs:element ref="attribute" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ValueAttribute">
+		<xs:complexContent>
+			<xs:extension base="Attribute">
+				<xs:attribute name="value" type="xs:string"/>
+				<xs:attribute name="datatype" type="DataType"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 执行Form 工具 -->
+	<xs:complexType name="ActionTools">
+		<xs:complexContent>
+			<xs:extension base="Define"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 用来进行功能执行 -->
+	<xs:complexType name="FunctionTools">
+		<xs:complexContent>
+			<xs:extension base="ActionTools">
+				<xs:sequence>
+					<xs:element ref="attribute" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="classname" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+	 <!-- 
+		sql action 执行工具，
+		通过定义，并且根据Form 和定义
+		和数据请求，进行相关数据查询或者定义
+	 -->
+	<xs:complexType name="ServiceActionTools">
+		<xs:complexContent>
+			<xs:extension base="FunctionTools">
+				<xs:sequence>
+					<xs:element ref="connection" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 数据转换 -->
+	<xs:complexType name="Library">
+		<xs:complexContent>
+			<xs:extension base="Define"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Library 组 -->
+	<xs:complexType name="LibraryGroup">
+		<xs:complexContent>
+			<xs:extension base="Library">
+				<xs:sequence>
+					<xs:element ref="library" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 数据转换 -->
+	<xs:complexType name="FormLibrary">
+		<xs:complexContent>
+			<xs:extension base="Library">
+				<xs:sequence>
+					<xs:element ref="form"/>
+				</xs:sequence>
+				<xs:attribute name="codefield" type="xs:string"/>
+				<xs:attribute name="valuefield" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 数据转换_参考 -->
+	<xs:complexType name="ReferenceLibrary">
+		<xs:complexContent>
+			<xs:extension base="Library">
+				<xs:attribute name="voCode" type="xs:string" />
+				<xs:attribute name="formCode" type="xs:string" />
+				<xs:attribute name="codefield" type="xs:string"/>
+				<xs:attribute name="valuefield" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- SQL 文 -->
+	<xs:complexType name="SqlLibrary">
+		<xs:complexContent>
+			<xs:extension base="Library">
+				<xs:sequence>
+					<xs:element name="sqlcontent" type="xs:string" />
+				</xs:sequence>
+				<xs:attribute name="codefield" type="xs:string"/>
+				<xs:attribute name="valuefield" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 从属性配置中获得 -->	
+	<xs:complexType name="AttributeLibrary">
+		<xs:complexContent>
+			<xs:extension base="Library">
+				<xs:sequence>
+					<xs:element ref="attribute"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 利用Action 进行处理 -->
+	<xs:complexType name="ActionLibrary">
+		<xs:complexContent>
+			<xs:extension base="Library">
+				<xs:sequence>
+					<xs:element ref="actionTools"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+	<!-- 数
+		据DataSet, 用来进行数据源，  
+		数据源 可以配置属性
+	-->
+	<xs:complexType name="DataSet">
+		<xs:complexContent>
+			<xs:extension base="Define">
+				<xs:sequence>
+					<xs:element ref="attribute"></xs:element> 
+				</xs:sequence>
+				<xs:attribute name="alias" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Table 名 -->
+	<xs:complexType name="TableSet">
+		<xs:complexContent>
+			<xs:extension base="DataSet">
+				<xs:attribute name="table" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Sql 文 -->
+	<xs:complexType name="SQLSet">
+		<xs:complexContent>
+			<xs:extension base="DataSet">
+				<xs:sequence>
+					<xs:element name="content" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 利用Form 作为数据源 -->
+	<xs:complexType name="FormSet">
+		<xs:complexContent>
+			<xs:extension base="DataSet">
+				<xs:sequence>
+					<xs:element ref="form"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 
+		模板Set, 支持:{%%}进行替换
+	    执行特殊的SQL 文
+	-->
+	<xs:complexType name="TemplateSet">
+		<xs:complexContent>
+			<xs:extension base="DataSet">
+				<xs:sequence>
+					<xs:element name="template" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 从Action Class 获得必要的SQL 文，或者其他内容 -->
+	<xs:complexType name="DoActionSet">
+		<xs:complexContent>
+			<xs:extension base="DataSet">
+				<xs:attribute name="actionclass" type="xs:string" />
+				<xs:attribute name="methodname" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<!-- 数据合法性检查 -->	
+	<xs:complexType name="Validator">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ValidatorGroup">
+		<xs:complexContent>
+			<xs:extension base="Validator" >
+				<xs:sequence>
+					<xs:element ref="validator" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 数据类型检查 -->
+	<xs:complexType name="DataTypeChecker">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:attribute name="datatype" type="DataType" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 可以为空 -->
+	<xs:complexType name="CanBeNull">
+		<xs:complexContent>
+			<xs:extension base="Validator" />
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<!-- 
+		不可以为空, 当目标字段为空的时候，
+        设置采用defaultValue 
+    -->
+	<xs:complexType name="CannotBeNull">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:attribute name="defaultValue" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 值用valuesCollection,需要用"," 隔开 -->
+	<xs:complexType name="BelongCollection">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:attribute name="valuesCollection" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--不在用valuesCollection,需要用"," 隔开-->
+	<xs:complexType name="NoneBelongCollection">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:attribute name="valuesCollection" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 比较>< <> >= <= -->
+	<xs:complexType name="BoundaryChecker">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:attribute name="boundary" type="FieldLogical" />
+				<xs:attribute name="defaultValue" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 正则表达是检查 -->
+	<xs:complexType name="FormatChecker">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:attribute name="syntaxString" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 方法检查 -->
+	<xs:complexType name="ExtendMethodChecker">
+		<xs:complexContent>
+			<xs:extension base="Validator">
+				<xs:sequence>
+					<xs:element ref="attribute"/>
+				</xs:sequence>
+				<xs:attribute name="className" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+</xs:schema>

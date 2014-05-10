@@ -1,6 +1,10 @@
 package org.zml.data.vo.command.parser;
 
 import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import org.zml.data.vo.command.bind.CommandDefine;
 
@@ -21,5 +25,57 @@ public class SQLCommandComparor implements Comparator<CommandDefine> {
 		
 		return index1 - index2;
 	}
+
+	@Override
+	public Comparator<CommandDefine> reversed() {
+		// TODO Auto-generated method stub
+		return new SQLCommandReversedComparor();
+	}
+
+	@Override
+	public Comparator<CommandDefine> thenComparing(
+			Comparator<? super CommandDefine> other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <U> Comparator<CommandDefine> thenComparing(
+			Function<? super CommandDefine, ? extends U> keyExtractor,
+			Comparator<? super U> keyComparator) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <U extends Comparable<? super U>> Comparator<CommandDefine> thenComparing(
+			Function<? super CommandDefine, ? extends U> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comparator<CommandDefine> thenComparingInt(
+			ToIntFunction<? super CommandDefine> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comparator<CommandDefine> thenComparingLong(
+			ToLongFunction<? super CommandDefine> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comparator<CommandDefine> thenComparingDouble(
+			ToDoubleFunction<? super CommandDefine> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 
 }

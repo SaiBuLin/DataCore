@@ -1,10 +1,13 @@
 package org.zml.data.service.page.request.parser;
 
-import org.zml.data.service.page.request.bind.RequestField;
-import org.zml.data.vo.form.VOForm;
-import org.zml.tools.xml.parser.CTXMLElement;
+import java.util.List;
 
-public abstract class VOServiceRequest implements VOServiceRequestAble
+import org.zml.data.vo.command.bind.CommandConfiguration;
+import org.zml.data.vo.command.bind.RequestTask;
+import org.zml.tools.xml.parser.CTXMLElement;
+import org.zml.vo.AIVOEngine;
+
+public abstract class VOServiceRequest extends AIVOEngine implements VOServiceRequestAble
 {
 	protected CTXMLElement queryDefineElement = null;
 	
@@ -19,27 +22,35 @@ public abstract class VOServiceRequest implements VOServiceRequestAble
 	}
 	
 	@Override
-	public RequestField getSelectedField(String code)throws Exception{
+	public List<String> listSelectFieldNames() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> listWhereFieldNames() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> listOrderByFieldNames() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> listGroupByFieldNames() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CommandConfiguration parseWhereForSyntax(RequestTask whereField,
+			String alias) throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	@Override
-	public RequestField getWhereField(String code)throws Exception{
-		return null;
-	}
 	
-	@Override
-	public RequestField getOrderByField(String code)throws Exception{
-		return null;
-	}
-	
-	@Override
-	public RequestField getGroupbyField(String code)throws Exception{
-		return null;
-	}
-	
-	@Override
-	public String parseWhereForSyntax(VOForm form, String alias, String[] fields) throws Exception{
-		return "";
-	}
 }

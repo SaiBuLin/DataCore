@@ -13,6 +13,7 @@ import org.zml.data.vo.tools.action.IActionTools;
  * 属性集合propeties的Key 区分大小写
  */
 public class VOForm {
+	
 	Map<String,Object> properties = new HashMap<String,Object>();
 	
 	QueryRequest MyQueryRequest = null;

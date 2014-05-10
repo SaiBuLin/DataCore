@@ -7,6 +7,8 @@ import org.zml.data.service.page.request.parser.VOServiceRequestFactory;
 import org.zml.data.vo.bind.Schema;
 import org.zml.data.vo.bind.WherePart;
 import org.zml.data.vo.command.bind.CommandConfiguration;
+import org.zml.data.vo.command.parser.SQLCommandAble;
+import org.zml.data.vo.command.parser.SQLCommandFactory;
 import org.zml.data.vo.exception.DataServiceException;
 import org.zml.data.vo.form.CommandForm;
 import org.zml.data.vo.form.VOForm;
@@ -167,19 +169,34 @@ public class WherePartSQLParser extends SQLParser implements SQLParserAble
 				throw new Exception("根据VOForm ParserWhereCommand,其中Command的内容为空。");
 			}
 			
+			SQLCommandAble resultCommandAble = SQLCommandFactory.getQueryDefineInterpreter( result.getCommand());
 			
-			
+			logger.debug("将Field 进行Parser 获得必要的信息。");
 			String WhereString = "";// UtilTools.getTrim( result.getCommand() );
+			if( resultCommandAble != null ){
+				
+			}
 			
 			/* 根据字符','来分解 */
 			String[] whereFields = splitString( WhereString, ",");
 			String command = "";
 			if( form.getQueryRequestService() != null ){
+				
+				/* 
+				 * 根据request 的请求进行处理
+				 * 条件格式， 满足复杂条件设置的需要， 具体的条件
+				 * 的要求，是按照Request Form 来判断的。
+				 *  
+				 */
+				
+				
+				/*
 				VOServiceRequestAble requestAble = VOServiceRequestFactory.getQueryDefineInterpreter(form.getQueryRequestService());
 				if( requestAble == null ){
 					return result;
 				}
 				command = requestAble.parseWhereForSyntax(form, alias, whereFields);
+				*/
 			}
 			
 			result = new CommandForm();

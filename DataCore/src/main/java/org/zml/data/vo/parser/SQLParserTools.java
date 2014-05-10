@@ -1,15 +1,13 @@
 package org.zml.data.vo.parser;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.zml.data.vo.bind.FieldLogical;
 import org.zml.data.vo.bind.TableRelation;
 import org.zml.util.UtilTools;
+import org.zml.vo.AIVOEngine;
 
 /* 抽象类， 装载Parser 使用的工具方法 */
-public abstract class SQLParserTools {
+public abstract class SQLParserTools extends AIVOEngine {	
 	
-	protected static Logger logger = LogManager.getLogger("DataSerivce.vo.parser.v2013");
 	
 	public static String PROPERTY_KEY_CONNECTION = "VO_CONNECTION";
 	public static String PROPERTY_KEY_ACTION_TOOL = "VO_ACTION_TOOL";

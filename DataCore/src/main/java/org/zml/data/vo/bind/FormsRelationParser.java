@@ -5,12 +5,12 @@ import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
 import org.zml.tools.xml.parser.Convert;
 import org.zml.util.UtilTools;
-public class LeRiFormsConnectionParser extends FormRelationParser implements IXmlVisitorParserable
+public class FormsRelationParser extends FormRelationParser implements IXmlVisitorParserable
 {
-	public LeRiFormsConnectionParser()
+	public FormsRelationParser()
 	{
 	}
-	public LeRiFormsConnectionParser(XMLVisitorFactory thisFactory)
+	public FormsRelationParser(XMLVisitorFactory thisFactory)
 	{
 		setFactory(thisFactory);
 	}
@@ -19,8 +19,8 @@ public class LeRiFormsConnectionParser extends FormRelationParser implements IXm
 		boolean result = false;
 		if( element == null) return result;
 		if( node == null) return result;
-		if( !(element instanceof LeRiFormsConnection ))  return result;
-		LeRiFormsConnection objElement = (LeRiFormsConnection)element;
+		if( !(element instanceof FormsRelation ))  return result;
+		FormsRelation objElement = (FormsRelation)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
 		if(node.attribute("leftform")!= null )
@@ -46,8 +46,8 @@ public class LeRiFormsConnectionParser extends FormRelationParser implements IXm
 	{
 		Object result = null;
 		if (node == null) return result;
-		result = new LeRiFormsConnection();
-		loadXML((LeRiFormsConnection)result, node);
+		result = new FormsRelation();
+		loadXML((FormsRelation)result, node);
 		return result;
 	}
 	public void encodeObjectToElement( Element fatherElement, CTXMLElement element )
@@ -57,8 +57,8 @@ public class LeRiFormsConnectionParser extends FormRelationParser implements IXm
 			if ( fatherElement == null ) return;
 			if ( element == null ) return;
 			super.encodeObjectToElement(fatherElement, element);
-			if( !(element instanceof LeRiFormsConnection ))  return;
-			LeRiFormsConnection objElement = (LeRiFormsConnection)element;
+			if( !(element instanceof FormsRelation ))  return;
+			FormsRelation objElement = (FormsRelation)element;
 			if( !UtilTools.isNull( objElement.getLeftform() ))
 			{
 				String dataOneElement = objElement.getLeftform();

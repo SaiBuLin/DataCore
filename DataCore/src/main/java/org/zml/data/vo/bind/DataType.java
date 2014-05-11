@@ -1,16 +1,20 @@
 package org.zml.data.vo.bind;
 public enum DataType
 {
-	zyhXML,
-	zyhShort,
-	zyhBlob,
-	zyhNumberic,
-	zyhString,
-	zyhDate,
-	zyhFloat,
-	zyhLong,
-	zyhDatetime,
-	zyhBoolean,
-	zyhInteger,
-	zyhDouble
+	zmlDouble,
+	zmlString,
+	zmlInteger,
+	zmlUNknown,
+	zmlGeometry,
+	zmlShort,
+	zmlNumberic,
+	zmlBoolean,
+	zmlBlob,
+	zmlDate,
+	SQLParameter,
+	zmlFloat,
+	zmlDatetime,
+	zmlXML,
+	zmlLong,
+	zmlJSON
 }

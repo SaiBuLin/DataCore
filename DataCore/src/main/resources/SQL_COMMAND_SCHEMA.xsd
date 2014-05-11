@@ -98,18 +98,22 @@
 	<!--支持存储Blob 文件-->
 	<xs:simpleType name="ParamValueType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="zyhString"/>
-			<xs:enumeration value="zyhInteger"/>
-			<xs:enumeration value="zyhShort"/>
-			<xs:enumeration value="zyhLong"/>
-			<xs:enumeration value="zyhFloat"/>
-			<xs:enumeration value="zyhDouble"/>
-			<xs:enumeration value="zyhDatetime"/>
-			<xs:enumeration value="zyhDate"/>
-			<xs:enumeration value="zyhBoolean"/>
-			<xs:enumeration value="zyhBlob"/>
-			<xs:enumeration value="zyhXML"/>
-			<xs:enumeration value="zyhNumberic"/>
+			<xs:enumeration value="zmlUNknown"/>
+			<xs:enumeration value="zmlString"/>
+			<xs:enumeration value="zmlInteger"/>
+			<xs:enumeration value="zmlShort"/>
+			<xs:enumeration value="zmlLong"/>
+			<xs:enumeration value="zmlFloat"/>
+			<xs:enumeration value="zmlDouble"/>
+			<xs:enumeration value="zmlDatetime"/>
+			<xs:enumeration value="zmlDate"/>
+			<xs:enumeration value="zmlBoolean"/>
+			<xs:enumeration value="zmlBlob"/>
+			<xs:enumeration value="zmlXML"/>
+			<xs:enumeration value="zmlJSON"/>
+			<xs:enumeration value="zmlNumberic"/>
+			<xs:enumeration value="SQLParameter"/>
+			<xs:enumeration value="zmlGeometry"/>
 		</xs:restriction>
 	</xs:simpleType>
 	

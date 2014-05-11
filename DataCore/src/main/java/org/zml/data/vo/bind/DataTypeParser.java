@@ -23,53 +23,69 @@ public class DataTypeParser extends XMLVisitorParser implements IXmlVisitorParse
 		if (node == null) return result;
 		String NodeValue = node.getTextTrim();
 		NodeValue = UTools.getTrim( NodeValue );
-		if (NodeValue.equals("zyhDatetime"))
+		if (NodeValue.equals("zmlDouble"))
 		{
-			result = DataType.zyhDatetime;
+			result = DataType.zmlDouble;
 		}
-		else if (NodeValue.equals("zyhShort"))
+		else if (NodeValue.equals("zmlGeometry"))
 		{
-			result = DataType.zyhShort;
+			result = DataType.zmlGeometry;
 		}
-		else if (NodeValue.equals("zyhFloat"))
+		else if (NodeValue.equals("zmlLong"))
 		{
-			result = DataType.zyhFloat;
+			result = DataType.zmlLong;
 		}
-		else if (NodeValue.equals("zyhLong"))
+		else if (NodeValue.equals("zmlString"))
 		{
-			result = DataType.zyhLong;
+			result = DataType.zmlString;
 		}
-		else if (NodeValue.equals("zyhInteger"))
+		else if (NodeValue.equals("SQLParameter"))
 		{
-			result = DataType.zyhInteger;
+			result = DataType.SQLParameter;
 		}
-		else if (NodeValue.equals("zyhString"))
+		else if (NodeValue.equals("zmlXML"))
 		{
-			result = DataType.zyhString;
+			result = DataType.zmlXML;
 		}
-		else if (NodeValue.equals("zyhXML"))
+		else if (NodeValue.equals("zmlDate"))
 		{
-			result = DataType.zyhXML;
+			result = DataType.zmlDate;
 		}
-		else if (NodeValue.equals("zyhDouble"))
+		else if (NodeValue.equals("zmlShort"))
 		{
-			result = DataType.zyhDouble;
+			result = DataType.zmlShort;
 		}
-		else if (NodeValue.equals("zyhBlob"))
+		else if (NodeValue.equals("zmlUNknown"))
 		{
-			result = DataType.zyhBlob;
+			result = DataType.zmlUNknown;
 		}
-		else if (NodeValue.equals("zyhNumberic"))
+		else if (NodeValue.equals("zmlFloat"))
 		{
-			result = DataType.zyhNumberic;
+			result = DataType.zmlFloat;
 		}
-		else if (NodeValue.equals("zyhBoolean"))
+		else if (NodeValue.equals("zmlNumberic"))
 		{
-			result = DataType.zyhBoolean;
+			result = DataType.zmlNumberic;
 		}
-		else if (NodeValue.equals("zyhDate"))
+		else if (NodeValue.equals("zmlDatetime"))
 		{
-			result = DataType.zyhDate;
+			result = DataType.zmlDatetime;
+		}
+		else if (NodeValue.equals("zmlBlob"))
+		{
+			result = DataType.zmlBlob;
+		}
+		else if (NodeValue.equals("zmlBoolean"))
+		{
+			result = DataType.zmlBoolean;
+		}
+		else if (NodeValue.equals("zmlJSON"))
+		{
+			result = DataType.zmlJSON;
+		}
+		else if (NodeValue.equals("zmlInteger"))
+		{
+			result = DataType.zmlInteger;
 		}
 		return result;
 	}
@@ -78,53 +94,69 @@ public class DataTypeParser extends XMLVisitorParser implements IXmlVisitorParse
 		Object result = null;
 		if (UtilTools.isNull(value) ) return result;
 		String tmpValue = UtilTools.getTrim(value);
-		if (tmpValue.equals("zyhDatetime"))
+		if (tmpValue.equals("zmlDouble"))
 		{
-			result = DataType.zyhDatetime;
+			result = DataType.zmlDouble;
 		}
-		else if (tmpValue.equals("zyhShort"))
+		else if (tmpValue.equals("zmlGeometry"))
 		{
-			result = DataType.zyhShort;
+			result = DataType.zmlGeometry;
 		}
-		else if (tmpValue.equals("zyhFloat"))
+		else if (tmpValue.equals("zmlLong"))
 		{
-			result = DataType.zyhFloat;
+			result = DataType.zmlLong;
 		}
-		else if (tmpValue.equals("zyhLong"))
+		else if (tmpValue.equals("zmlString"))
 		{
-			result = DataType.zyhLong;
+			result = DataType.zmlString;
 		}
-		else if (tmpValue.equals("zyhInteger"))
+		else if (tmpValue.equals("SQLParameter"))
 		{
-			result = DataType.zyhInteger;
+			result = DataType.SQLParameter;
 		}
-		else if (tmpValue.equals("zyhString"))
+		else if (tmpValue.equals("zmlXML"))
 		{
-			result = DataType.zyhString;
+			result = DataType.zmlXML;
 		}
-		else if (tmpValue.equals("zyhXML"))
+		else if (tmpValue.equals("zmlDate"))
 		{
-			result = DataType.zyhXML;
+			result = DataType.zmlDate;
 		}
-		else if (tmpValue.equals("zyhDouble"))
+		else if (tmpValue.equals("zmlShort"))
 		{
-			result = DataType.zyhDouble;
+			result = DataType.zmlShort;
 		}
-		else if (tmpValue.equals("zyhBlob"))
+		else if (tmpValue.equals("zmlUNknown"))
 		{
-			result = DataType.zyhBlob;
+			result = DataType.zmlUNknown;
 		}
-		else if (tmpValue.equals("zyhNumberic"))
+		else if (tmpValue.equals("zmlFloat"))
 		{
-			result = DataType.zyhNumberic;
+			result = DataType.zmlFloat;
 		}
-		else if (tmpValue.equals("zyhBoolean"))
+		else if (tmpValue.equals("zmlNumberic"))
 		{
-			result = DataType.zyhBoolean;
+			result = DataType.zmlNumberic;
 		}
-		else if (tmpValue.equals("zyhDate"))
+		else if (tmpValue.equals("zmlDatetime"))
 		{
-			result = DataType.zyhDate;
+			result = DataType.zmlDatetime;
+		}
+		else if (tmpValue.equals("zmlBlob"))
+		{
+			result = DataType.zmlBlob;
+		}
+		else if (tmpValue.equals("zmlBoolean"))
+		{
+			result = DataType.zmlBoolean;
+		}
+		else if (tmpValue.equals("zmlJSON"))
+		{
+			result = DataType.zmlJSON;
+		}
+		else if (tmpValue.equals("zmlInteger"))
+		{
+			result = DataType.zmlInteger;
 		}
 		return result;
 	}

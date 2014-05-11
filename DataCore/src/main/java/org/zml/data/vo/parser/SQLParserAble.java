@@ -1,8 +1,7 @@
 package org.zml.data.vo.parser;
 
 import org.zml.data.vo.exception.DataServiceException;
-import org.zml.data.vo.form.CommandForm;
-import org.zml.data.vo.form.VOForm;
+
 import org.zml.data.vo.tools.action.IActionTools;
 import org.zml.data.vo.tools.connection.IConnectionAble;
 import org.zml.data.dataset.bind.NetDataSet;
@@ -24,53 +23,6 @@ import java.util.Map;
 public interface SQLParserAble
 {
 	public boolean checkQueryElementComfort() throws Exception;
-	
-	/**
-	 * 	 
-	 * 执行, 是属性列表form， 用来装载需要处理的特殊。
-	 * 表单	
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public NetDataSet executeVOAction(VOForm form, String formcode) throws DataServiceException;
-	
-	/**
-	 * 创建出对应Command 字符串，存储在Map<String,String> 中。
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public CommandForm parserCommand( 
-			VOForm form) throws DataServiceException;
-	
-	public CommandForm parserCommand(
-			int index,
-			VOForm form, 
-			CommandForm selectForm,
-			CommandForm whereForm,
-			CommandForm orderForm,
-			CommandForm groupbyForm,
-			CommandForm dataset) throws DataServiceException;
-	
-	public CommandForm parserCommand(
-			VOForm form,
-			CommandForm leftForm,
-			CommandForm rightForm, 
-			TableRelation tableRelation 
-			)throws DataServiceException;
-	
-	public CommandForm parserCommand(
-			int index,
-			VOForm form, 
-			CommandForm relationForm) throws DataServiceException;
-	
-	
-	public String parserRelationFieldString(
-			VOForm form,
-			String leftalias,
-			String rightalias
-			) throws DataServiceException;
 	
 	
 	/**
@@ -143,93 +95,6 @@ public interface SQLParserAble
 	public void loadProperties( Map<String, Object> properties ) throws DataServiceException;
 	
 	
-	/* 专用于part 部分 */
-	/**
-	 * 获得查询返回值得Columns
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public Map<String, Field> getQueryFields(VOForm form) throws DataServiceException;
-	
-	/**
-	 * 获得条件列表
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public Map<String, Field> getWhereFields(VOForm form) throws DataServiceException;
-	
-	/**
-	 * 
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public Map<String, Field> getOrderFields(VOForm form) throws DataServiceException;
-	
-	/**
-	 * 
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public Map<String, Field> getGroupByFields(VOForm form) throws DataServiceException;
-	
-	/* ********************************* 专用part 部分 */
-	
-	/**
-	 * 产生用来进行Select 的命令部分
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public CommandForm parserSelectCommand(
-			int index,
-			String alias, 
-			VOForm form) throws DataServiceException;
-	
-	/**
-	 * 产生Where 条件部分命令
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public CommandForm parserWhereCommand(
-			int index,
-			String alias, 
-			VOForm form) throws DataServiceException;
-	
-	
-	/**
-	 * 产生排序部分的命令
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public CommandForm parserOrderCommand(
-			int index,
-			String alias, 
-			VOForm form) throws DataServiceException;
-	
-	/**
-	 * 产生Group by 的部分
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public CommandForm parserGroupbyCommand(
-			int index,
-			String alias, 
-			VOForm form) throws DataServiceException;
-	
-	/**
-	 * 产生DataSet 部分的命令， 比如SQL问Table 或者SQL文
-	 * @param form
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public CommandForm parserDataSetStringCommand(VOForm form) throws DataServiceException; 
 	
 	/**
 	 * 装载Field 配置

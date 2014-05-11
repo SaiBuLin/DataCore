@@ -1,16 +1,20 @@
 package org.zml.data.vo.command.bind;
 public enum ParamValueType
 {
-	zyhBoolean,
-	zyhDatetime,
-	zyhXML,
-	zyhNumberic,
-	zyhLong,
-	zyhFloat,
-	zyhString,
-	zyhInteger,
-	zyhBlob,
-	zyhDouble,
-	zyhShort,
-	zyhDate
+	zmlLong,
+	zmlString,
+	SQLParameter,
+	zmlInteger,
+	zmlDouble,
+	zmlShort,
+	zmlGeometry,
+	zmlBlob,
+	zmlFloat,
+	zmlDatetime,
+	zmlXML,
+	zmlDate,
+	zmlBoolean,
+	zmlUNknown,
+	zmlJSON,
+	zmlNumberic
 }

@@ -33,7 +33,6 @@ public class MyFactory extends XMLVisitorFactory
 		this.addBindMap("fieldsPart","formPart");
 		this.addBindMap("wherePart","fieldsPart");
 		this.addBindMap("storedproductForm","serviceForm");
-		this.addBindMap("leriFormsConnection","formRelation");
 		this.addBindMap("boundaryChecker","validator");
 		this.addBindMap("validator","define");
 		this.addBindMap("jndiConnection","connection");
@@ -66,7 +65,7 @@ public class MyFactory extends XMLVisitorFactory
 		this.addBindMap("transactionForm","serviceForm");
 		this.addBindMap("attribute","define");
 		this.addBindMap("valueAttribute","attribute");
-		this.addBindMap("simpleValue","fieldValue");
+		this.addBindMap("formsRelation","formRelation");
 		this.addBindMap("actionTools","define");
 		this.addBindMap("schemaGroup","schema");
 		this.addBindMap("serviceField","field");
@@ -83,6 +82,7 @@ public class MyFactory extends XMLVisitorFactory
 		this.addBindMap("formPartGroup","formPart");
 		this.addBindMap("sqlLibrary","library");
 		this.addBindMap("getStatus","status");
+		this.addBindMap("simpleValue","fieldValue");
 		this.addBindMap("formRelationGroup","formRelation");
 		this.addBindMap("formRelation","define");
 		this.addBindMap("connectTools","define");
@@ -230,9 +230,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new ValueAttributeParser(this);
 		}
-		else if(tmpName.equals("schemaGroup"))
+		else if(tmpName.equals("formsRelation"))
 		{
-			result = new SchemaGroupParser(this);
+			result = new FormsRelationParser(this);
 		}
 		else if(tmpName.equals("belongCollection"))
 		{
@@ -334,6 +334,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new ActionToolsParser(this);
 		}
+		else if(tmpName.equals("doActionSet"))
+		{
+			result = new DoActionSetParser(this);
+		}
 		else if(tmpName.equals("form"))
 		{
 			result = new FormParser(this);
@@ -382,17 +386,13 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new RelationParser(this);
 		}
-		else if(tmpName.equals("leriFormsConnection"))
-		{
-			result = new LeRiFormsConnectionParser(this);
-		}
 		else if(tmpName.equals("relationGroup"))
 		{
 			result = new RelationGroupParser(this);
 		}
-		else if(tmpName.equals("doActionSet"))
+		else if(tmpName.equals("schemaGroup"))
 		{
-			result = new DoActionSetParser(this);
+			result = new SchemaGroupParser(this);
 		}
 		else if(tmpName.equals("updateForm"))
 		{
@@ -467,10 +467,6 @@ public class MyFactory extends XMLVisitorFactory
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.ConnectTools"))
 		{
 			result = new ConnectToolsParser(this);
-		}
-		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.BelongCollection"))
-		{
-			result = new BelongCollectionParser(this);
 		}
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.VISchema"))
 		{
@@ -564,9 +560,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new ServiceFormParser(this);
 		}
-		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.GroupByPart"))
+		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.FormGroup"))
 		{
-			result = new GroupByPartParser(this);
+			result = new FormGroupParser(this);
 		}
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.UpdateForm"))
 		{
@@ -608,6 +604,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new StatusParser(this);
 		}
+		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.FormsRelation"))
+		{
+			result = new FormsRelationParser(this);
+		}
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.SchemaDefine"))
 		{
 			result = new SchemaDefineParser(this);
@@ -636,9 +636,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new SelectFormParser(this);
 		}
-		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.LeRiFormsConnection"))
+		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.BelongCollection"))
 		{
-			result = new LeRiFormsConnectionParser(this);
+			result = new BelongCollectionParser(this);
 		}
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.FieldValue"))
 		{
@@ -692,6 +692,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new InsertFormParser(this);
 		}
+		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.GroupByPart"))
+		{
+			result = new GroupByPartParser(this);
+		}
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.SchemaGroup"))
 		{
 			result = new SchemaGroupParser(this);
@@ -731,10 +735,6 @@ public class MyFactory extends XMLVisitorFactory
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.AttributeLibrary"))
 		{
 			result = new AttributeLibraryParser(this);
-		}
-		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.FormGroup"))
-		{
-			result = new FormGroupParser(this);
 		}
 		else if( ob.getClass().getName().equals( "org.zml.data.vo.bind.DeleteForm"))
 		{
@@ -791,9 +791,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new FormRelationGroupParser(this);
 		}
-		else if( tmpTypeName.equals( "org.zml.data.vo.bind.LeRiFormsConnection"))
+		else if( tmpTypeName.equals( "org.zml.data.vo.bind.FormsRelation"))
 		{
-			result = new LeRiFormsConnectionParser(this);
+			result = new FormsRelationParser(this);
 		}
 		else if( tmpTypeName.equals( "org.zml.data.vo.bind.Form"))
 		{
@@ -1226,9 +1226,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "org.zml.data.vo.bind.ValueAttribute";
 		}
-		else if(tmpName.equals("schemaGroup"))
+		else if(tmpName.equals("formsRelation"))
 		{
-			result = "org.zml.data.vo.bind.SchemaGroup";
+			result = "org.zml.data.vo.bind.FormsRelation";
 		}
 		else if(tmpName.equals("belongCollection"))
 		{
@@ -1330,6 +1330,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "org.zml.data.vo.bind.ActionTools";
 		}
+		else if(tmpName.equals("doActionSet"))
+		{
+			result = "org.zml.data.vo.bind.DoActionSet";
+		}
 		else if(tmpName.equals("form"))
 		{
 			result = "org.zml.data.vo.bind.Form";
@@ -1378,17 +1382,13 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "org.zml.data.vo.bind.Relation";
 		}
-		else if(tmpName.equals("leriFormsConnection"))
-		{
-			result = "org.zml.data.vo.bind.LeRiFormsConnection";
-		}
 		else if(tmpName.equals("relationGroup"))
 		{
 			result = "org.zml.data.vo.bind.RelationGroup";
 		}
-		else if(tmpName.equals("doActionSet"))
+		else if(tmpName.equals("schemaGroup"))
 		{
-			result = "org.zml.data.vo.bind.DoActionSet";
+			result = "org.zml.data.vo.bind.SchemaGroup";
 		}
 		else if(tmpName.equals("updateForm"))
 		{
@@ -1545,9 +1545,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "valueAttribute";
 		}
-		else if(tmpName.equals("org.zml.data.vo.bind.SchemaGroup"))
+		else if(tmpName.equals("org.zml.data.vo.bind.FormsRelation"))
 		{
-			result = "schemaGroup";
+			result = "formsRelation";
 		}
 		else if(tmpName.equals("org.zml.data.vo.bind.BelongCollection"))
 		{
@@ -1649,6 +1649,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "actionTools";
 		}
+		else if(tmpName.equals("org.zml.data.vo.bind.DoActionSet"))
+		{
+			result = "doActionSet";
+		}
 		else if(tmpName.equals("org.zml.data.vo.bind.Form"))
 		{
 			result = "form";
@@ -1697,17 +1701,13 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "relation";
 		}
-		else if(tmpName.equals("org.zml.data.vo.bind.LeRiFormsConnection"))
-		{
-			result = "leriFormsConnection";
-		}
 		else if(tmpName.equals("org.zml.data.vo.bind.RelationGroup"))
 		{
 			result = "relationGroup";
 		}
-		else if(tmpName.equals("org.zml.data.vo.bind.DoActionSet"))
+		else if(tmpName.equals("org.zml.data.vo.bind.SchemaGroup"))
 		{
-			result = "doActionSet";
+			result = "schemaGroup";
 		}
 		else if(tmpName.equals("org.zml.data.vo.bind.UpdateForm"))
 		{

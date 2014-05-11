@@ -1,5 +1,5 @@
 package org.zml.data.vo.bind;
-public class LeRiFormsConnection extends FormRelation
+public class FormsRelation extends FormRelation
 {
 	private String leftform;
 	private Relation relation;

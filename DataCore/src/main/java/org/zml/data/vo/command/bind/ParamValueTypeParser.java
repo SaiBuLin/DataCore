@@ -23,53 +23,69 @@ public class ParamValueTypeParser extends XMLVisitorParser implements IXmlVisito
 		if (node == null) return result;
 		String NodeValue = node.getTextTrim();
 		NodeValue = UTools.getTrim( NodeValue );
-		if (NodeValue.equals("zyhDatetime"))
+		if (NodeValue.equals("zmlUNknown"))
 		{
-			result = ParamValueType.zyhDatetime;
+			result = ParamValueType.zmlUNknown;
 		}
-		else if (NodeValue.equals("zyhInteger"))
+		else if (NodeValue.equals("zmlDouble"))
 		{
-			result = ParamValueType.zyhInteger;
+			result = ParamValueType.zmlDouble;
 		}
-		else if (NodeValue.equals("zyhFloat"))
+		else if (NodeValue.equals("zmlGeometry"))
 		{
-			result = ParamValueType.zyhFloat;
+			result = ParamValueType.zmlGeometry;
 		}
-		else if (NodeValue.equals("zyhLong"))
+		else if (NodeValue.equals("zmlString"))
 		{
-			result = ParamValueType.zyhLong;
+			result = ParamValueType.zmlString;
 		}
-		else if (NodeValue.equals("zyhBoolean"))
+		else if (NodeValue.equals("SQLParameter"))
 		{
-			result = ParamValueType.zyhBoolean;
+			result = ParamValueType.SQLParameter;
 		}
-		else if (NodeValue.equals("zyhString"))
+		else if (NodeValue.equals("zmlNumberic"))
 		{
-			result = ParamValueType.zyhString;
+			result = ParamValueType.zmlNumberic;
 		}
-		else if (NodeValue.equals("zyhXML"))
+		else if (NodeValue.equals("zmlLong"))
 		{
-			result = ParamValueType.zyhXML;
+			result = ParamValueType.zmlLong;
 		}
-		else if (NodeValue.equals("zyhDouble"))
+		else if (NodeValue.equals("zmlShort"))
 		{
-			result = ParamValueType.zyhDouble;
+			result = ParamValueType.zmlShort;
 		}
-		else if (NodeValue.equals("zyhBlob"))
+		else if (NodeValue.equals("zmlXML"))
 		{
-			result = ParamValueType.zyhBlob;
+			result = ParamValueType.zmlXML;
 		}
-		else if (NodeValue.equals("zyhNumberic"))
+		else if (NodeValue.equals("zmlFloat"))
 		{
-			result = ParamValueType.zyhNumberic;
+			result = ParamValueType.zmlFloat;
 		}
-		else if (NodeValue.equals("zyhShort"))
+		else if (NodeValue.equals("zmlJSON"))
 		{
-			result = ParamValueType.zyhShort;
+			result = ParamValueType.zmlJSON;
 		}
-		else if (NodeValue.equals("zyhDate"))
+		else if (NodeValue.equals("zmlDatetime"))
 		{
-			result = ParamValueType.zyhDate;
+			result = ParamValueType.zmlDatetime;
+		}
+		else if (NodeValue.equals("zmlBoolean"))
+		{
+			result = ParamValueType.zmlBoolean;
+		}
+		else if (NodeValue.equals("zmlBlob"))
+		{
+			result = ParamValueType.zmlBlob;
+		}
+		else if (NodeValue.equals("zmlDate"))
+		{
+			result = ParamValueType.zmlDate;
+		}
+		else if (NodeValue.equals("zmlInteger"))
+		{
+			result = ParamValueType.zmlInteger;
 		}
 		return result;
 	}
@@ -78,53 +94,69 @@ public class ParamValueTypeParser extends XMLVisitorParser implements IXmlVisito
 		Object result = null;
 		if (UtilTools.isNull(value) ) return result;
 		String tmpValue = UtilTools.getTrim(value);
-		if (tmpValue.equals("zyhDatetime"))
+		if (tmpValue.equals("zmlUNknown"))
 		{
-			result = ParamValueType.zyhDatetime;
+			result = ParamValueType.zmlUNknown;
 		}
-		else if (tmpValue.equals("zyhInteger"))
+		else if (tmpValue.equals("zmlDouble"))
 		{
-			result = ParamValueType.zyhInteger;
+			result = ParamValueType.zmlDouble;
 		}
-		else if (tmpValue.equals("zyhFloat"))
+		else if (tmpValue.equals("zmlGeometry"))
 		{
-			result = ParamValueType.zyhFloat;
+			result = ParamValueType.zmlGeometry;
 		}
-		else if (tmpValue.equals("zyhLong"))
+		else if (tmpValue.equals("zmlString"))
 		{
-			result = ParamValueType.zyhLong;
+			result = ParamValueType.zmlString;
 		}
-		else if (tmpValue.equals("zyhBoolean"))
+		else if (tmpValue.equals("SQLParameter"))
 		{
-			result = ParamValueType.zyhBoolean;
+			result = ParamValueType.SQLParameter;
 		}
-		else if (tmpValue.equals("zyhString"))
+		else if (tmpValue.equals("zmlNumberic"))
 		{
-			result = ParamValueType.zyhString;
+			result = ParamValueType.zmlNumberic;
 		}
-		else if (tmpValue.equals("zyhXML"))
+		else if (tmpValue.equals("zmlLong"))
 		{
-			result = ParamValueType.zyhXML;
+			result = ParamValueType.zmlLong;
 		}
-		else if (tmpValue.equals("zyhDouble"))
+		else if (tmpValue.equals("zmlShort"))
 		{
-			result = ParamValueType.zyhDouble;
+			result = ParamValueType.zmlShort;
 		}
-		else if (tmpValue.equals("zyhBlob"))
+		else if (tmpValue.equals("zmlXML"))
 		{
-			result = ParamValueType.zyhBlob;
+			result = ParamValueType.zmlXML;
 		}
-		else if (tmpValue.equals("zyhNumberic"))
+		else if (tmpValue.equals("zmlFloat"))
 		{
-			result = ParamValueType.zyhNumberic;
+			result = ParamValueType.zmlFloat;
 		}
-		else if (tmpValue.equals("zyhShort"))
+		else if (tmpValue.equals("zmlJSON"))
 		{
-			result = ParamValueType.zyhShort;
+			result = ParamValueType.zmlJSON;
 		}
-		else if (tmpValue.equals("zyhDate"))
+		else if (tmpValue.equals("zmlDatetime"))
 		{
-			result = ParamValueType.zyhDate;
+			result = ParamValueType.zmlDatetime;
+		}
+		else if (tmpValue.equals("zmlBoolean"))
+		{
+			result = ParamValueType.zmlBoolean;
+		}
+		else if (tmpValue.equals("zmlBlob"))
+		{
+			result = ParamValueType.zmlBlob;
+		}
+		else if (tmpValue.equals("zmlDate"))
+		{
+			result = ParamValueType.zmlDate;
+		}
+		else if (tmpValue.equals("zmlInteger"))
+		{
+			result = ParamValueType.zmlInteger;
 		}
 		return result;
 	}

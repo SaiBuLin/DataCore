@@ -64,10 +64,6 @@ public class SQLParserFactory
 		{
 			result = new ConnectToolsSQLParser((ConnectTools)element);
 		}
-		else if( element instanceof BelongCollection  )
-		{
-			result = new BelongCollectionSQLParser((BelongCollection)element);
-		}
 		else if( element instanceof VISchema  )
 		{
 			result = new VISchemaSQLParser((VISchema)element);
@@ -160,9 +156,9 @@ public class SQLParserFactory
 		{
 			result = new ServiceFormSQLParser((ServiceForm)element);
 		}
-		else if( element instanceof GroupByPart  )
+		else if( element instanceof FormGroup  )
 		{
-			result = new GroupByPartSQLParser((GroupByPart)element);
+			result = new FormGroupSQLParser((FormGroup)element);
 		}
 		else if( element instanceof UpdateForm  )
 		{
@@ -204,6 +200,10 @@ public class SQLParserFactory
 		{
 			result = new StatusSQLParser((Status)element);
 		}
+		else if( element instanceof FormsRelation  )
+		{
+			result = new FormsRelationSQLParser((FormsRelation)element);
+		}
 		else if( element instanceof SchemaDefine  )
 		{
 			result = new SchemaDefineSQLParser((SchemaDefine)element);
@@ -232,9 +232,9 @@ public class SQLParserFactory
 		{
 			result = new SelectFormSQLParser((SelectForm)element);
 		}
-		else if( element instanceof LeRiFormsConnection  )
+		else if( element instanceof BelongCollection  )
 		{
-			result = new LeRiFormsConnectionSQLParser((LeRiFormsConnection)element);
+			result = new BelongCollectionSQLParser((BelongCollection)element);
 		}
 		else if( element instanceof FieldValue  )
 		{
@@ -288,6 +288,10 @@ public class SQLParserFactory
 		{
 			result = new InsertFormSQLParser((InsertForm)element);
 		}
+		else if( element instanceof GroupByPart  )
+		{
+			result = new GroupByPartSQLParser((GroupByPart)element);
+		}
 		else if( element instanceof SchemaGroup  )
 		{
 			result = new SchemaGroupSQLParser((SchemaGroup)element);
@@ -327,10 +331,6 @@ public class SQLParserFactory
 		else if( element instanceof AttributeLibrary  )
 		{
 			result = new AttributeLibrarySQLParser((AttributeLibrary)element);
-		}
-		else if( element instanceof FormGroup  )
-		{
-			result = new FormGroupSQLParser((FormGroup)element);
 		}
 		else if( element instanceof DeleteForm  )
 		{
@@ -393,10 +393,6 @@ public class SQLParserFactory
 		else if( tmpElementClassName.equals(  ConnectTools.class.getName())  )
 		{
 			result = new ConnectToolsSQLParser((ConnectTools)element);
-		}
-		else if( tmpElementClassName.equals(  BelongCollection.class.getName())  )
-		{
-			result = new BelongCollectionSQLParser((BelongCollection)element);
 		}
 		else if( tmpElementClassName.equals(  VISchema.class.getName())  )
 		{
@@ -490,9 +486,9 @@ public class SQLParserFactory
 		{
 			result = new ServiceFormSQLParser((ServiceForm)element);
 		}
-		else if( tmpElementClassName.equals(  GroupByPart.class.getName())  )
+		else if( tmpElementClassName.equals(  FormGroup.class.getName())  )
 		{
-			result = new GroupByPartSQLParser((GroupByPart)element);
+			result = new FormGroupSQLParser((FormGroup)element);
 		}
 		else if( tmpElementClassName.equals(  UpdateForm.class.getName())  )
 		{
@@ -534,6 +530,10 @@ public class SQLParserFactory
 		{
 			result = new StatusSQLParser((Status)element);
 		}
+		else if( tmpElementClassName.equals(  FormsRelation.class.getName())  )
+		{
+			result = new FormsRelationSQLParser((FormsRelation)element);
+		}
 		else if( tmpElementClassName.equals(  SchemaDefine.class.getName())  )
 		{
 			result = new SchemaDefineSQLParser((SchemaDefine)element);
@@ -562,9 +562,9 @@ public class SQLParserFactory
 		{
 			result = new SelectFormSQLParser((SelectForm)element);
 		}
-		else if( tmpElementClassName.equals(  LeRiFormsConnection.class.getName())  )
+		else if( tmpElementClassName.equals(  BelongCollection.class.getName())  )
 		{
-			result = new LeRiFormsConnectionSQLParser((LeRiFormsConnection)element);
+			result = new BelongCollectionSQLParser((BelongCollection)element);
 		}
 		else if( tmpElementClassName.equals(  FieldValue.class.getName())  )
 		{
@@ -618,6 +618,10 @@ public class SQLParserFactory
 		{
 			result = new InsertFormSQLParser((InsertForm)element);
 		}
+		else if( tmpElementClassName.equals(  GroupByPart.class.getName())  )
+		{
+			result = new GroupByPartSQLParser((GroupByPart)element);
+		}
 		else if( tmpElementClassName.equals(  SchemaGroup.class.getName())  )
 		{
 			result = new SchemaGroupSQLParser((SchemaGroup)element);
@@ -657,10 +661,6 @@ public class SQLParserFactory
 		else if( tmpElementClassName.equals(  AttributeLibrary.class.getName())  )
 		{
 			result = new AttributeLibrarySQLParser((AttributeLibrary)element);
-		}
-		else if( tmpElementClassName.equals(  FormGroup.class.getName())  )
-		{
-			result = new FormGroupSQLParser((FormGroup)element);
 		}
 		else if( tmpElementClassName.equals(  DeleteForm.class.getName())  )
 		{

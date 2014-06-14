@@ -10,6 +10,7 @@ public enum DataType
 	zmlNumberic,
 	zmlBoolean,
 	zmlBlob,
+	zmlTime,
 	zmlDate,
 	SQLParameter,
 	zmlFloat,

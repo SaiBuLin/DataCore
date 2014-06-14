@@ -2,6 +2,7 @@ package org.zml.data.service.page.request.parser;
 
 import java.util.List;
 
+import org.zml.data.vo.bind.Field;
 import org.zml.data.vo.command.bind.CommandConfiguration;
 
 /**
@@ -18,9 +19,29 @@ public interface FormsetParserAble
 	 * @return
 	 * @throws Exception
 	 */
-	public List<String> getSelectFieldNames() throws Exception;
+	public List<Field> getSelectFields() throws Exception;
 	
+	/**
+	 * 获得条件Where Fields 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Field> getWhereFields() throws Exception;
 	
+	/**
+	 * 获得Order by Fields
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Field> getOrderByFields() throws Exception;
+	
+	/**
+	 * 获得Group by Fields 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Field> getGroupbyFields() throws Exception;
+	 
 	public CommandConfiguration parserWhereString() throws Exception;
 	
 }

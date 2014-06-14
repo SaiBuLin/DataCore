@@ -7,7 +7,6 @@ import org.zml.data.vo.bind.Form;
 import org.zml.data.vo.bind.Schema;
 import org.zml.data.vo.bind.VOSchema;
 import org.zml.data.vo.exception.DataServiceException;
-import org.zml.data.vo.form.VOForm;
 import org.zml.util.UtilTools;
 
 public class VOSchemaSQLParser extends SQLParser implements SQLParserAble
@@ -109,52 +108,5 @@ public class VOSchemaSQLParser extends SQLParser implements SQLParserAble
 		}
 	}
 
-	@Override
-	public NetDataSet executeVOAction(VOForm form, String formcode) throws DataServiceException{
-		NetDataSet result = null;
-		/* VO Schema  */
-		try{
-			logger.debug("VOSchemaSQLParser 执行executeVOAction。");
-			
-			if(!this.checkQueryElementComfort()){
-				return result;
-			}
-			
-			/* 强制转换 */
-			logger.debug("executeVOAction 执行：将queryDefineElement强制转换成VOSchema.");
-			VOSchema config = (VOSchema)this.getQueryDefineElement();
-			
-			if( config == null ){
-				return result;
-			}
-			
-			if( config.getForm() == null ){
-				throw new Exception("VOSchema 没有配置form。");
-			}
-			
-			SQLParserAble formAble = SQLParserFactory.getQueryDefineInterpreter( config.getForm() );
-			if( formAble == null ){
-				throw new Exception("VOSchema 配置的Form不能创建SQLParserAble. ");
-			}
-			
-			logger.debug("执行VO 的Form 其中Form的编号为：" + formcode );
-			result = formAble.executeVOAction(form, formcode);
-		
-			logger.debug("VOSchemaSQLParser 执行executeVOAction完毕。");
-			return result;
-		}catch(Exception e){
-			if( e != null ){
-				String execeptionClassName = e.getClass().toString();
-				if( !UtilTools.isNull(execeptionClassName)){
-					logger.error("VOSchemaSQLParser::executeVOAction 抛出异常， 异常类：" + execeptionClassName);
-				}
-				logger.error("VOSchemaSQLParser::executeVOAction 抛出异常， 异常信息：" + e.getMessage());
-				String localMessage = e.getLocalizedMessage();
-				if( !UtilTools.isNull(localMessage)){
-					logger.error("VOSchemaSQLParser::executeVOAction 抛出异常， 异常信息：" + localMessage);
-				}
-			}
-		}
-		return null;
-	}
+	
 }

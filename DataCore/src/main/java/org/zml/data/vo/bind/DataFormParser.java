@@ -22,8 +22,8 @@ public class DataFormParser extends ServiceFormParser implements IXmlVisitorPars
 		DataForm objElement = (DataForm)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
-		objElement.setFormPart((FormPart)this.getObjectFromElement(node,"formPart","FormPart"));
 		objElement.setDataSet((DataSet)this.getObjectFromElement(node,"dataSet","DataSet"));
+		objElement.setField((Field)this.getObjectFromElement(node,"field","Field"));
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -47,13 +47,13 @@ public class DataFormParser extends ServiceFormParser implements IXmlVisitorPars
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof DataForm ))  return;
 			DataForm objElement = (DataForm)element;
-			if(  objElement.getFormPart()  != null )
+			if(  objElement.getDataSet()  != null )
 			{
-				FormPart dataOneElement = objElement.getFormPart();
+				DataSet dataOneElement = objElement.getDataSet();
 				String xmlElementNameEx = "";
 				if(UtilTools.isNull( dataOneElement.getXmlElementName() ))
 				{
-					xmlElementNameEx = this.getRealElementName("formPart",dataOneElement.getClass().getName());
+					xmlElementNameEx = this.getRealElementName("dataSet",dataOneElement.getClass().getName());
 				}
 				else
 				{
@@ -62,13 +62,13 @@ public class DataFormParser extends ServiceFormParser implements IXmlVisitorPars
 				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
 				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
 			}
-			if(  objElement.getDataSet()  != null )
+			if(  objElement.getField()  != null )
 			{
-				DataSet dataOneElement = objElement.getDataSet();
+				Field dataOneElement = objElement.getField();
 				String xmlElementNameEx = "";
 				if(UtilTools.isNull( dataOneElement.getXmlElementName() ))
 				{
-					xmlElementNameEx = this.getRealElementName("dataSet",dataOneElement.getClass().getName());
+					xmlElementNameEx = this.getRealElementName("field",dataOneElement.getClass().getName());
 				}
 				else
 				{

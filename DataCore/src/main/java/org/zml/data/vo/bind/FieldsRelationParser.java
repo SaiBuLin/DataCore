@@ -23,6 +23,10 @@ public class FieldsRelationParser extends RelationParser implements IXmlVisitorP
 		FieldsRelation objElement = (FieldsRelation)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
+		if(node.attribute("leftfield")!= null )
+		{
+			objElement.setLeftfield(node.attribute("leftfield").getText());
+		}
 		if(node.attribute("rightfield")!= null )
 		{
 			objElement.setRightfield(node.attribute("rightfield").getText());
@@ -30,10 +34,6 @@ public class FieldsRelationParser extends RelationParser implements IXmlVisitorP
 		if(node.attribute("operation")!= null )
 		{
 			objElement.setOperation((FieldLogical)this.getObjectFromAttribute(node,"operation",FieldLogical.class.getName()));
-		}
-		if(node.attribute("leftfield")!= null )
-		{
-			objElement.setLeftfield(node.attribute("leftfield").getText());
 		}
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
@@ -58,6 +58,12 @@ public class FieldsRelationParser extends RelationParser implements IXmlVisitorP
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof FieldsRelation ))  return;
 			FieldsRelation objElement = (FieldsRelation)element;
+			if( !UtilTools.isNull( objElement.getLeftfield() ))
+			{
+				String dataOneElement = objElement.getLeftfield();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("leftfield",tmpValue);
+			}
 			if( !UtilTools.isNull( objElement.getRightfield() ))
 			{
 				String dataOneElement = objElement.getRightfield();
@@ -69,12 +75,6 @@ public class FieldsRelationParser extends RelationParser implements IXmlVisitorP
 				FieldLogical dataOneElement = objElement.getOperation();
 				String tmpValue = String.valueOf(dataOneElement);
 				fatherElement.addAttribute("operation",tmpValue);
-			}
-			if( !UtilTools.isNull( objElement.getLeftfield() ))
-			{
-				String dataOneElement = objElement.getLeftfield();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("leftfield",tmpValue);
 			}
 			if (!UtilTools.isNull(objElement.getText()))
 			{

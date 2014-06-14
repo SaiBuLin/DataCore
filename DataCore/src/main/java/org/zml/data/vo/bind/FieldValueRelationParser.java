@@ -23,13 +23,13 @@ public class FieldValueRelationParser extends RelationParser implements IXmlVisi
 		FieldValueRelation objElement = (FieldValueRelation)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
-		if(node.attribute("operation")!= null )
-		{
-			objElement.setOperation((FieldLogical)this.getObjectFromAttribute(node,"operation",FieldLogical.class.getName()));
-		}
 		if(node.attribute("value")!= null )
 		{
 			objElement.setValue(node.attribute("value").getText());
+		}
+		if(node.attribute("operation")!= null )
+		{
+			objElement.setOperation((FieldLogical)this.getObjectFromAttribute(node,"operation",FieldLogical.class.getName()));
 		}
 		if(node.attribute("field")!= null )
 		{
@@ -58,17 +58,17 @@ public class FieldValueRelationParser extends RelationParser implements IXmlVisi
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof FieldValueRelation ))  return;
 			FieldValueRelation objElement = (FieldValueRelation)element;
-			if(  objElement.getOperation() != null  )
-			{
-				FieldLogical dataOneElement = objElement.getOperation();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("operation",tmpValue);
-			}
 			if( !UtilTools.isNull( objElement.getValue() ))
 			{
 				String dataOneElement = objElement.getValue();
 				String tmpValue = String.valueOf(dataOneElement);
 				fatherElement.addAttribute("value",tmpValue);
+			}
+			if(  objElement.getOperation() != null  )
+			{
+				FieldLogical dataOneElement = objElement.getOperation();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("operation",tmpValue);
 			}
 			if( !UtilTools.isNull( objElement.getField() ))
 			{

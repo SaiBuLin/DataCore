@@ -1,13 +1,13 @@
 package org.zml.data.vo.parser;
 
 import org.zml.data.vo.exception.DataServiceException;
-
 import org.zml.data.vo.tools.action.IActionTools;
 import org.zml.data.vo.tools.connection.IConnectionAble;
 import org.zml.data.dataset.bind.NetDataSet;
 import org.zml.data.vo.bind.Field;
 import org.zml.data.vo.bind.Schema;
 import org.zml.data.vo.bind.TableRelation;
+import org.zml.data.vo.command.bind.CommandConfiguration;
 
 import java.util.Map;
 
@@ -24,48 +24,13 @@ public interface SQLParserAble
 {
 	public boolean checkQueryElementComfort() throws Exception;
 	
-	
 	/**
-	 * 
+	 * 配置
 	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 * 获得定义信息, 这个主要是有FormPart 去实现
+	 * @throws Exception
 	 */
-	public NetDataSet getColumnsDefine() throws DataServiceException;
+	public CommandConfiguration parserCommand() throws Exception;
 	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 * 获得条件定义信息
-	 */
-	public NetDataSet getConditionsDefine() throws DataServiceException;
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 */
-	public NetDataSet getGroupByDefine() throws DataServiceException;
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 */
-	public NetDataSet getOrderByDefine() throws DataServiceException;
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public NetDataSet getLibraryDefine() throws DataServiceException;
-		
 	/**
 	 * 
 	 * @param dataSet
@@ -85,8 +50,7 @@ public interface SQLParserAble
 	/**
 	 * 装载Schema 及数据定义。
 	 */
-	public void loadSchemas( Map<String, Schema> schema_map, Map<String, Object> properties ) throws Exception;
-	
+	public void loadSchemas( Map<String, Schema> schema_map, Map<String, Object> properties ) throws Exception;	
 	public void loadSchemas(Schema schema, Map<String, Object> properties) throws Exception;
 	
 	/**
@@ -105,7 +69,11 @@ public interface SQLParserAble
 	
 	public void loadFieldsProperties(Map<String,Object> fieldProperties) throws DataServiceException;
 	
-	
+	/**
+	 * Parser ActionTools
+	 * @return
+	 * @throws DataServiceException
+	 */
 	public IActionTools parseFormActionTools() throws DataServiceException;
 	
 	public IConnectionAble parseConnection() throws DataServiceException;

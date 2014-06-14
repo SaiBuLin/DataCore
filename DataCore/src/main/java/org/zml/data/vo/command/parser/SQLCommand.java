@@ -1,9 +1,12 @@
 package org.zml.data.vo.command.parser;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.zml.data.vo.command.bind.CommandConfiguration;
+import org.zml.data.vo.command.bind.RequestParameter;
 import org.zml.data.vo.command.bind.RequestTask;
 import org.zml.tools.xml.parser.CTXMLElement;
 
@@ -70,5 +73,15 @@ public abstract class SQLCommand implements SQLCommandAble
 	@Override
 	public void insertRequestTask(String code, String commandString )throws Exception{
 		
+	}
+	
+	@Override
+	public void addParameter( RequestParameter parameter ) throws Exception{
+		
+	}
+	
+	@Override
+	public List<RequestParameter> getParameters() throws Exception{
+		return new ArrayList<RequestParameter>();
 	}
 }

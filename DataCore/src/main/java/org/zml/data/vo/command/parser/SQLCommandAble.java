@@ -1,8 +1,10 @@
 package org.zml.data.vo.command.parser;
 
 
+import java.util.List;
 import java.util.Map;
 
+import org.zml.data.vo.command.bind.RequestParameter;
 import org.zml.data.vo.command.bind.RequestTask;
 import org.zml.data.vo.command.bind.CommandConfiguration;
 
@@ -61,8 +63,24 @@ public interface SQLCommandAble
 	
 	public String getRequestTaskContent(String code)throws Exception;
 	
-	/* 获得RequestTask */
+	/**
+	 * 获得RequestTask 
+	 */
 	public String getRequestTaskContent() throws Exception;
+	
+	/**
+	 * 添加Parameter
+	 * @param parameter
+	 * @throws Exception
+	 */
+	public void addParameter( RequestParameter parameter ) throws Exception;
+	
+	/**
+	 * 获得parameter 列表
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RequestParameter> getParameters() throws Exception;
 	
 	
 }

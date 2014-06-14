@@ -1,6 +1,8 @@
 package org.zml.data.vo.tools.connection;
 
 import org.zml.data.dataset.bind.NetDataSet;
+import org.zml.data.vo.command.bind.CommandConfiguration;
+
 import java.util.Map;
 /**
  * 
@@ -18,6 +20,6 @@ public interface IConnectionAble {
 	 * @return
 	 * @throws Exception
 	 */
-	public NetDataSet execute(Map<String,String> command,
+	public NetDataSet execute(CommandConfiguration command,
 			Map<String, Object> properties) throws Exception;
 }

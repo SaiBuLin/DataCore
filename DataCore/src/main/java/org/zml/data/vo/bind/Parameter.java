@@ -1,5 +1,5 @@
 package org.zml.data.vo.bind;
-public class ValueAttribute extends Attribute
+public class Parameter extends Attribute
 {
 	private String value;
 	private DataType datatype;

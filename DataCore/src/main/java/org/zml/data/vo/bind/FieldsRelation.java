@@ -1,9 +1,17 @@
 package org.zml.data.vo.bind;
 public class FieldsRelation extends Relation
 {
+	private String leftfield;
 	private String rightfield;
 	private FieldLogical operation;
-	private String leftfield;
+	public String getLeftfield()
+	{
+		return this.leftfield;
+	}
+	public void setLeftfield(String inleftfield )
+	{
+		this.leftfield = inleftfield;
+	}
 	public String getRightfield()
 	{
 		return this.rightfield;
@@ -19,13 +27,5 @@ public class FieldsRelation extends Relation
 	public void setOperation(FieldLogical inoperation )
 	{
 		this.operation = inoperation;
-	}
-	public String getLeftfield()
-	{
-		return this.leftfield;
-	}
-	public void setLeftfield(String inleftfield )
-	{
-		this.leftfield = inleftfield;
 	}
 }

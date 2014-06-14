@@ -7,6 +7,6 @@ public enum FieldLogical
 	LOWER,
 	LARGER,
 	NOTEQUALS,
-	EQUALS,
-	NOTIN
+	NOT_IN,
+	EQUALS
 }

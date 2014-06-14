@@ -1,17 +1,9 @@
 package org.zml.data.vo.bind;
 public class FieldValueRelation extends Relation
 {
-	private FieldLogical operation;
 	private String value;
+	private FieldLogical operation;
 	private String field;
-	public FieldLogical getOperation()
-	{
-		return this.operation;
-	}
-	public void setOperation(FieldLogical inoperation )
-	{
-		this.operation = inoperation;
-	}
 	public String getValue()
 	{
 		return this.value;
@@ -19,6 +11,14 @@ public class FieldValueRelation extends Relation
 	public void setValue(String invalue )
 	{
 		this.value = invalue;
+	}
+	public FieldLogical getOperation()
+	{
+		return this.operation;
+	}
+	public void setOperation(FieldLogical inoperation )
+	{
+		this.operation = inoperation;
 	}
 	public String getField()
 	{

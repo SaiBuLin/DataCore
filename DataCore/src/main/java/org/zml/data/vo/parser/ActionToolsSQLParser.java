@@ -1,9 +1,7 @@
 package org.zml.data.vo.parser;
 import org.zml.data.vo.bind.ActionTools;
-import org.zml.data.vo.bind.TableRelation;
 import org.zml.data.vo.exception.DataServiceException;
-import org.zml.data.vo.form.CommandForm;
-import org.zml.data.vo.form.VOForm;
+
 import org.zml.data.vo.tools.action.IFormActionTools;
 
 public class ActionToolsSQLParser extends SQLParser implements SQLParserAble
@@ -26,37 +24,6 @@ public class ActionToolsSQLParser extends SQLParser implements SQLParserAble
 		}
 		result = true;
 		return result;
-	}
-	
-	@Override
-	public CommandForm parserCommand(int index,
-			VOForm form, 
-			CommandForm selectForm,
-			CommandForm whereForm,
-			CommandForm orderForm,
-			CommandForm groupbyForm,
-			CommandForm dataset) throws DataServiceException{
-		throw new DataServiceException(" ActionTools 是抽象类。  ");
-	}
-	
-	@Override
-	public CommandForm parserCommand(
-			VOForm form,
-			CommandForm leftForm,
-			CommandForm rightForm, 
-			TableRelation tableRelation 
-			)throws DataServiceException{
-		throw new DataServiceException(" ActionTools 是抽象类。  ");
-	}
-
-	
-	@Override
-	public CommandForm parserCommand(
-			int index,
-			VOForm form, 
-			CommandForm relationForm) throws DataServiceException{
-		
-		throw new DataServiceException(" ActionTools 是抽象类。  ");
 	}
 	
 	@Override 

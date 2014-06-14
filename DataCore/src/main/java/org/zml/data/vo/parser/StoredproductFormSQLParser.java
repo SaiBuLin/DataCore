@@ -5,8 +5,6 @@ import org.zml.data.vo.bind.ActionTools;
 import org.zml.data.vo.bind.Schema;
 import org.zml.data.vo.bind.StoredproductForm;
 import org.zml.data.vo.exception.DataServiceException;
-import org.zml.data.vo.form.CommandForm;
-import org.zml.data.vo.form.VOForm;
 import org.zml.util.UtilTools;
 
 public class StoredproductFormSQLParser extends SQLParser implements SQLParserAble
@@ -76,38 +74,5 @@ public class StoredproductFormSQLParser extends SQLParser implements SQLParserAb
 		}
 	}
 
-	@Override
-	public CommandForm parserCommand(VOForm form) throws DataServiceException{
-		CommandForm result = null;
-		try{
-			logger.debug("StoredproductFormSQLParser开始执行parserCommand。");
-			
-			if( !this.checkQueryElementComfort() ){
-				return result;
-			}
-			
-			StoredproductForm config = (StoredproductForm)this.queryDefineElement;
-			if( config == null){			
-				throw new Exception("StoredproductFormSQLParser错误：parserCommand, queryDefineElement构型为TransactionForm错误。" );
-			}
-			
-			
-			
-			logger.debug("StoredproductFormSQLParser执行parserCommand完毕。");
-			return result;
-		}catch(Exception e){
-			if( e != null ){
-				String execeptionClassName =  e.getClass().toString();
-				if( !UtilTools.isNull(execeptionClassName)){
-					logger.error("StoredproductFormSQLParser::parserCommand 抛出异常， 异常类：" + execeptionClassName);
-				}
-				logger.error("StoredproductFormSQLParser::parserCommand 抛出异常， 异常信息：" + e.getMessage());
-				String localMessage = e.getLocalizedMessage();
-				if( !UtilTools.isNull(localMessage)){
-					logger.error("StoredproductFormSQLParser::parserCommand 抛出异常， 异常信息：" + localMessage);
-				}
-			}
-		}
-		return null;
-	}
+	
 }

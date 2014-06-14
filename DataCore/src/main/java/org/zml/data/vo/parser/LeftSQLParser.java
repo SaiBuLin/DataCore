@@ -1,7 +1,6 @@
 package org.zml.data.vo.parser;
 import java.util.Map;
 
-import org.zml.data.vo.bind.GroupByPart;
 import org.zml.data.vo.bind.Left;
 import org.zml.data.vo.bind.Schema;
 import org.zml.data.vo.exception.DataServiceException;

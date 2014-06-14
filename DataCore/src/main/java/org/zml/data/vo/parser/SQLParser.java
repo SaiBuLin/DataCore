@@ -32,67 +32,6 @@ public abstract class SQLParser extends SQLParserTools implements SQLParserAble
 	
 	/**
 	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 * 获得定义信息, 这个主要是有FormPart 去实现
-	 */
-	public NetDataSet getColumnsDefine() throws DataServiceException{
-		NetDataSet result = null;
-		logger.debug("执行获得Column列表。");
-		return result;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 * 获得条件定义信息
-	 */
-	public NetDataSet getConditionsDefine() throws DataServiceException{
-		NetDataSet result = null;
-		logger.debug("执行获得条件列表。");
-		return result;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 */
-	public NetDataSet getGroupByDefine() throws DataServiceException{
-		NetDataSet result = null;
-		logger.debug("执行获得Group by 列表。");
-		return result;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 * @author zlmwork 
-	 */
-	public NetDataSet getOrderByDefine() throws DataServiceException{
-		NetDataSet result = null;
-		logger.debug("执行获得 Order by 列表。");
-		return result;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @throws DataServiceException
-	 */
-	public NetDataSet getLibraryDefine() throws DataServiceException{
-		NetDataSet result = null;
-		logger.debug("执行获得 Library 列表。");
-		return result;
-	}
-		
-	/**
-	 * 
 	 * @param dataSet
 	 * @throws DataServiceException
 	 * 数据绑定

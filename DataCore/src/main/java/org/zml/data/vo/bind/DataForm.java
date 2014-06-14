@@ -1,16 +1,8 @@
 package org.zml.data.vo.bind;
 public class DataForm extends ServiceForm
 {
-	private FormPart formPart;
 	private DataSet dataSet;
-	public FormPart getFormPart()
-	{
-		return this.formPart;
-	}
-	public void setFormPart(FormPart informPart )
-	{
-		this.formPart = informPart;
-	}
+	private Field field;
 	public DataSet getDataSet()
 	{
 		return this.dataSet;
@@ -18,5 +10,13 @@ public class DataForm extends ServiceForm
 	public void setDataSet(DataSet indataSet )
 	{
 		this.dataSet = indataSet;
+	}
+	public Field getField()
+	{
+		return this.field;
+	}
+	public void setField(Field infield )
+	{
+		this.field = infield;
 	}
 }

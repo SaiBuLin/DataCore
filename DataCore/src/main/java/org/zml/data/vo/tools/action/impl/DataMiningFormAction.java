@@ -32,6 +32,13 @@ public class DataMiningFormAction implements IFormActionTools {
 	}
 
 	@Override
+	public RequestTask parseSelectFieldForInsertValues(String alias,
+			String field, String extendString) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public RequestTask parseSelectFieldForDelete(String alias, String field,
 			String extendString) throws Exception {
 		// TODO Auto-generated method stub
@@ -80,7 +87,34 @@ public class DataMiningFormAction implements IFormActionTools {
 		return null;
 	}
 
-	
+	@Override
+	public RequestTask parserCommandForQuery(RequestTask selectTask,
+			RequestTask whereTask, RequestTask orderbyTask,
+			RequestTask groupbyTask, RequestTask dataset) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
+	@Override
+	public RequestTask parserCommandForInsert(RequestTask selectTask,
+			RequestTask valuesTask, RequestTask dataset) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RequestTask parserCommandForDelete(RequestTask whereTask,
+			RequestTask dataset) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RequestTask parserCommandForUpdate(RequestTask selectTask,
+			RequestTask whereTask, RequestTask dataset) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

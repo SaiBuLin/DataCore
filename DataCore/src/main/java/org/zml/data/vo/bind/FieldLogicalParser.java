@@ -47,13 +47,13 @@ public class FieldLogicalParser extends XMLVisitorParser implements IXmlVisitorP
 		{
 			result = FieldLogical.NOT_LOWER;
 		}
+		else if (NodeValue.equals("NOT_IN"))
+		{
+			result = FieldLogical.NOT_IN;
+		}
 		else if (NodeValue.equals("EQUALS"))
 		{
 			result = FieldLogical.EQUALS;
-		}
-		else if (NodeValue.equals("NOTIN"))
-		{
-			result = FieldLogical.NOTIN;
 		}
 		return result;
 	}
@@ -86,13 +86,13 @@ public class FieldLogicalParser extends XMLVisitorParser implements IXmlVisitorP
 		{
 			result = FieldLogical.NOT_LOWER;
 		}
+		else if (tmpValue.equals("NOT_IN"))
+		{
+			result = FieldLogical.NOT_IN;
+		}
 		else if (tmpValue.equals("EQUALS"))
 		{
 			result = FieldLogical.EQUALS;
-		}
-		else if (tmpValue.equals("NOTIN"))
-		{
-			result = FieldLogical.NOTIN;
 		}
 		return result;
 	}

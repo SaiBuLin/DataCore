@@ -4,7 +4,6 @@ public class ViewForm extends ServiceForm
 	private Right right;
 	private Relation relation;
 	private Left left;
-	private TableRelation tableRelation;
 	public Right getRight()
 	{
 		return this.right;
@@ -28,13 +27,5 @@ public class ViewForm extends ServiceForm
 	public void setLeft(Left inleft )
 	{
 		this.left = inleft;
-	}
-	public TableRelation getTableRelation()
-	{
-		return this.tableRelation;
-	}
-	public void setTableRelation(TableRelation intableRelation )
-	{
-		this.tableRelation = intableRelation;
 	}
 }

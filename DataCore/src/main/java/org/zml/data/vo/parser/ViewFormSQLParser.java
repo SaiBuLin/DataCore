@@ -1,14 +1,12 @@
 package org.zml.data.vo.parser;
 import java.util.Map;
 
-import org.zml.data.dataset.bind.NetDataSet;
+
 import org.zml.data.vo.bind.ActionTools;
 import org.zml.data.vo.bind.Schema;
 import org.zml.data.vo.bind.ViewForm;
+import org.zml.data.vo.command.bind.CommandConfiguration;
 import org.zml.data.vo.exception.DataServiceException;
-import org.zml.data.vo.tools.action.IActionTools;
-import org.zml.data.vo.tools.action.IFormActionTools;
-import org.zml.data.vo.tools.connection.IConnectionAble;
 import org.zml.util.UtilTools;
 
 public class ViewFormSQLParser extends SQLParser implements SQLParserAble
@@ -154,5 +152,42 @@ public class ViewFormSQLParser extends SQLParser implements SQLParserAble
 		}
 	}
 
-	
+	@Override
+	public CommandConfiguration parserCommand() throws Exception{
+		CommandConfiguration result = null;
+		
+		try{
+			logger.debug("ViewFormSQLParser开始执行parserCommand。");	
+			
+			if(!this.checkQueryElementComfort()){
+				return result;
+			}
+			
+			
+			ViewForm config = (ViewForm)this.queryDefineElement;
+			if( config == null){			
+				throw new Exception("ViewFormSQLParser错误：loadSchemas, queryDefineElement构型为ViewForm错误。" );
+			}
+			
+			
+			
+			
+			logger.debug("ViewFormSQLParser执行parserCommand完毕。");	
+			return result;
+		}catch(Exception e){
+			if( e != null ){
+				String execeptionClassName =  e.getClass().toString();
+				if( !UtilTools.isNull(execeptionClassName)){
+					logger.error("ViewFormSQLParser::parserCommand 抛出异常， 异常类：" + execeptionClassName);
+				}
+				logger.error("ViewFormSQLParser::parserCommand 抛出异常， 异常信息：" + e.getMessage());
+				String localMessage = e.getLocalizedMessage();
+				if( !UtilTools.isNull(localMessage)){
+					logger.error("ViewFormSQLParser::parserCommand 抛出异常， 异常信息：" + localMessage);
+				}
+			}
+		}
+		return null;
+		
+	}
 }

@@ -6,6 +6,7 @@ public enum DataType
 	zmlInteger,
 	zmlUNknown,
 	zmlGeometry,
+	zmlLong,
 	zmlShort,
 	zmlNumberic,
 	zmlBoolean,
@@ -16,6 +17,5 @@ public enum DataType
 	zmlFloat,
 	zmlDatetime,
 	zmlXML,
-	zmlLong,
 	zmlJSON
 }

@@ -25,7 +25,7 @@ public interface SQLParserAble
 	public boolean checkQueryElementComfort() throws Exception;
 	
 	/**
-	 * 配置
+	 * 配置命令， 用来生成命令字， 比如生成Select Field 字词， Where Part Field
 	 * @return
 	 * @throws Exception
 	 */

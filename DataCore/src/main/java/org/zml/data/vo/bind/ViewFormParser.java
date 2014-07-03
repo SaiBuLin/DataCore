@@ -25,10 +25,6 @@ public class ViewFormParser extends ServiceFormParser implements IXmlVisitorPars
 		objElement.setRight((Right)this.getObjectFromElement(node,"right","Right"));
 		objElement.setRelation((Relation)this.getObjectFromElement(node,"relation","Relation"));
 		objElement.setLeft((Left)this.getObjectFromElement(node,"left","Left"));
-		if(node.attribute("tableRelation")!= null )
-		{
-			objElement.setTableRelation((TableRelation)this.getObjectFromAttribute(node,"tableRelation",TableRelation.class.getName()));
-		}
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -96,12 +92,6 @@ public class ViewFormParser extends ServiceFormParser implements IXmlVisitorPars
 				}
 				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
 				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
-			}
-			if(  objElement.getTableRelation() != null  )
-			{
-				TableRelation dataOneElement = objElement.getTableRelation();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("tableRelation",tmpValue);
 			}
 			if (!UtilTools.isNull(objElement.getText()))
 			{

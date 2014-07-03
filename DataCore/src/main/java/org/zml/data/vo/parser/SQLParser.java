@@ -3,6 +3,7 @@ package org.zml.data.vo.parser;
 import java.util.Map;
 
 import org.zml.data.vo.bind.Schema;
+import org.zml.data.vo.command.bind.CommandConfiguration;
 import org.zml.data.vo.exception.DataServiceException;
 import org.zml.tools.xml.parser.CTXMLElement;
 import org.zml.data.vo.tools.action.IActionTools;
@@ -30,12 +31,7 @@ public abstract class SQLParser extends SQLParserTools implements SQLParserAble
 		this.queryDefineElement = queryDefineElement;
 	}
 	
-	/**
-	 * 
-	 * @param dataSet
-	 * @throws DataServiceException
-	 * 数据绑定
-	 */
+	
 	public void filterBind(NetDataSet dataSet) throws DataServiceException{
 		logger.debug("进行数据绑定");
 	}
@@ -52,41 +48,60 @@ public abstract class SQLParser extends SQLParserTools implements SQLParserAble
 		return result;
 	}
 	
+	
 	@Override
+	public CommandConfiguration parserCommand() throws Exception{
+		return null;
+	}
+	
+	
+
+	
+	/**
+	 * 装载Schema 及数据定义。
+	 */
 	public void loadSchemas( Map<String, Schema> schema_map, Map<String, Object> properties ) throws Exception{
-		logger.debug("执行 ：Load Schemas");
+		
 	}
 	
-	@Override
 	public void loadSchemas(Schema schema, Map<String, Object> properties) throws Exception{
-		logger.debug("执行 ：Load Schemas");
+		
 	}
 	
+	/**
+	 * 装载属性
+	 */
 	public void loadProperties( Map<String, Object> properties ) throws DataServiceException{
-		logger.debug(" 装载属性配置.");
+		
 	}
 	
 	
 	
-	
-	@Override 
+	/**
+	 * 装载Field 配置
+	 * @param fieldProperties
+	 * @throws DataServiceException
+	 */
 	public void loadFieldsProperties(FieldsConfig fieldProperties) throws DataServiceException{
 		
 	}
 	
-	@Override 
 	public void loadFieldsProperties(Map<String,Object> fieldProperties) throws DataServiceException{
 		
 	}
 	
-	@Override 
+	/**
+	 * Parser ActionTools
+	 * @return
+	 * @throws DataServiceException
+	 */
 	public IActionTools parseFormActionTools() throws DataServiceException{
 		return null;
 	}
 	
-	@Override 
 	public IConnectionAble parseConnection() throws DataServiceException{
 		return null;
 	}
+	
 
 }

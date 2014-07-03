@@ -69,10 +69,15 @@
 	<!-- 左右 -->
 	<xs:element name="left" type="Left" substitutionGroup="define"/>
 	<xs:element name="right" type="Right" substitutionGroup="define"/>
+	
 	<xs:element name="relation" type="Relation" substitutionGroup="define"/>
-	<xs:element name="relationGroup" type="RelationGroup" substitutionGroup="define"/>
-	<xs:element name="fieldsRelation" type="FieldsRelation" substitutionGroup="define"/>
-	<xs:element name="fieldValueRelation" type="FieldValueRelation" substitutionGroup="define"/>
+	<xs:element name="relationGroup" type="RelationGroup" substitutionGroup="relation"/>
+	<xs:element name="boundaryRelation" type="BoundaryRelation" substitutionGroup="relation"/>
+	
+	
+	<xs:element name="boundary" type="Boundary" substitutionGroup="define"/>	
+	<xs:element name="fieldsBoundary" type="FieldsBoundary" substitutionGroup="boundary"/>
+	<xs:element name="fieldValueBoundary" type="FieldValueBoundary" substitutionGroup="boundary"/>
 	
 	<!-- Field 定义 -->
 	<xs:element name="field" type="Field" substitutionGroup="define" />
@@ -212,6 +217,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
+	<!-- Form 之间关系 -->
 	<xs:complexType name="FormRelation">
 		<xs:complexContent>
 			<xs:extension base="Define" />
@@ -340,13 +346,11 @@
 					<xs:element ref="left" />
 					<xs:element ref="right" />
 					<xs:element ref="relation" />
-				</xs:sequence>
-				<xs:attribute name="tableRelation" type="TableRelation" />
+				</xs:sequence>				
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
-	
+		
 	<!-- 左边 -->
 	<xs:complexType name="Left">
 		<xs:complexContent>
@@ -390,10 +394,29 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<!-- 字段关系 -->
-	<xs:complexType name="FieldsRelation">
+	<!-- 表达 -->
+	<xs:complexType name="BoundaryRelation">
 		<xs:complexContent>
-			<xs:extension base="Relation">
+			<xs:extension base="Relation" >
+				<xs:sequence>
+					<xs:element ref="boundary" minOccurs="0" />
+				</xs:sequence>
+				<xs:attribute name="tableRelation" type="TableRelation" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Boundary 边界， 条件  -->
+	<xs:complexType name="Boundary">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 字段关系 -->
+	<xs:complexType name="FieldsBoundary">
+		<xs:complexContent>
+			<xs:extension base="Boundary">
 				<xs:attribute name="leftfield" type="xs:string" />
 				<xs:attribute name="rightfield" type="xs:string" />
 				<xs:attribute name="operation" type="FieldLogical" />
@@ -402,9 +425,9 @@
 	</xs:complexType>
 	
 	<!---->
-	<xs:complexType name="FieldValueRelation">
+	<xs:complexType name="FieldValueBoundary">
 		<xs:complexContent>
-			<xs:extension base="Relation">
+			<xs:extension base="Boundary">
 				<xs:attribute name="field" type="xs:string" />
 				<xs:attribute name="value" type="xs:string" />
 				<xs:attribute name="operation" type="FieldLogical" />

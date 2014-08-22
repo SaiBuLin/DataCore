@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.zml.data.vo.bind.Schema;
+import org.zml.schema.bind.Schema;
 import org.zml.util.UtilTools;
 import org.zml.vo.AIVOEngine;
 

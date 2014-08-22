@@ -12,80 +12,272 @@
 				用来定义查询请求的结构, 请求定义中，需要能进行
 				Clinet 发出的请求， 请求的json 字符串， JSON 转成XML 
 				进行处理。
+				
+				1. 惊醒修正，用来定义报表，
+				2. 设置数据源
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	
 	<xs:element name="queryFormNode" type="QueryFormNode"/>
-	<xs:element name="queryRequest" type="QueryRequest" substitutionGroup="queryFormNode" />
+
+	<xs:element name="requestService" type="RequestService" substitutionGroup="queryFormNode" />	
+
+	<!-- Form 定义部分 -->
+	<xs:element name="formSet" type="FormSet" substitutionGroup="queryFormNode" />	
+	<xs:element name="formSetGroup" type="FormSetGroup" substitutionGroup="formSet" />	
+	<xs:element name="dataTable" type="DataTable" substitutionGroup="formSet" />	
 	
-	<xs:element name="requestPart" type="RequestPart" substitutionGroup="queryFormNode" />
-	<xs:element name="requestPartGroup" type="RequestPartGroup" substitutionGroup="requestPart" />
-	<xs:element name="requestColumn" type="RequestColumn" substitutionGroup="requestPart" />
-	<xs:element name="conditionColumn" type="ConditionColumn" substitutionGroup="requestPart" />
-	<xs:element name="orderByColumn" type="OrderByColumn" substitutionGroup="requestPart" />
+	<!-- 各个部分 -->
+	<xs:element name="section" type="Section" substitutionGroup="queryFormNode" />	
+	<xs:element name="sectionGroup" type="SectionGroup" substitutionGroup="section" />
+	<xs:element name="selectSection" type="SelectSection" substitutionGroup="section" />	
+	<xs:element name="conditionSection" type="ConditionSection" substitutionGroup="section" />
+	<xs:element name="orderBySection" type="OrderBySection" substitutionGroup="selectSection" />
+	<xs:element name="groupBySection" type="GroupBySection" substitutionGroup="selectSection" />
+	
+	<!-- 栏目设置 -->
+	<xs:element name="column" type="Column" substitutionGroup="queryFormNode" />
+	<xs:element name="columnGroup" type="ColumnGroup" substitutionGroup="column" />
+	<xs:element name="fieldColumn" type="FieldColumn" substitutionGroup="column" />
+	<xs:element name="analystColumn" type="AnalystColumn" substitutionGroup="fieldColumn" />
+	<xs:element name="conditionColumn" type="ConditionColumn" substitutionGroup="fieldColumn" />
+	<xs:element name="orderByColumn" type="OrderByColumn" substitutionGroup="fieldColumn" />
+	
+	<xs:element name="pythonColumn" type="PythonColumn" substitutionGroup="column" />
+	
+	<!-- 数据源头 -->
+	<xs:element name="dataSource" type="DataSource" substitutionGroup="queryFormNode" />
+	<xs:element name="pageDataSource" type="PageDataSource" substitutionGroup="dataSource" />
+	<xs:element name="voSource" type="VOSource" substitutionGroup="pageDataSource" />
+	<xs:element name="sqlSource" type="SQLSource" substitutionGroup="pageDataSource" />
+	
+	<!-- 数据Page Info -->
+	<xs:element name="pageInfo" type="PageInfo" substitutionGroup="queryFormNode" />
+	<xs:element name="dataPageInfo" type="DataPageInfo" substitutionGroup="pageInfo" />
 	
 	<!--条件格式-->
 	<xs:element name="conditionSyntax" type="ConditionSyntax" substitutionGroup="queryFormNode" />
-	<xs:element name="complexConditionSyntax" type="ComplexConditionSyntax" substitutionGroup="conditionSyntax" />
-	<xs:element name="feildConditionSyntax" type="FeildConditionSyntax" substitutionGroup="conditionSyntax" />	
-	
-	<xs:element name="requestField" type="RequestField" substitutionGroup="queryFormNode" />
-	<xs:element name="requestFieldGroup" type="RequestFieldGroup" substitutionGroup="requestField" />
-	<xs:element name="simpleField" type="SimpleField" substitutionGroup="requestField" />
-	<xs:element name="conditionField" type="ConditionField" substitutionGroup="requestField" />
-	<xs:element name="orderByField" type="OrderByField" substitutionGroup="requestField" />
-	
+	<xs:element name="complexWhere" type="ComplexWhere" substitutionGroup="conditionSyntax" />
+	<xs:element name="fieldWhere" type="FieldWhere" substitutionGroup="conditionSyntax" />	
 	
 	<xs:complexType name="QueryFormNode">
 		<xs:attribute name="code" type="xs:string"/>
 		<xs:attribute name="index" type="xs:integer"/>
+		<xs:attribute name="alias" type="xs:string"/>
 	</xs:complexType>
 	
-	<xs:complexType name="QueryRequest">
+	<!-- 请求入口 -->
+	<xs:complexType name="RequestService">
 		<xs:complexContent>
 			<xs:extension base="QueryFormNode">
 				<xs:sequence>
-					<xs:element ref="requestPart" minOccurs="0" maxOccurs="unbounded" />
+					<xs:sequence >
+						<xs:element ref="formSet" />
+					</xs:sequence>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<xs:complexType name="RequestPart">
+	<!-- Form 的定义 -->
+	<xs:complexType name="FormSet">
+		<xs:complexContent>
+			<xs:extension base="QueryFormNode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Form Group -->
+	<xs:complexType name="FormSetGroup">
+		<xs:complexContent>
+			<xs:extension base="FormSet">
+				<xs:sequence>
+					<xs:sequence >
+						<xs:element ref="formSet" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 一个记录  -->
+	<xs:complexType name="DataTable">
+		<xs:complexContent>
+			<xs:extension base="FormSet">
+				<xs:sequence>
+					<xs:element ref="section" />
+					<xs:element ref="dataSource" />					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<!-- 各个部分 -->
+	<xs:complexType name="Section">
 		<xs:complexContent>
 			<xs:extension base="QueryFormNode" />
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<xs:complexType name="RequestPartGroup">
+	<!-- 定义Section 组 -->
+	<xs:complexType name="SectionGroup">
 		<xs:complexContent>
-			<xs:extension base="RequestPart" >
+			<xs:extension base="Section" >
 				<xs:sequence>
-					<xs:element ref="requestPart" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element ref="section"  minOccurs="0" maxOccurs="unbounded"   />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<!-- 数据的请求 -->
-	<xs:complexType name="RequestColumn">
+	<xs:complexType name="SelectSection">
 		<xs:complexContent>
-			<xs:extension base="RequestPart" >
+			<xs:extension base="Section" >
 				<xs:sequence>
-					<xs:element ref="requestField" minOccurs="0" />
+					<xs:element ref="column"  />
 				</xs:sequence>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ConditionSection">
+		<xs:complexContent>
+			<xs:extension base="Section" >
+				<xs:sequence>
+					<xs:element ref="conditionSyntax" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderBySection">
+		<xs:complexContent>
+			<xs:extension base="SelectSection" />				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="GroupBySection">
+		<xs:complexContent>
+			<xs:extension base="SelectSection" />				
+		</xs:complexContent>
+	</xs:complexType>
+		
+	<!-- 数据项目 -->
+	<xs:complexType name="Column">
+		<xs:complexContent>
+			<xs:extension base="QueryFormNode" />				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ColumnGroup">
+		<xs:complexContent>
+			<xs:extension base="Column" >
+				<xs:sequence>
+					<xs:element ref="column" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FieldColumn">
+		<xs:complexContent>
+			<xs:extension base="Column" >	
+				<xs:attribute name="field" type="xs:string" />
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="AnalystColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" >
+				<xs:attribute name="function" type="vo:SQLFunction" />		
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 支持用表达式来完成计算 -->
+	<xs:complexType name="PythonColumn">
+		<xs:complexContent>
+			<xs:extension base="Column" >
+				<xs:sequence>
+					<xs:element name="content" type="xs:string" />
+				</xs:sequence>	
+			</xs:extension>				
 		</xs:complexContent>
 	</xs:complexType>
 	
 	<xs:complexType name="ConditionColumn">
 		<xs:complexContent>
-			<xs:extension base="RequestPart" >
+			<xs:extension base="FieldColumn" >
+				<xs:attribute name="operation" type="vo:FieldLogical" />
+				<xs:attribute name="defaultvalue" type="xs:string" />
+			</xs:extension>					
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderByColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" >
+				<xs:attribute name="operation" type="vo:OrderDirection" />	
+			</xs:extension>					
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	
+	<!-- 数据源 -->
+	<xs:complexType name="DataSource">
+		<xs:complexContent>
+			<xs:extension base="QueryFormNode" />				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 支持分页 -->
+	<xs:complexType name="PageDataSource">
+		<xs:complexContent>
+			<xs:extension base="DataSource" >
 				<xs:sequence>
-					<xs:element ref="conditionSyntax" minOccurs="0" />
+					<xs:element ref="pageInfo" />
 				</xs:sequence>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--  -->
+	<xs:complexType name="VOSource">
+		<xs:complexContent>
+			<xs:extension base="PageDataSource" >	
+				<xs:attribute name="vocode" type="xs:string" />
+				<xs:attribute name="formcode" type="xs:string" />
+			</xs:extension>			
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="SQLSource">
+		<xs:complexContent>
+			<xs:extension base="PageDataSource" >	
+				<xs:sequence>
+					<xs:element name="sqlContent" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>			
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--  -->
+	<xs:complexType name="PageInfo">
+		<xs:complexContent>
+			<xs:extension base="QueryFormNode" />				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="DataPageInfo">
+		<xs:complexContent>
+			<xs:extension base="PageInfo" >		
+				<xs:attribute name="page" type="xs:integer" />	
+				<xs:attribute name="size" type="xs:integer" />
+				<xs:attribute name="pages" type="xs:integer" />
+				<xs:attribute name="records" type="xs:long" />
+			</xs:extension>	
 		</xs:complexContent>
 	</xs:complexType>
 	
@@ -97,7 +289,7 @@
 	</xs:complexType>
 	
 	<!-- 等同于括号 -->
-	<xs:complexType name="ComplexConditionSyntax">
+	<xs:complexType name="ComplexWhere">
 		<xs:complexContent>
 			<xs:extension base="ConditionSyntax" >
 				<xs:sequence>
@@ -108,59 +300,12 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<xs:complexType name="FeildConditionSyntax">
+	<xs:complexType name="FieldWhere">
 		<xs:complexContent>
 			<xs:extension base="ConditionSyntax" >
 				<xs:sequence>
-					<xs:element ref="requestField" />
+					<xs:element ref="column" />
 				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="OrderByColumn">
-		<xs:complexContent>
-			<xs:extension base="RequestColumn" />
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="RequestField">
-		<xs:complexContent>
-			<xs:extension base="QueryFormNode" />
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="RequestFieldGroup">
-		<xs:complexContent>
-			<xs:extension base="RequestField" >
-				<xs:sequence>
-					<xs:element ref="requestField" minOccurs="0" maxOccurs="unbounded" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="SimpleField">
-		<xs:complexContent>
-			<xs:extension base="RequestField" >
-				<xs:attribute name="field" type="xs:string" />								
-				<xs:attribute name="value" type="xs:string" />		
-			</xs:extension>			
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="ConditionField">
-		<xs:complexContent>
-			<xs:extension base="SimpleField" >
-				<xs:attribute name="operation" type="vo:FieldLogical" />			
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="OrderByField">
-		<xs:complexContent>
-			<xs:extension base="SimpleField" >
-				<xs:attribute name="operation" type="vo:OrderDirection" />			
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

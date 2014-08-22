@@ -3,6 +3,7 @@
  xmlns="http://www.zlmwork.com/zmvoengine"
  targetNamespace="http://www.zlmwork.com/zmvoengine"
  elementFormDefault="qualified" attributeFormDefault="unqualified">
+ 
 	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
 		<xs:annotation>
 			<xs:documentation>
@@ -15,7 +16,7 @@
 				基于数据服务的概念进行开发。 
 				OLAP online analytical processing 
 				
-				1.将支持Blob 数据存储和读取
+				1. 将支持Blob 数据存储和读取
 				2. 支持对XML文件的读取和索引
 				3. 支持多数据集
 				4. 数据集合将采用综合并能转成JSON
@@ -828,7 +829,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-
 	<!-- 数
 		据DataSet, 用来进行数据源，  
 		数据源 可以配置属性

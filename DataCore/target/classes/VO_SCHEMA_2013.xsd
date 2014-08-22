@@ -3,6 +3,7 @@
  xmlns="http://www.zlmwork.com/zmvoengine"
  targetNamespace="http://www.zlmwork.com/zmvoengine"
  elementFormDefault="qualified" attributeFormDefault="unqualified">
+ 
 	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
 		<xs:annotation>
 			<xs:documentation>
@@ -15,7 +16,7 @@
 				基于数据服务的概念进行开发。 
 				OLAP online analytical processing 
 				
-				1.将支持Blob 数据存储和读取
+				1. 将支持Blob 数据存储和读取
 				2. 支持对XML文件的读取和索引
 				3. 支持多数据集
 				4. 数据集合将采用综合并能转成JSON
@@ -48,16 +49,18 @@
 	
 	<xs:element name="formRelation" type="FormRelation" substitutionGroup="define"/>	
 	<xs:element name="formRelationGroup" type="FormRelationGroup" substitutionGroup="formRelation"/>
-	<xs:element name="leriFormsConnection" type="LeRiFormsConnection" substitutionGroup="formRelation"/>
+	<xs:element name="formsRelation" type="FormsRelation" substitutionGroup="formRelation"/>
 	
 	<!--Form 定义 -->
 	<xs:element name="form" type="Form" substitutionGroup="schemaDefine"/>
 	<xs:element name="serviceForm" type="ServiceForm" substitutionGroup="form"/>
 	<xs:element name="formGroup" type="FormGroup" substitutionGroup="form"/>	
 	<xs:element name="dataForm" type="DataForm" substitutionGroup="serviceForm"/>
+	
 	<xs:element name="selectForm" type="SelectForm" substitutionGroup="dataForm"/>
 	<xs:element name="updateForm" type="UpdateForm" substitutionGroup="dataForm"/>
 	<xs:element name="insertForm" type="InsertForm" substitutionGroup="dataForm"/>	
+	
 	<xs:element name="storedproductForm" type="StoredproductForm" substitutionGroup="serviceForm"/>
 
 	<!-- 特别数据 -->
@@ -67,10 +70,15 @@
 	<!-- 左右 -->
 	<xs:element name="left" type="Left" substitutionGroup="define"/>
 	<xs:element name="right" type="Right" substitutionGroup="define"/>
+	
 	<xs:element name="relation" type="Relation" substitutionGroup="define"/>
-	<xs:element name="relationGroup" type="RelationGroup" substitutionGroup="define"/>
-	<xs:element name="fieldsRelation" type="FieldsRelation" substitutionGroup="define"/>
-	<xs:element name="fieldValueRelation" type="FieldValueRelation" substitutionGroup="define"/>
+	<xs:element name="relationGroup" type="RelationGroup" substitutionGroup="relation"/>
+	<xs:element name="boundaryRelation" type="BoundaryRelation" substitutionGroup="relation"/>
+	
+	
+	<xs:element name="boundary" type="Boundary" substitutionGroup="define"/>	
+	<xs:element name="fieldsBoundary" type="FieldsBoundary" substitutionGroup="boundary"/>
+	<xs:element name="fieldValueBoundary" type="FieldValueBoundary" substitutionGroup="boundary"/>
 	
 	<!-- Field 定义 -->
 	<xs:element name="field" type="Field" substitutionGroup="define" />
@@ -89,17 +97,6 @@
 	<xs:element name="schemaValue" type="SchemaValue" substitutionGroup="fieldValue" />
 	<xs:element name="jsonFieldValue" type="JSONFieldValue" substitutionGroup="schemaValue" />
 	
-	<!-- FormPart -->
-	<xs:element name="formPart" type="FormPart" substitutionGroup="define"/>
-	<xs:element name="formPartGroup" type="FormPartGroup" substitutionGroup="formPart"/>
-	
-	<!-- Field 定义 -->
-	<xs:element name="fieldsPart" type="FieldsPart" substitutionGroup="formPart"/>
-	<xs:element name="selectedPart" type="SelectedPart" substitutionGroup="fieldsPart"/>
-	<xs:element name="wherePart" type="WherePart" substitutionGroup="fieldsPart"/>
-	<xs:element name="groupByPart" type="GroupByPart" substitutionGroup="fieldsPart"/>
-	<xs:element name="orderPart" type="OrderPart" substitutionGroup="fieldsPart"/>
-
 	<!-- 数据连接  -->
 	<xs:element name="connection" type="Connection" substitutionGroup="define"/>
 	<xs:element name="databaseConnection" type="DatabaseConnection" substitutionGroup="connection"/>
@@ -112,7 +109,7 @@
 	
 	<xs:element name="attribute" type="Attribute" substitutionGroup="define"/>
 	<xs:element name="attributeGroup" type="AttributeGroup" substitutionGroup="attribute"/>
-	<xs:element name="valueAttribute" type="ValueAttribute" substitutionGroup="attribute"/>
+	<xs:element name="parameter" type="Parameter" substitutionGroup="attribute"/>
 
 	<!-- 字典 -->
 	<xs:element name="library" type="Library" substitutionGroup="define"/>
@@ -221,6 +218,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
+	<!-- Form 之间关系 -->
 	<xs:complexType name="FormRelation">
 		<xs:complexContent>
 			<xs:extension base="Define" />
@@ -237,7 +235,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<xs:complexType name="LeRiFormsConnection">
+	<xs:complexType name="FormsRelation">
 		<xs:complexContent>
 			<xs:extension base="FormRelation" >
 				<xs:sequence>
@@ -285,7 +283,7 @@
 		<xs:complexContent>
 			<xs:extension base="ServiceForm">
 				<xs:sequence>
-					<xs:element ref="formPart"/>
+					<xs:element ref="field"/>
 					<xs:element ref="dataSet"/>
 				</xs:sequence>
 			</xs:extension>
@@ -349,13 +347,11 @@
 					<xs:element ref="left" />
 					<xs:element ref="right" />
 					<xs:element ref="relation" />
-				</xs:sequence>
-				<xs:attribute name="tableRelation" type="TableRelation" />
+				</xs:sequence>				
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
-	
+		
 	<!-- 左边 -->
 	<xs:complexType name="Left">
 		<xs:complexContent>
@@ -399,10 +395,29 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<!-- 字段关系 -->
-	<xs:complexType name="FieldsRelation">
+	<!-- 表达 -->
+	<xs:complexType name="BoundaryRelation">
 		<xs:complexContent>
-			<xs:extension base="Relation">
+			<xs:extension base="Relation" >
+				<xs:sequence>
+					<xs:element ref="boundary" minOccurs="0" />
+				</xs:sequence>
+				<xs:attribute name="tableRelation" type="TableRelation" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Boundary 边界， 条件  -->
+	<xs:complexType name="Boundary">
+		<xs:complexContent>
+			<xs:extension base="Define" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 字段关系 -->
+	<xs:complexType name="FieldsBoundary">
+		<xs:complexContent>
+			<xs:extension base="Boundary">
 				<xs:attribute name="leftfield" type="xs:string" />
 				<xs:attribute name="rightfield" type="xs:string" />
 				<xs:attribute name="operation" type="FieldLogical" />
@@ -411,9 +426,9 @@
 	</xs:complexType>
 	
 	<!---->
-	<xs:complexType name="FieldValueRelation">
+	<xs:complexType name="FieldValueBoundary">
 		<xs:complexContent>
-			<xs:extension base="Relation">
+			<xs:extension base="Boundary">
 				<xs:attribute name="field" type="xs:string" />
 				<xs:attribute name="value" type="xs:string" />
 				<xs:attribute name="operation" type="FieldLogical" />
@@ -438,18 +453,23 @@
 	<!--支持存储Blob 文件-->
 	<xs:simpleType name="DataType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="zyhString"/>
-			<xs:enumeration value="zyhInteger"/>
-			<xs:enumeration value="zyhShort"/>
-			<xs:enumeration value="zyhLong"/>
-			<xs:enumeration value="zyhFloat"/>
-			<xs:enumeration value="zyhDouble"/>
-			<xs:enumeration value="zyhDatetime"/>
-			<xs:enumeration value="zyhDate"/>
-			<xs:enumeration value="zyhBoolean"/>
-			<xs:enumeration value="zyhBlob"/>
-			<xs:enumeration value="zyhXML"/>
-			<xs:enumeration value="zyhNumberic"/>
+			<xs:enumeration value="zmlUNknown"/>
+			<xs:enumeration value="zmlString"/>
+			<xs:enumeration value="zmlInteger"/>
+			<xs:enumeration value="zmlShort"/>
+			<xs:enumeration value="zmlLong"/>
+			<xs:enumeration value="zmlFloat"/>
+			<xs:enumeration value="zmlDouble"/>
+			<xs:enumeration value="zmlDatetime"/>
+			<xs:enumeration value="zmlDate"/>
+			<xs:enumeration value="zmlTime"/>
+			<xs:enumeration value="zmlBoolean"/>
+			<xs:enumeration value="zmlBlob"/>
+			<xs:enumeration value="zmlXML"/>
+			<xs:enumeration value="zmlJSON"/>
+			<xs:enumeration value="zmlNumberic"/>
+			<xs:enumeration value="SQLParameter"/>
+			<xs:enumeration value="zmlGeometry"/>
 		</xs:restriction>
 	</xs:simpleType>
 	
@@ -472,7 +492,7 @@
 			<xs:enumeration value="NOT_LOWER"/>
 			<xs:enumeration value="NOT_LARGER"/>
 			<xs:enumeration value="IN"/>
-			<xs:enumeration value="NOTIN"/>
+			<xs:enumeration value="NOT_IN"/>
 		</xs:restriction>
 	</xs:simpleType>
 	
@@ -612,59 +632,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-	
-
-	<!-- 表单部分, 用来区分数据结构、条件结构、Group 结构和排序  -->
-	<xs:complexType name="FormPart">
-		<xs:complexContent>
-			<xs:extension base="Define"/>
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="FormPartGroup">
-		<xs:complexContent>
-			<xs:extension base="FormPart">
-				<xs:sequence>
-					<xs:element ref="formPart" minOccurs="0" maxOccurs="unbounded" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:complexType name="FieldsPart">
-		<xs:complexContent>
-			<xs:extension base="FormPart">
-				<xs:sequence>
-					<xs:element ref="field"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name="SelectedPart">
-		<xs:complexContent>
-			<xs:extension base="FieldsPart"/>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name="WherePart">
-		<xs:complexContent>
-			<xs:extension base="FieldsPart"/>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name="GroupByPart">
-		<xs:complexContent>
-			<xs:extension base="FieldsPart"/>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name="OrderPart">
-		<xs:complexContent>
-			<xs:extension base="FieldsPart"/>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<!-- 链接 -->
 	<xs:complexType name="Connection">
 		<xs:complexContent>
@@ -740,7 +707,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:complexType name="ValueAttribute">
+	<xs:complexType name="Parameter">
 		<xs:complexContent>
 			<xs:extension base="Attribute">
 				<xs:attribute name="value" type="xs:string"/>
@@ -862,7 +829,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-
 	<!-- 数
 		据DataSet, 用来进行数据源，  
 		数据源 可以配置属性

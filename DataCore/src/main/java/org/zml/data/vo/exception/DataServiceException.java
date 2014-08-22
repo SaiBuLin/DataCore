@@ -1,5 +1,10 @@
 package org.zml.data.vo.exception;
 
+/**
+ * 异常，主要表示Service 不能正确访问
+ * @author zlmwork
+ *
+ */
 public class DataServiceException extends Exception {
 
 	/**

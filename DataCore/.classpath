@@ -27,12 +27,16 @@
 	<classpathentry kind="lib" path="target/lib/groovy-1.1-rc-1.jar"/>
 	<classpathentry kind="lib" path="target/lib/jaxrpc-api-1.1.jar"/>
 	<classpathentry kind="lib" path="target/lib/jline-0.9.91.jar"/>
+	<classpathentry kind="lib" path="target/lib/json-20090211.jar"/>
+	<classpathentry kind="lib" path="target/lib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="lib" path="target/lib/junit-3.8.2.jar"/>
 	<classpathentry kind="lib" path="target/lib/log4j-1.2.12.jar"/>
 	<classpathentry kind="lib" path="target/lib/log4j-api-2.0-beta8.jar"/>
 	<classpathentry kind="lib" path="target/lib/log4j-core-2.0-beta8.jar"/>
 	<classpathentry kind="lib" path="target/lib/logkit-1.0.1.jar"/>
+	<classpathentry kind="lib" path="target/lib/myqtDBTools-1.1.1.jar"/>
 	<classpathentry kind="lib" path="target/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="target/lib/proxool-0.8.3.jar"/>
 	<classpathentry kind="lib" path="target/lib/qdox-1.5.jar"/>
 	<classpathentry kind="lib" path="target/lib/servlet-api-3.0-alpha-1.jar"/>
 	<classpathentry kind="lib" path="target/lib/slf4j-api-1.7.5.jar"/>
@@ -42,7 +46,5 @@
 	<classpathentry kind="lib" path="target/lib/xml-apis-1.0.b2.jar"/>
 	<classpathentry kind="lib" path="target/lib/xom-1.2.5.jar"/>
 	<classpathentry kind="lib" path="target/lib/zmltools-1.1.1.jar"/>
-	<classpathentry kind="lib" path="target/lib/myqtDBTools-1.1.1.jar"/>
-	<classpathentry kind="lib" path="target/lib/proxool-0.8.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

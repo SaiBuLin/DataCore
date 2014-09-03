@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
    xmlns="http://www.zlmwork.com/zmqueryform"
-   xmlns:vo="http://www.zlmwork.com/zmvoengine"
    targetNamespace="http://www.zlmwork.com/zmqueryform"
 	 elementFormDefault="qualified" attributeFormDefault="unqualified" >
-	<xs:import namespace="http://www.zlmwork.com/zmvoengine" schemaLocation="VO_SCHEMA_2013.xsd" />
 	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
 		<xs:annotation>
 			<xs:documentation>
@@ -190,7 +188,7 @@
 	<xs:complexType name="AnalystColumn">
 		<xs:complexContent>
 			<xs:extension base="FieldColumn" >
-				<xs:attribute name="function" type="vo:SQLFunction" />		
+				<xs:attribute name="function" type="SQLFunction" />		
 			</xs:extension>				
 		</xs:complexContent>
 	</xs:complexType>
@@ -209,7 +207,7 @@
 	<xs:complexType name="ConditionColumn">
 		<xs:complexContent>
 			<xs:extension base="FieldColumn" >
-				<xs:attribute name="operation" type="vo:FieldLogical" />
+				<xs:attribute name="operation" type="FieldLogical" />
 				<xs:attribute name="defaultvalue" type="xs:string" />
 			</xs:extension>					
 		</xs:complexContent>
@@ -218,7 +216,7 @@
 	<xs:complexType name="OrderByColumn">
 		<xs:complexContent>
 			<xs:extension base="FieldColumn" >
-				<xs:attribute name="operation" type="vo:OrderDirection" />	
+				<xs:attribute name="operation" type="OrderDirection" />	
 			</xs:extension>					
 		</xs:complexContent>
 	</xs:complexType>
@@ -295,7 +293,7 @@
 				<xs:sequence>
 					<xs:element ref="conditionSyntax" minOccurs="0" maxOccurs="unbounded" />
 				</xs:sequence>
-				<xs:attribute name="operation" type="vo:OperationLogical" />
+				<xs:attribute name="operation" type="OperationLogical" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -309,5 +307,49 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
+	<xs:simpleType name="SQLFunction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AVG"/>
+			<xs:enumeration value="COUNT"/>
+			<xs:enumeration value="FIRST"/>
+			<xs:enumeration value="LAST"/>
+			<xs:enumeration value="MAX"/>
+			<xs:enumeration value="MIN"/>
+			<xs:enumeration value="STDEV"/>
+			<xs:enumeration value="STDEVP"/>
+			<xs:enumeration value="SUM"/>
+			<xs:enumeration value="VAR"/>
+			<xs:enumeration value="VARP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="FieldLogical">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EQUALS"/>
+			<xs:enumeration value="NOTEQUALS"/>
+			<xs:enumeration value="LOWER"/>
+			<xs:enumeration value="LARGER"/>
+			<xs:enumeration value="NOT_LOWER"/>
+			<xs:enumeration value="NOT_LARGER"/>
+			<xs:enumeration value="IN"/>
+			<xs:enumeration value="NOT_IN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="OperationLogical">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT"/>
+			<xs:enumeration value="AND"/>
+			<xs:enumeration value="OR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="OrderDirection">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DESC"/>
+			<xs:enumeration value="ASC"/>
+		</xs:restriction>
+	</xs:simpleType>
 
 </xs:schema>

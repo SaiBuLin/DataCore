@@ -1,4 +1,4 @@
 package org.zml.form.bind;
-public class Section extends QueryFormNode
+public class Section extends FormNode
 {
 }

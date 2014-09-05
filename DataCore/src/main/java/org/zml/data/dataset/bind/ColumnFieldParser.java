@@ -1,5 +1,4 @@
 package org.zml.data.dataset.bind;
-
 import org.zml.schema.bind.DataType;
 import org.zml.tools.xml.parser.IXmlVisitorParserable;
 import org.zml.tools.xml.parser.XMLVisitorFactory;
@@ -7,7 +6,6 @@ import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
 import org.zml.tools.xml.parser.Convert;
 import org.zml.util.UtilTools;
-
 public class ColumnFieldParser extends DataFieldParser implements IXmlVisitorParserable
 {
 	public ColumnFieldParser()
@@ -77,8 +75,7 @@ public class ColumnFieldParser extends DataFieldParser implements IXmlVisitorPar
 				String tmpValue = String.valueOf(dataOneElement);
 				fatherElement.addAttribute("field",tmpValue);
 			}
-			
-			if(  objElement.getDatatype() != null )
+			if( objElement.getDatatype() != null )
 			{
 				DataType dataOneElement = objElement.getDatatype();
 				String tmpValue = String.valueOf(dataOneElement);

@@ -1,13 +1,13 @@
 package org.zml.form.bind;
 public class ConditionSection extends Section
 {
-	private ConditionSyntax conditionSyntax;
-	public ConditionSyntax getConditionSyntax()
+	private Condition condition;
+	public Condition getCondition()
 	{
-		return this.conditionSyntax;
+		return this.condition;
 	}
-	public void setConditionSyntax(ConditionSyntax inconditionSyntax )
+	public void setCondition(Condition incondition )
 	{
-		this.conditionSyntax = inconditionSyntax;
+		this.condition = incondition;
 	}
 }

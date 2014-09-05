@@ -4,7 +4,7 @@ import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
 import org.zml.util.UtilTools;
-public class ColumnParser extends QueryFormNodeParser implements IXmlVisitorParserable
+public class ColumnParser extends FormNodeParser implements IXmlVisitorParserable
 {
 	public ColumnParser()
 	{

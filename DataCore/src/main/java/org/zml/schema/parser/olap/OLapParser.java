@@ -1,6 +1,8 @@
 package org.zml.schema.parser.olap;
+import org.zml.data.DataServiceTools;
 import org.zml.tools.xml.parser.CTXMLElement;
-public abstract class OLapParser implements OLapParserAble
+
+public abstract class OLapParser extends DataServiceTools implements OLapParserAble
 {
 	protected CTXMLElement queryDefineElement = null;
 	public CTXMLElement getQueryDefineElement()

@@ -22,6 +22,7 @@ public class SchemaParser extends SchemaDefineParser implements IXmlVisitorParse
 		Schema objElement = (Schema)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
+		objElement.setFactory((Factory)this.getObjectFromElement(node,"factory","Factory"));
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -45,6 +46,21 @@ public class SchemaParser extends SchemaDefineParser implements IXmlVisitorParse
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof Schema ))  return;
 			Schema objElement = (Schema)element;
+			if(  objElement.getFactory()  != null )
+			{
+				Factory dataOneElement = objElement.getFactory();
+				String xmlElementNameEx = "";
+				if(UtilTools.isNull( dataOneElement.getXmlElementName() ))
+				{
+					xmlElementNameEx = this.getRealElementName("factory",dataOneElement.getClass().getName());
+				}
+				else
+				{
+					xmlElementNameEx = dataOneElement.getXmlElementName();
+				}
+				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
+				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
+			}
 			if (!UtilTools.isNull(objElement.getText()))
 			{
 				String dataOneElement = objElement.getText();

@@ -23,9 +23,9 @@ public class SQLFunctionParser extends XMLVisitorParser implements IXmlVisitorPa
 		if (node == null) return result;
 		String NodeValue = node.getTextTrim();
 		NodeValue = UTools.getTrim( NodeValue );
-		if (NodeValue.equals("VARP"))
+		if (NodeValue.equals("VAR"))
 		{
-			result = SQLFunction.VARP;
+			result = SQLFunction.VAR;
 		}
 		else if (NodeValue.equals("MAX"))
 		{
@@ -47,6 +47,10 @@ public class SQLFunctionParser extends XMLVisitorParser implements IXmlVisitorPa
 		{
 			result = SQLFunction.SUM;
 		}
+		else if (NodeValue.equals("VARP"))
+		{
+			result = SQLFunction.VARP;
+		}
 		else if (NodeValue.equals("COUNT"))
 		{
 			result = SQLFunction.COUNT;
@@ -59,10 +63,6 @@ public class SQLFunctionParser extends XMLVisitorParser implements IXmlVisitorPa
 		{
 			result = SQLFunction.MIN;
 		}
-		else if (NodeValue.equals("VAR"))
-		{
-			result = SQLFunction.VAR;
-		}
 		else if (NodeValue.equals("AVG"))
 		{
 			result = SQLFunction.AVG;
@@ -74,9 +74,9 @@ public class SQLFunctionParser extends XMLVisitorParser implements IXmlVisitorPa
 		Object result = null;
 		if (UtilTools.isNull(value) ) return result;
 		String tmpValue = UtilTools.getTrim(value);
-		if (tmpValue.equals("VARP"))
+		if (tmpValue.equals("VAR"))
 		{
-			result = SQLFunction.VARP;
+			result = SQLFunction.VAR;
 		}
 		else if (tmpValue.equals("MAX"))
 		{
@@ -98,6 +98,10 @@ public class SQLFunctionParser extends XMLVisitorParser implements IXmlVisitorPa
 		{
 			result = SQLFunction.SUM;
 		}
+		else if (tmpValue.equals("VARP"))
+		{
+			result = SQLFunction.VARP;
+		}
 		else if (tmpValue.equals("COUNT"))
 		{
 			result = SQLFunction.COUNT;
@@ -109,10 +113,6 @@ public class SQLFunctionParser extends XMLVisitorParser implements IXmlVisitorPa
 		else if (tmpValue.equals("MIN"))
 		{
 			result = SQLFunction.MIN;
-		}
-		else if (tmpValue.equals("VAR"))
-		{
-			result = SQLFunction.VAR;
 		}
 		else if (tmpValue.equals("AVG"))
 		{

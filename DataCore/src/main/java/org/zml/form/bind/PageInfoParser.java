@@ -3,8 +3,9 @@ import org.zml.tools.xml.parser.IXmlVisitorParserable;
 import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
+import org.zml.tools.xml.parser.Convert;
 import org.zml.util.UtilTools;
-public class PageInfoParser extends QueryFormNodeParser implements IXmlVisitorParserable
+public class PageInfoParser extends FormNodeParser implements IXmlVisitorParserable
 {
 	public PageInfoParser()
 	{
@@ -22,6 +23,22 @@ public class PageInfoParser extends QueryFormNodeParser implements IXmlVisitorPa
 		PageInfo objElement = (PageInfo)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
+		if(node.attribute("page")!= null )
+		{
+			objElement.setPage(Convert.toInt(node.attribute("page").getText()));
+		}
+		if(node.attribute("records")!= null )
+		{
+			objElement.setRecords(Convert.toLong(node.attribute("records").getText()));
+		}
+		if(node.attribute("pages")!= null )
+		{
+			objElement.setPages(Convert.toInt(node.attribute("pages").getText()));
+		}
+		if(node.attribute("size")!= null )
+		{
+			objElement.setSize(Convert.toInt(node.attribute("size").getText()));
+		}
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -45,6 +62,30 @@ public class PageInfoParser extends QueryFormNodeParser implements IXmlVisitorPa
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof PageInfo ))  return;
 			PageInfo objElement = (PageInfo)element;
+			if( !UtilTools.isNull( objElement.getPage() ))
+			{
+				int dataOneElement = objElement.getPage();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("page",tmpValue);
+			}
+			if( !UtilTools.isNull( objElement.getRecords() ))
+			{
+				Long dataOneElement = objElement.getRecords();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("records",tmpValue);
+			}
+			if( !UtilTools.isNull( objElement.getPages() ))
+			{
+				int dataOneElement = objElement.getPages();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("pages",tmpValue);
+			}
+			if( !UtilTools.isNull( objElement.getSize() ))
+			{
+				int dataOneElement = objElement.getSize();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("size",tmpValue);
+			}
 			if (!UtilTools.isNull(objElement.getText()))
 			{
 				String dataOneElement = objElement.getText();

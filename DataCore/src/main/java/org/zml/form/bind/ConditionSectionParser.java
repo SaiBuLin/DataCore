@@ -22,7 +22,7 @@ public class ConditionSectionParser extends SectionParser implements IXmlVisitor
 		ConditionSection objElement = (ConditionSection)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
-		objElement.setConditionSyntax((ConditionSyntax)this.getObjectFromElement(node,"conditionSyntax","ConditionSyntax"));
+		objElement.setCondition((Condition)this.getObjectFromElement(node,"condition","Condition"));
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -46,13 +46,13 @@ public class ConditionSectionParser extends SectionParser implements IXmlVisitor
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof ConditionSection ))  return;
 			ConditionSection objElement = (ConditionSection)element;
-			if(  objElement.getConditionSyntax()  != null )
+			if(  objElement.getCondition()  != null )
 			{
-				ConditionSyntax dataOneElement = objElement.getConditionSyntax();
+				Condition dataOneElement = objElement.getCondition();
 				String xmlElementNameEx = "";
 				if(UtilTools.isNull( dataOneElement.getXmlElementName() ))
 				{
-					xmlElementNameEx = this.getRealElementName("conditionSyntax",dataOneElement.getClass().getName());
+					xmlElementNameEx = this.getRealElementName("condition",dataOneElement.getClass().getName());
 				}
 				else
 				{

@@ -121,7 +121,11 @@
 	<!-- Schema 定义，就是数据定义-->
 	<xs:complexType name="Schema">
 		<xs:complexContent>
-			<xs:extension base="SchemaDefine" />				
+			<xs:extension base="SchemaDefine" >
+				<xs:sequence>
+					<xs:element ref="factory" />
+				</xs:sequence>
+			</xs:extension>				
 		</xs:complexContent>
 	</xs:complexType>
 
@@ -399,7 +403,10 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
-	<!-- 过滤器 -->
+	<!-- 
+		过滤器
+		过滤器，主要用于数据查询出来后进行数据转换。 
+	-->
 	<xs:complexType name="Filter">
 		<xs:complexContent>
 			<xs:extension base="Define">

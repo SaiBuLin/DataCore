@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 	
+	 xmlns="http://www.example.org/Data_Service_Form" 
+	 targetNamespace="http://www.example.org/Data_Service_Form"
+	 elementFormDefault="qualified" attributeFormDefault="unqualified"  >
+	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
+		<xs:annotation>
+			<xs:documentation>
+				请求服务，用来提供Form 操作 
+				用来定义查询请求的结构, 请求定义中，需要能进行
+				Clinet 发出的请求， 请求的json 字符串， JSON 转成XML 
+				进行处理。
+				
+				1. 惊醒修正，用来定义报表，
+				2. 设置数据源
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="formNode" type="FormNode"/>
+
+	<!-- Form 定义部分 -->
+	<xs:element name="form" type="Form" substitutionGroup="formNode" />	
+	<xs:element name="formGroup" type="FormGroup" substitutionGroup="form" />	
+	<xs:element name="dataForm" type="DataForm" substitutionGroup="form" />	
+	
+	<!-- 各个部分 -->
+	<xs:element name="section" type="Section" substitutionGroup="formNode" />	
+	<xs:element name="sectionGroup" type="SectionGroup" substitutionGroup="section" />
+	<xs:element name="columnSection" type="ColumnSection" substitutionGroup="section" />
+	<xs:element name="gridSection" type="GridSection" substitutionGroup="columnSection" />
+	<xs:element name="conditionSection" type="ConditionSection" substitutionGroup="section" />
+	
+	<!-- 栏目设置 -->
+	<xs:element name="column" type="Column" substitutionGroup="formNode" />
+	<xs:element name="columnGroup" type="ColumnGroup" substitutionGroup="column" />
+	<xs:element name="fieldColumn" type="FieldColumn" substitutionGroup="column" />
+	<xs:element name="analystColumn" type="AnalystColumn" substitutionGroup="fieldColumn" />
+	<xs:element name="conditionColumn" type="ConditionColumn" substitutionGroup="fieldColumn" />
+	<xs:element name="orderColumn" type="OrderColumn" substitutionGroup="fieldColumn" />	
+	<xs:element name="scriptColumn" type="ScriptColumn" substitutionGroup="fieldColumn" />
+	
+	<!-- 数据源头 -->
+	<xs:element name="formService" type="FormService" substitutionGroup="formNode" />
+	<xs:element name="voFormService" type="VOFormService" substitutionGroup="formService" />
+	<xs:element name="sqlFormService" type="SQLFormService" substitutionGroup="formService" />
+	
+	<!-- 数据Page Info -->
+	<xs:element name="pageInfo" type="PageInfo" substitutionGroup="formNode" />
+	<!--条件格式-->
+	<xs:element name="condition" type="Condition" substitutionGroup="formNode" />
+	<xs:element name="conditions" type="Conditions" substitutionGroup="condition" />
+	<xs:element name="fieldCondition" type="FieldCondition" substitutionGroup="condition" />	
+	
+	<xs:complexType name="FormNode">
+		<xs:attribute name="code" type="xs:string"/>
+		<xs:attribute name="index" type="xs:integer"/>
+		<xs:attribute name="alias" type="xs:string"/>
+	</xs:complexType>
+	
+	<!-- Form 的定义 -->
+	<xs:complexType name="Form">
+		<xs:complexContent>
+			<xs:extension base="FormNode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Form Group -->
+	<xs:complexType name="FormGroup">
+		<xs:complexContent>
+			<xs:extension base="Form">
+				<xs:sequence>
+					<xs:sequence >
+						<xs:element ref="form" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 一个记录  -->
+	<xs:complexType name="DataForm">
+		<xs:complexContent>
+			<xs:extension base="Form">
+				<xs:sequence>
+					<xs:element ref="section" />
+					<xs:element ref="formService" />					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<!-- 各个部分 -->
+	<xs:complexType name="Section">
+		<xs:complexContent>
+			<xs:extension base="FormNode" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 定义Section 组 -->
+	<xs:complexType name="SectionGroup">
+		<xs:complexContent>
+			<xs:extension base="Section" >
+				<xs:sequence>
+					<xs:element ref="section"  minOccurs="0" maxOccurs="unbounded"   />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ColumnSection">
+		<xs:complexContent>
+			<xs:extension base="Section" >
+				<xs:sequence>
+					<xs:element ref="column"  />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="GridSection">
+		<xs:complexContent>
+			<xs:extension base="ColumnSection">
+				<xs:sequence>
+					<xs:element ref="pageInfo" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ConditionSection">
+		<xs:complexContent>
+			<xs:extension base="Section" >
+				<xs:sequence>
+					<xs:element ref="condition" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		
+	<!-- 数据项目 -->
+	<xs:complexType name="Column">
+		<xs:complexContent>
+			<xs:extension base="FormNode" />				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ColumnGroup">
+		<xs:complexContent>
+			<xs:extension base="Column" >
+				<xs:sequence>
+					<xs:element ref="column" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FieldColumn">
+		<xs:complexContent>
+			<xs:extension base="Column" >	
+				<xs:attribute name="field" type="xs:string" />
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="AnalystColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" >
+				<xs:attribute name="function" type="SQLFunction" />		
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 支持用表达式来完成计算 -->
+	<xs:complexType name="ScriptColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" >
+				<xs:sequence>
+					<xs:element name="content" type="xs:string" />
+				</xs:sequence>	
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ConditionColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" >
+				<xs:attribute name="operation" type="FieldLogical" />
+				<xs:attribute name="defaultvalue" type="xs:string" />
+			</xs:extension>					
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" >
+				<xs:attribute name="operation" type="OrderDirection" />	
+			</xs:extension>					
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	
+	<!-- 数据源 -->
+	<xs:complexType name="FormService">
+		<xs:complexContent>
+			<xs:extension base="FormNode" />				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 调用VO  -->
+	<xs:complexType name="VOFormService">
+		<xs:complexContent>
+			<xs:extension base="FormService" >
+				<xs:attribute name="vocode" type="xs:string" />
+				<xs:attribute name="formcode" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 执行SQL -->
+	<xs:complexType name="SQLFormService">
+		<xs:complexContent>
+			<xs:extension base="FormService" >	
+				<xs:sequence>
+					<xs:element name="sqlContent" type="xs:string" />
+				</xs:sequence>				
+			</xs:extension>			
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Page 信息  -->
+	<xs:complexType name="PageInfo">
+		<xs:complexContent>
+			<xs:extension base="FormNode" >
+				<xs:attribute name="page" type="xs:integer" />	
+				<xs:attribute name="size" type="xs:integer" />
+				<xs:attribute name="pages" type="xs:integer" />
+				<xs:attribute name="records" type="xs:long" />
+			</xs:extension>				
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 条件 -->
+	<xs:complexType name="Condition">
+		<xs:complexContent>
+			<xs:extension base="FormNode" />
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- 等同于括号 -->
+	<xs:complexType name="Conditions">
+		<xs:complexContent>
+			<xs:extension base="Condition" >
+				<xs:sequence>
+					<xs:element ref="condition" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+				<xs:attribute name="operation" type="OperationLogical" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="FieldCondition">
+		<xs:complexContent>
+			<xs:extension base="Condition">
+				<xs:sequence>
+					<xs:element ref="column" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:simpleType name="SQLFunction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AVG"/>
+			<xs:enumeration value="COUNT"/>
+			<xs:enumeration value="FIRST"/>
+			<xs:enumeration value="LAST"/>
+			<xs:enumeration value="MAX"/>
+			<xs:enumeration value="MIN"/>
+			<xs:enumeration value="STDEV"/>
+			<xs:enumeration value="STDEVP"/>
+			<xs:enumeration value="SUM"/>
+			<xs:enumeration value="VAR"/>
+			<xs:enumeration value="VARP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="FieldLogical">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EQUALS"/>
+			<xs:enumeration value="NOTEQUALS"/>
+			<xs:enumeration value="LOWER"/>
+			<xs:enumeration value="LARGER"/>
+			<xs:enumeration value="NOT_LOWER"/>
+			<xs:enumeration value="NOT_LARGER"/>
+			<xs:enumeration value="IN"/>
+			<xs:enumeration value="NOT_IN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="OperationLogical">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT"/>
+			<xs:enumeration value="AND"/>
+			<xs:enumeration value="OR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="OrderDirection">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DESC"/>
+			<xs:enumeration value="ASC"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

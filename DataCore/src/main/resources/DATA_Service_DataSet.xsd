@@ -40,7 +40,7 @@
 		<xs:complexContent>
 			<xs:extension base="DatasetNode">
 				<xs:sequence>
-					<xs:element ref="dataTable" />		
+					<xs:element ref="table" />		
 					<xs:element ref="dataException" />			
 				</xs:sequence>
 				<xs:attribute name="updatenumber" type="xs:integer" />

@@ -36,6 +36,7 @@
 	<xs:element name="columnGroup" type="ColumnGroup" substitutionGroup="column" />
 	<xs:element name="fieldColumn" type="FieldColumn" substitutionGroup="column" />
 	<xs:element name="analystColumn" type="AnalystColumn" substitutionGroup="fieldColumn" />
+	<xs:element name="groupbyColumn" type="GroupbyColumn" substitutionGroup="fieldColumn" />	
 	<xs:element name="conditionColumn" type="ConditionColumn" substitutionGroup="fieldColumn" />
 	<xs:element name="orderColumn" type="OrderColumn" substitutionGroup="fieldColumn" />	
 	<xs:element name="scriptColumn" type="ScriptColumn" substitutionGroup="fieldColumn" />
@@ -171,6 +172,12 @@
 		</xs:complexContent>
 	</xs:complexType>
 	
+	<xs:complexType name="GroupbyColumn">
+		<xs:complexContent>
+			<xs:extension base="FieldColumn" />
+		</xs:complexContent>
+	</xs:complexType>
+	
 	<!-- 支持用表达式来完成计算 -->
 	<xs:complexType name="ScriptColumn">
 		<xs:complexContent>
@@ -198,8 +205,6 @@
 			</xs:extension>					
 		</xs:complexContent>
 	</xs:complexType>
-	
-	
 	
 	<!-- 数据源 -->
 	<xs:complexType name="FormService">

@@ -3,6 +3,7 @@ import org.zml.tools.xml.parser.IXmlVisitorParserable;
 import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
+import org.zml.tools.xml.parser.Convert;
 import org.zml.util.UtilTools;
 public class ViewParser extends SchemaParser implements IXmlVisitorParserable
 {
@@ -23,6 +24,10 @@ public class ViewParser extends SchemaParser implements IXmlVisitorParserable
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
 		objElement.setRelation((Relation)this.getObjectFromElement(node,"relation","Relation"));
+		if(node.attribute("alias")!= null )
+		{
+			objElement.setAlias(node.attribute("alias").getText());
+		}
 		objElement.setSchema((Schema)this.getObjectFromElement(node,"schema","Schema"));
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
@@ -61,6 +66,12 @@ public class ViewParser extends SchemaParser implements IXmlVisitorParserable
 				}
 				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
 				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
+			}
+			if( !UtilTools.isNull( objElement.getAlias() ))
+			{
+				String dataOneElement = objElement.getAlias();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("alias",tmpValue);
 			}
 			if(  objElement.getSchema()  != null )
 			{

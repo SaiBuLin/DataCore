@@ -23,32 +23,24 @@ public class ServiceFieldParser extends FieldParser implements IXmlVisitorParser
 		ServiceField objElement = (ServiceField)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
-		objElement.setLibrary((Library)this.getObjectFromElement(node,"library","Library"));
-		if(node.attribute("alias")!= null )
+		if(node.attribute("field")!= null )
 		{
-			objElement.setAlias(node.attribute("alias").getText());
-		}
-		if(node.attribute("label")!= null )
-		{
-			objElement.setLabel(node.attribute("label").getText());
-		}
-		if(node.attribute("dataType")!= null )
-		{
-			objElement.setDataType((DataType)this.getObjectFromAttribute(node,"dataType",DataType.class.getName()));
+			objElement.setField(node.attribute("field").getText());
 		}
 		if(node.attribute("format")!= null )
 		{
 			objElement.setFormat(node.attribute("format").getText());
 		}
+		objElement.setLibrary((Library)this.getObjectFromElement(node,"library","Library"));
 		if(node.attribute("size")!= null )
 		{
 			objElement.setSize(Convert.toInt(node.attribute("size").getText()));
 		}
-		objElement.setFilter((Filter)this.getObjectFromElement(node,"filter","Filter"));
-		if(node.attribute("field")!= null )
+		if(node.attribute("dataType")!= null )
 		{
-			objElement.setField(node.attribute("field").getText());
+			objElement.setDataType((DataType)this.getObjectFromAttribute(node,"dataType",DataType.class.getName()));
 		}
+		objElement.setFilter((Filter)this.getObjectFromElement(node,"filter","Filter"));
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -72,6 +64,18 @@ public class ServiceFieldParser extends FieldParser implements IXmlVisitorParser
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof ServiceField ))  return;
 			ServiceField objElement = (ServiceField)element;
+			if( !UtilTools.isNull( objElement.getField() ))
+			{
+				String dataOneElement = objElement.getField();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("field",tmpValue);
+			}
+			if( !UtilTools.isNull( objElement.getFormat() ))
+			{
+				String dataOneElement = objElement.getFormat();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("format",tmpValue);
+			}
 			if(  objElement.getLibrary()  != null )
 			{
 				Library dataOneElement = objElement.getLibrary();
@@ -87,35 +91,17 @@ public class ServiceFieldParser extends FieldParser implements IXmlVisitorParser
 				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
 				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
 			}
-			if( !UtilTools.isNull( objElement.getAlias() ))
+			if( !UtilTools.isNull( objElement.getSize() ))
 			{
-				String dataOneElement = objElement.getAlias();
+				int dataOneElement = objElement.getSize();
 				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("alias",tmpValue);
-			}
-			if( !UtilTools.isNull( objElement.getLabel() ))
-			{
-				String dataOneElement = objElement.getLabel();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("label",tmpValue);
+				fatherElement.addAttribute("size",tmpValue);
 			}
 			if(  objElement.getDataType() != null  )
 			{
 				DataType dataOneElement = objElement.getDataType();
 				String tmpValue = String.valueOf(dataOneElement);
 				fatherElement.addAttribute("dataType",tmpValue);
-			}
-			if( !UtilTools.isNull( objElement.getFormat() ))
-			{
-				String dataOneElement = objElement.getFormat();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("format",tmpValue);
-			}
-			if( !UtilTools.isNull( objElement.getSize() ))
-			{
-				int dataOneElement = objElement.getSize();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("size",tmpValue);
 			}
 			if(  objElement.getFilter()  != null )
 			{
@@ -131,12 +117,6 @@ public class ServiceFieldParser extends FieldParser implements IXmlVisitorParser
 				}
 				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
 				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
-			}
-			if( !UtilTools.isNull( objElement.getField() ))
-			{
-				String dataOneElement = objElement.getField();
-				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("field",tmpValue);
 			}
 			if (!UtilTools.isNull(objElement.getText()))
 			{

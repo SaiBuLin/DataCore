@@ -80,6 +80,10 @@ public class SQLParserFactory
 		{
 			result = new LibrarySQLParser((Library)element);
 		}
+		else if( element instanceof PageFactory  )
+		{
+			result = new PageFactorySQLParser((PageFactory)element);
+		}
 		else if( element instanceof Transaction  )
 		{
 			result = new TransactionSQLParser((Transaction)element);
@@ -253,6 +257,10 @@ public class SQLParserFactory
 		else if( tmpElementClassName.equals(  Library.class.getName())  )
 		{
 			result = new LibrarySQLParser((Library)element);
+		}
+		else if( tmpElementClassName.equals(  PageFactory.class.getName())  )
+		{
+			result = new PageFactorySQLParser((PageFactory)element);
 		}
 		else if( tmpElementClassName.equals(  Transaction.class.getName())  )
 		{

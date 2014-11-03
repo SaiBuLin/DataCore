@@ -80,6 +80,10 @@ public class ArcGISParserFactory
 		{
 			result = new LibraryArcGISParser((Library)element);
 		}
+		else if( element instanceof PageFactory  )
+		{
+			result = new PageFactoryArcGISParser((PageFactory)element);
+		}
 		else if( element instanceof Transaction  )
 		{
 			result = new TransactionArcGISParser((Transaction)element);
@@ -253,6 +257,10 @@ public class ArcGISParserFactory
 		else if( tmpElementClassName.equals(  Library.class.getName())  )
 		{
 			result = new LibraryArcGISParser((Library)element);
+		}
+		else if( tmpElementClassName.equals(  PageFactory.class.getName())  )
+		{
+			result = new PageFactoryArcGISParser((PageFactory)element);
 		}
 		else if( tmpElementClassName.equals(  Transaction.class.getName())  )
 		{

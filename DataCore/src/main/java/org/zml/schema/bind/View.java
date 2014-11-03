@@ -2,6 +2,7 @@ package org.zml.schema.bind;
 public class View extends Schema
 {
 	private Relation relation;
+	private String alias;
 	private Schema schema;
 	public Relation getRelation()
 	{
@@ -10,6 +11,14 @@ public class View extends Schema
 	public void setRelation(Relation inrelation )
 	{
 		this.relation = inrelation;
+	}
+	public String getAlias()
+	{
+		return this.alias;
+	}
+	public void setAlias(String inalias )
+	{
+		this.alias = inalias;
 	}
 	public Schema getSchema()
 	{

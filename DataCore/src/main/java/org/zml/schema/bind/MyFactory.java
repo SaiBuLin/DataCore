@@ -29,7 +29,7 @@ public class MyFactory extends XMLVisitorFactory
 		this.addBindMap("schemaDefine","define");
 		this.addBindMap("libraryGroup","library");
 		this.addBindMap("parameter","attribute");
-		this.addBindMap("dataService","define");
+		this.addBindMap("dataService","service");
 		this.addBindMap("view","schema");
 		this.addBindMap("schemaGroup","schema");
 		this.addBindMap("command","schemaDefine");
@@ -47,6 +47,7 @@ public class MyFactory extends XMLVisitorFactory
 		this.addBindMap("attribute","define");
 		this.addBindMap("fieldValueExpress","express");
 		this.addBindMap("formLibrary","library");
+		this.addBindMap("pageFactory","factory");
 		this.addBindMap("exists","viewRelation");
 		this.addBindMap("relationGroup","relation");
 		this.addBindMap("factory","define");
@@ -89,6 +90,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new DeleteParser(this);
 		}
+		else if(tmpName.equals("define"))
+		{
+			result = new DefineParser(this);
+		}
 		else if(tmpName.equals("factory"))
 		{
 			result = new FactoryParser(this);
@@ -96,6 +101,10 @@ public class MyFactory extends XMLVisitorFactory
 		else if(tmpName.equals("expressGroup"))
 		{
 			result = new ExpressGroupParser(this);
+		}
+		else if(tmpName.equals("pageFactory"))
+		{
+			result = new PageFactoryParser(this);
 		}
 		else if(tmpName.equals("noneExists"))
 		{
@@ -180,10 +189,6 @@ public class MyFactory extends XMLVisitorFactory
 		else if(tmpName.equals("libraryGroup"))
 		{
 			result = new LibraryGroupParser(this);
-		}
-		else if(tmpName.equals("define"))
-		{
-			result = new DefineParser(this);
 		}
 		else if(tmpName.equals("attributeLibrary"))
 		{
@@ -298,6 +303,10 @@ public class MyFactory extends XMLVisitorFactory
 		else if( ob.getClass().getName().equals( "org.zml.schema.bind.Library"))
 		{
 			result = new LibraryParser(this);
+		}
+		else if( ob.getClass().getName().equals( "org.zml.schema.bind.PageFactory"))
+		{
+			result = new PageFactoryParser(this);
 		}
 		else if( ob.getClass().getName().equals( "org.zml.schema.bind.Transaction"))
 		{
@@ -578,6 +587,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new FactoryParser(this);
 		}
+		else if( tmpTypeName.equals( "org.zml.schema.bind.PageFactory"))
+		{
+			result = new PageFactoryParser(this);
+		}
 		else if( tmpTypeName.equals( "org.zml.schema.bind.DataType"))
 		{
 			result = new DataTypeParser(this);
@@ -613,6 +626,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "org.zml.schema.bind.Delete";
 		}
+		else if(tmpName.equals("define"))
+		{
+			result = "org.zml.schema.bind.Define";
+		}
 		else if(tmpName.equals("factory"))
 		{
 			result = "org.zml.schema.bind.Factory";
@@ -620,6 +637,10 @@ public class MyFactory extends XMLVisitorFactory
 		else if(tmpName.equals("expressGroup"))
 		{
 			result = "org.zml.schema.bind.ExpressGroup";
+		}
+		else if(tmpName.equals("pageFactory"))
+		{
+			result = "org.zml.schema.bind.PageFactory";
 		}
 		else if(tmpName.equals("noneExists"))
 		{
@@ -705,10 +726,6 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "org.zml.schema.bind.LibraryGroup";
 		}
-		else if(tmpName.equals("define"))
-		{
-			result = "org.zml.schema.bind.Define";
-		}
 		else if(tmpName.equals("attributeLibrary"))
 		{
 			result = "org.zml.schema.bind.AttributeLibrary";
@@ -784,6 +801,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "delete";
 		}
+		else if(tmpName.equals("org.zml.schema.bind.Define"))
+		{
+			result = "define";
+		}
 		else if(tmpName.equals("org.zml.schema.bind.Factory"))
 		{
 			result = "factory";
@@ -791,6 +812,10 @@ public class MyFactory extends XMLVisitorFactory
 		else if(tmpName.equals("org.zml.schema.bind.ExpressGroup"))
 		{
 			result = "expressGroup";
+		}
+		else if(tmpName.equals("org.zml.schema.bind.PageFactory"))
+		{
+			result = "pageFactory";
 		}
 		else if(tmpName.equals("org.zml.schema.bind.NoneExists"))
 		{
@@ -875,10 +900,6 @@ public class MyFactory extends XMLVisitorFactory
 		else if(tmpName.equals("org.zml.schema.bind.LibraryGroup"))
 		{
 			result = "libraryGroup";
-		}
-		else if(tmpName.equals("org.zml.schema.bind.Define"))
-		{
-			result = "define";
 		}
 		else if(tmpName.equals("org.zml.schema.bind.AttributeLibrary"))
 		{

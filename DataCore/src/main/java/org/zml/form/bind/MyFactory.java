@@ -27,6 +27,7 @@ public class MyFactory extends XMLVisitorFactory
 		this.addBindMap("columnSection","section");
 		this.addBindMap("conditions","condition");
 		this.addBindMap("section","formNode");
+		this.addBindMap("groupbyColumn","fieldColumn");
 		this.addBindMap("pageInfo","formNode");
 		this.addBindMap("columnGroup","column");
 		this.addBindMap("fieldColumn","column");
@@ -55,7 +56,11 @@ public class MyFactory extends XMLVisitorFactory
 		IXmlVisitorParserable result = null;
 		if( UtilTools.isNull( name ) ) return result;
 		String tmpName = UTools.getTrim(name);
-		if(tmpName.equals("sqlFormService"))
+		if(tmpName.equals("voFormService"))
+		{
+			result = new VOFormServiceParser(this);
+		}
+		else if(tmpName.equals("sqlFormService"))
 		{
 			result = new SQLFormServiceParser(this);
 		}
@@ -83,9 +88,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new ConditionsParser(this);
 		}
-		else if(tmpName.equals("voFormService"))
+		else if(tmpName.equals("groupbyColumn"))
 		{
-			result = new VOFormServiceParser(this);
+			result = new GroupbyColumnParser(this);
 		}
 		else if(tmpName.equals("conditionColumn"))
 		{
@@ -205,6 +210,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new ConditionParser(this);
 		}
+		else if( ob.getClass().getName().equals( "org.zml.form.bind.GroupbyColumn"))
+		{
+			result = new GroupbyColumnParser(this);
+		}
 		else if( ob.getClass().getName().equals( "org.zml.form.bind.PageInfo"))
 		{
 			result = new PageInfoParser(this);
@@ -304,6 +313,10 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = new AnalystColumnParser(this);
 		}
+		else if( tmpTypeName.equals( "org.zml.form.bind.GroupbyColumn"))
+		{
+			result = new GroupbyColumnParser(this);
+		}
 		else if( tmpTypeName.equals( "org.zml.form.bind.ScriptColumn"))
 		{
 			result = new ScriptColumnParser(this);
@@ -367,7 +380,11 @@ public class MyFactory extends XMLVisitorFactory
 		String result = "";
 		if( UtilTools.isNull( confElementName ) ) return result;
 		String tmpName = UTools.getTrim(confElementName);
-		if(tmpName.equals("sqlFormService"))
+		if(tmpName.equals("voFormService"))
+		{
+			result = "org.zml.form.bind.VOFormService";
+		}
+		else if(tmpName.equals("sqlFormService"))
 		{
 			result = "org.zml.form.bind.SQLFormService";
 		}
@@ -395,9 +412,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "org.zml.form.bind.Conditions";
 		}
-		else if(tmpName.equals("voFormService"))
+		else if(tmpName.equals("groupbyColumn"))
 		{
-			result = "org.zml.form.bind.VOFormService";
+			result = "org.zml.form.bind.GroupbyColumn";
 		}
 		else if(tmpName.equals("conditionColumn"))
 		{
@@ -466,7 +483,11 @@ public class MyFactory extends XMLVisitorFactory
 		String result = "";
 		if( UtilTools.isNull( typeName ) ) return result;
 		String tmpName = UTools.getTrim(typeName);
-		if(tmpName.equals("org.zml.form.bind.SQLFormService"))
+		if(tmpName.equals("org.zml.form.bind.VOFormService"))
+		{
+			result = "voFormService";
+		}
+		else if(tmpName.equals("org.zml.form.bind.SQLFormService"))
 		{
 			result = "sqlFormService";
 		}
@@ -494,9 +515,9 @@ public class MyFactory extends XMLVisitorFactory
 		{
 			result = "conditions";
 		}
-		else if(tmpName.equals("org.zml.form.bind.VOFormService"))
+		else if(tmpName.equals("org.zml.form.bind.GroupbyColumn"))
 		{
-			result = "voFormService";
+			result = "groupbyColumn";
 		}
 		else if(tmpName.equals("org.zml.form.bind.ConditionColumn"))
 		{

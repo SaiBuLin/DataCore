@@ -23,6 +23,7 @@ public class SchemaConfigureParser extends SchemaDefineParser implements IXmlVis
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
 		objElement.setFactory((Factory)this.getObjectFromElement(node,"factory","Factory"));
+		objElement.setService((Service)this.getObjectFromElement(node,"service","Service"));
 		objElement.setSchema((Schema)this.getObjectFromElement(node,"schema","Schema"));
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
@@ -54,6 +55,21 @@ public class SchemaConfigureParser extends SchemaDefineParser implements IXmlVis
 				if(UtilTools.isNull( dataOneElement.getXmlElementName() ))
 				{
 					xmlElementNameEx = this.getRealElementName("factory",dataOneElement.getClass().getName());
+				}
+				else
+				{
+					xmlElementNameEx = dataOneElement.getXmlElementName();
+				}
+				Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
+				encodeObjectToXMLForElement(OchildElement ,dataOneElement);
+			}
+			if(  objElement.getService()  != null )
+			{
+				Service dataOneElement = objElement.getService();
+				String xmlElementNameEx = "";
+				if(UtilTools.isNull( dataOneElement.getXmlElementName() ))
+				{
+					xmlElementNameEx = this.getRealElementName("service",dataOneElement.getClass().getName());
 				}
 				else
 				{

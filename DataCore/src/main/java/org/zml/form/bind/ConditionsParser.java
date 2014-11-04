@@ -4,6 +4,7 @@ import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
 import java.util.ArrayList;
+import org.zml.tools.xml.parser.Convert;
 import org.zml.util.UtilTools;
 public class ConditionsParser extends ConditionParser implements IXmlVisitorParserable
 {
@@ -33,6 +34,10 @@ public class ConditionsParser extends ConditionParser implements IXmlVisitorPars
 		}
 		objElement.getCondition().clear();
 		objElement.setCondition(this.getObjectsFromElement(node,"condition","Condition"));
+		if(node.attribute("bracket")!= null )
+		{
+			objElement.setBracket(Convert.toBoolean(node.attribute("bracket").getText()));
+		}
 		if ( !UtilTools.isNull( node.getText() ) )
 		{
 			objElement.setText(UtilTools.getTrim(node.getText()));
@@ -82,6 +87,12 @@ public class ConditionsParser extends ConditionParser implements IXmlVisitorPars
 					Element OchildElement = fatherElement.addElement(UtilTools.getTrim( xmlElementNameEx));
 					encodeObjectToXMLForElement(OchildElement ,dataOneElement);
 				}
+			}
+			if( !UtilTools.isNull( objElement.getBracket() ))
+			{
+				Boolean dataOneElement = objElement.getBracket();
+				String tmpValue = String.valueOf(dataOneElement);
+				fatherElement.addAttribute("bracket",tmpValue);
 			}
 			if (!UtilTools.isNull(objElement.getText()))
 			{

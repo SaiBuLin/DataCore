@@ -2,6 +2,7 @@ package org.zml.schema.parser.sql;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.zml.data.FieldInfo;
 import org.zml.form.bind.FormNode;
 import org.zml.schema.bind.Field;
 import org.zml.schema.bind.FieldGroup;
@@ -35,7 +36,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getSelectFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getSelectFields(String alias, FormNode formrequest) throws Exception{
 		List<FieldInfo> result = new ArrayList<FieldInfo>();
 		try{
 			logger.debug("FieldGroupSQLParser.getSelectFields 开始被调用。");
@@ -71,7 +72,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 						continue;
 					}
 					
-					List<FieldInfo>  fieldmap =  fieldAble.getSelectFields(formrequest);
+					List<FieldInfo> fieldmap =  fieldAble.getSelectFields(alias, formrequest);
 					
 					if( fieldmap != null ){
 						result.addAll( fieldmap );
@@ -98,7 +99,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getConditionFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getConditionFields(String alias,FormNode formrequest) throws Exception{
 		List<FieldInfo> result = new ArrayList<FieldInfo>();
 		try{
 			logger.debug("FieldGroupSQLParser.getConditionFields 开始被调用。");
@@ -134,7 +135,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 						continue;
 					}
 					
-					List<FieldInfo>  fieldmap =  fieldAble.getConditionFields(formrequest);
+					List<FieldInfo>  fieldmap =  fieldAble.getConditionFields( alias, formrequest);
 					
 					if( fieldmap != null ){
 						result.addAll( fieldmap );
@@ -160,7 +161,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getOrderByFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getOrderByFields( String alias, FormNode formrequest) throws Exception{
 		List<FieldInfo> result = new ArrayList<FieldInfo>();
 		try{
 			logger.debug("FieldGroupSQLParser.getOrderByFields 开始被调用。");
@@ -196,7 +197,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 						continue;
 					}
 					
-					List<FieldInfo>  fieldmap =  fieldAble.getOrderByFields(formrequest);
+					List<FieldInfo>  fieldmap =  fieldAble.getOrderByFields(alias,formrequest);
 					
 					if( fieldmap != null ){
 						result.addAll( fieldmap );
@@ -222,7 +223,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getGroupByFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getGroupByFields( String alias, FormNode formrequest) throws Exception{
 		List<FieldInfo> result = new ArrayList<FieldInfo>();
 		try{
 			logger.debug("FieldGroupSQLParser.getGroupByFields 开始被调用。");
@@ -258,7 +259,7 @@ public class FieldGroupSQLParser extends SQLParser implements SQLParserAble
 						continue;
 					}
 					
-					List<FieldInfo>  fieldmap =  fieldAble.getGroupByFields(formrequest);
+					List<FieldInfo>  fieldmap =  fieldAble.getGroupByFields( alias, formrequest);
 					
 					if( fieldmap != null ){
 						result.addAll( fieldmap );

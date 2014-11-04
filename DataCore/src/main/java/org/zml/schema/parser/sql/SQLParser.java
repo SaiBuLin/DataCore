@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.zml.data.DataServiceTools;
+import org.zml.data.FieldInfo;
+import org.zml.data.SQLParameter;
+import org.zml.data.SQLString;
 import org.zml.data.dataset.bind.NetDataSet;
 import org.zml.form.bind.ConditionSection;
 import org.zml.form.bind.FormNode;
@@ -1770,7 +1773,7 @@ public abstract class SQLParser extends DataServiceTools implements SQLParserAbl
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getSelectFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getSelectFields(String alias, FormNode formrequest) throws Exception{
 		logger.debug("SQLParser 不需要实现getSelectFields");
 		return null;
 	}
@@ -1782,8 +1785,19 @@ public abstract class SQLParser extends DataServiceTools implements SQLParserAbl
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getConditionFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getConditionFields( String alias, FormNode formrequest) throws Exception{
 		logger.debug("SQLParser 不需要实现getConditionFields.");
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param formrequest
+	 * @return
+	 * @throws Exception
+	 */
+	public SQLString parserSQLStringForWhereString(String alias, FormNode formrequest) throws Exception{
+		logger.debug("SQLParser 不需要实现parserSQLStringForWhereString.");
 		return null;
 	}
 	/**
@@ -1793,7 +1807,7 @@ public abstract class SQLParser extends DataServiceTools implements SQLParserAbl
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getOrderByFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getOrderByFields(String alias,FormNode formrequest) throws Exception{
 		logger.debug("SQLParser 不需要实现getOrderByFields.");
 		return null;
 	}
@@ -1805,7 +1819,7 @@ public abstract class SQLParser extends DataServiceTools implements SQLParserAbl
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getGroupByFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getGroupByFields(String alias,FormNode formrequest) throws Exception{
 		logger.debug("SQLParser 不需要实现getGroupByFields.");
 		return null;
 	}

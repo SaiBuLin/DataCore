@@ -27,6 +27,7 @@
 	<xs:element name="define" type="Define" />
 	<xs:element name="schemaDefine" type="SchemaDefine" substitutionGroup="define" />
 	<xs:element name="schemaConfigure" type="SchemaConfigure" substitutionGroup="define" />
+	
 	<!-- 表单定义 -->
 	<xs:element name="schema" type="Schema" substitutionGroup="schemaDefine" />
 	<xs:element name="schemaGroup" type="SchemaGroup" substitutionGroup="schema" />

@@ -30,7 +30,7 @@
 	<xs:element name="columnSection" type="ColumnSection" substitutionGroup="section" />
 	<xs:element name="gridSection" type="GridSection" substitutionGroup="columnSection" />
 	<xs:element name="conditionSection" type="ConditionSection" substitutionGroup="section" />
-	
+		
 	<!-- 栏目设置 -->
 	<xs:element name="column" type="Column" substitutionGroup="formNode" />
 	<xs:element name="columnGroup" type="ColumnGroup" substitutionGroup="column" />
@@ -48,6 +48,7 @@
 	
 	<!-- 数据Page Info -->
 	<xs:element name="pageInfo" type="PageInfo" substitutionGroup="formNode" />
+	
 	<!--条件格式-->
 	<xs:element name="condition" type="Condition" substitutionGroup="formNode" />
 	<xs:element name="conditions" type="Conditions" substitutionGroup="condition" />
@@ -159,6 +160,9 @@
 	<xs:complexType name="FieldColumn">
 		<xs:complexContent>
 			<xs:extension base="Column" >	
+				<xs:sequence>
+					<xs:element name="content" type="xs:string" />
+				</xs:sequence>
 				<xs:attribute name="field" type="xs:string" />
 			</xs:extension>				
 		</xs:complexContent>
@@ -192,8 +196,10 @@
 	<xs:complexType name="ConditionColumn">
 		<xs:complexContent>
 			<xs:extension base="FieldColumn" >
-				<xs:attribute name="operation" type="FieldLogical" />
-				<xs:attribute name="defaultvalue" type="xs:string" />
+				<xs:sequence>
+					<xs:element name="content" type="xs:string" />
+				</xs:sequence>
+				<xs:attribute name="operation" type="FieldLogical" />				
 			</xs:extension>					
 		</xs:complexContent>
 	</xs:complexType>
@@ -261,6 +267,7 @@
 					<xs:element ref="condition" minOccurs="0" maxOccurs="unbounded" />
 				</xs:sequence>
 				<xs:attribute name="operation" type="OperationLogical" />
+				<xs:attribute name="bracket" type="xs:boolean" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

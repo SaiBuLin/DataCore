@@ -3,7 +3,6 @@ import org.zml.tools.xml.parser.IXmlVisitorParserable;
 import org.zml.tools.xml.parser.XMLVisitorFactory;
 import org.dom4j.Element;
 import org.zml.tools.xml.parser.CTXMLElement;
-import org.zml.tools.xml.parser.Convert;
 import org.zml.util.UtilTools;
 public class ConditionColumnParser extends FieldColumnParser implements IXmlVisitorParserable
 {
@@ -23,10 +22,7 @@ public class ConditionColumnParser extends FieldColumnParser implements IXmlVisi
 		ConditionColumn objElement = (ConditionColumn)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
-		if(node.attribute("defaultvalue")!= null )
-		{
-			objElement.setDefaultvalue(node.attribute("defaultvalue").getText());
-		}
+		objElement.setContent((String)this.getObjectFromElement(node,"content","String"));
 		if(node.attribute("operation")!= null )
 		{
 			objElement.setOperation((FieldLogical)this.getObjectFromAttribute(node,"operation",FieldLogical.class.getName()));
@@ -54,11 +50,12 @@ public class ConditionColumnParser extends FieldColumnParser implements IXmlVisi
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof ConditionColumn ))  return;
 			ConditionColumn objElement = (ConditionColumn)element;
-			if( !UtilTools.isNull( objElement.getDefaultvalue() ))
+			if( !UtilTools.isNull( objElement.getContent() ) )
 			{
-				String dataOneElement = objElement.getDefaultvalue();
+				String dataOneElement = objElement.getContent();
+				Element subElement =  fatherElement.addElement("content");
 				String tmpValue = String.valueOf(dataOneElement);
-				fatherElement.addAttribute("defaultvalue",tmpValue);
+				subElement.setText(tmpValue);
 			}
 			if(  objElement.getOperation() != null  )
 			{

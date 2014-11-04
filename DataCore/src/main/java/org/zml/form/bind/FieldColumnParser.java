@@ -23,6 +23,7 @@ public class FieldColumnParser extends ColumnParser implements IXmlVisitorParser
 		FieldColumn objElement = (FieldColumn)element;
 		super.loadXML(element,node);
 		objElement.setXmlElementName(node.getName());
+		objElement.setContent((String)this.getObjectFromElement(node,"content","String"));
 		if(node.attribute("field")!= null )
 		{
 			objElement.setField(node.attribute("field").getText());
@@ -50,6 +51,13 @@ public class FieldColumnParser extends ColumnParser implements IXmlVisitorParser
 			super.encodeObjectToElement(fatherElement, element);
 			if( !(element instanceof FieldColumn ))  return;
 			FieldColumn objElement = (FieldColumn)element;
+			if( !UtilTools.isNull( objElement.getContent() ) )
+			{
+				String dataOneElement = objElement.getContent();
+				Element subElement =  fatherElement.addElement("content");
+				String tmpValue = String.valueOf(dataOneElement);
+				subElement.setText(tmpValue);
+			}
 			if( !UtilTools.isNull( objElement.getField() ))
 			{
 				String dataOneElement = objElement.getField();

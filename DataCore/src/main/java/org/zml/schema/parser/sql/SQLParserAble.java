@@ -3,6 +3,9 @@ package org.zml.schema.parser.sql;
 import java.util.List;
 import java.util.Map;
 
+import org.zml.data.FieldInfo;
+import org.zml.data.SQLParameter;
+import org.zml.data.SQLString;
 import org.zml.data.dataset.bind.NetDataSet;
 import org.zml.form.bind.ConditionSection;
 import org.zml.form.bind.FormNode;
@@ -65,7 +68,7 @@ public interface SQLParserAble
 	 * @return
 	 * @throws Exception
 	 */
-	public List<FieldInfo> getSelectFields(FormNode formrequest) throws Exception;
+	public List<FieldInfo> getSelectFields( String alias, FormNode formrequest) throws Exception;
 	
 	/**
 	 * 该接口由Form 对应Parser 实现。获得对应的Where 部分 字段列表
@@ -73,7 +76,15 @@ public interface SQLParserAble
 	 * @return
 	 * @throws Exception
 	 */
-	public List<FieldInfo> getConditionFields(FormNode formrequest) throws Exception;
+	public List<FieldInfo> getConditionFields(String alias, FormNode formrequest) throws Exception;
+	
+	/**
+	 * 
+	 * @param formrequest
+	 * @return
+	 * @throws Exception
+	 */
+	public SQLString parserSQLStringForWhereString(String alias, FormNode formrequest) throws Exception;
 	
 	/**
 	 * 该接口由Form 对应Parser 实现。获得对应的Order By 部分 字段列表
@@ -81,7 +92,7 @@ public interface SQLParserAble
 	 * @return
 	 * @throws Exception
 	 */
-	public List<FieldInfo> getOrderByFields(FormNode formrequest) throws Exception;
+	public List<FieldInfo> getOrderByFields(String alias, FormNode formrequest) throws Exception;
 	
 	/**
 	 * 该接口由Form 对应Parser 实现。获得对应的Group by 部分 字段列表
@@ -89,7 +100,7 @@ public interface SQLParserAble
 	 * @return
 	 * @throws Exception
 	 */
-	public List<FieldInfo> getGroupByFields(FormNode formrequest) throws Exception;	
+	public List<FieldInfo> getGroupByFields(String alias, FormNode formrequest) throws Exception;	
 	
 	 
 	/**

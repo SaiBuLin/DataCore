@@ -1,15 +1,15 @@
 package org.zml.form.bind;
 public class ConditionColumn extends FieldColumn
 {
-	private String defaultvalue;
+	private String content;
 	private FieldLogical operation;
-	public String getDefaultvalue()
+	public String getContent()
 	{
-		return this.defaultvalue;
+		return this.content;
 	}
-	public void setDefaultvalue(String indefaultvalue )
+	public void setContent(String incontent )
 	{
-		this.defaultvalue = indefaultvalue;
+		this.content = incontent;
 	}
 	public FieldLogical getOperation()
 	{

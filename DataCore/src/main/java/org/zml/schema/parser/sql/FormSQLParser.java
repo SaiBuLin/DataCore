@@ -3,6 +3,8 @@ package org.zml.schema.parser.sql;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.zml.data.FieldInfo;
+import org.zml.data.SQLString;
 import org.zml.form.bind.FormNode;
 import org.zml.schema.bind.Form;
 
@@ -66,7 +68,13 @@ public class FormSQLParser extends SQLParser implements SQLParserAble
 				throw new Exception("form 属性command没有对应的SQLParserAble.");
 			}
 			
-			result = sqlAble.parserSQLString( config.getField(), config.getAlias(), config.getContent(), formrequest );			
+			String content = config.getContent();
+			
+			if( !config.getOnlytable() ){
+				content = "(" + content + ")";
+			}
+			
+			result = sqlAble.parserSQLString( config.getField(), config.getAlias(), content , formrequest );			
 			logger.debug("FormSQLParser.parserSQLString 调用完毕。");
 			return result;
 		}catch(Exception e){
@@ -83,7 +91,7 @@ public class FormSQLParser extends SQLParser implements SQLParserAble
 	 * @throws Exception
 	 */
 	@Override
-	public List<FieldInfo> getSelectFields(FormNode formrequest) throws Exception{
+	public List<FieldInfo> getSelectFields(String alias,FormNode formrequest) throws Exception{
 		List<FieldInfo> result = new ArrayList<FieldInfo>();
 		
 		try{
